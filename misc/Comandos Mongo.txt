@@ -1,0 +1,14 @@
+Use academia
+
+db.alunos.insertOne({
+	"Nome": "Seu Francisco"
+	"Idade": 73
+	"Gênero": "M"
+	"Telefone": "11 9857-8656"
+	"CPF": 56895212554
+	"Renda": 1100
+	"Beneficio": "sim"
+	"Aulas": [ "Pilates" ]
+	"Login": "francisco santos pereira"
+	"Senha": "1234"
+})
