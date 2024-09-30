@@ -12,3 +12,11 @@ db.alunos.insertOne({
 	"Login": "francisco santos pereira",
 	"Senha": "1234"
 })
+
+db.loja.insertOne({
+	"Nome": "Creatina",
+	"img": "(url)"
+	"Preço": "199,99",
+	"uso" : "xxx e xx"
+	"ingredientes": ["xx", "xxx", "xxxx"]
+})

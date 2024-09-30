@@ -9,13 +9,15 @@ const fs = require('fs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, '/HTML')));
 
 const url = 'mongodb://127.0.0.1:27017/';
 const dbName = 'academia';
-const collection = 'alunos';
+const collectionUser = 'usuarios';
+const collectionShop = 'loja';
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/HTML/index.html')
+    res.sendFile(__dirname + '/HTML/home.html')
 })
 
 app.get('/sobrenos', (req, res) => {
@@ -55,7 +57,41 @@ app.get('/email', (req, res) => {
     res.sendFile(__dirname + '/HTML/email.html')
 })
 
+app.get('/registro', (req, res) => {
+    res.sendFile(__dirname + '/HTML/registro.html')
+})
 
+app.get('/conta', (req, res) => {
+    res.sendFile(__dirname + '/HTML/conta.html')
+})
+
+app.get('/planos', (req, res) => {
+    res.sendFile(__dirname + '/HTML/planos.html')
+})
+
+app.post('/registro', async (req, res) => {
+    const newUser = req.body
+
+    const client = new MongoClient(url)
+
+    try {
+        await client.connect();
+
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser)
+
+        const result = await collection.insertOne(newUser)
+        console.log(`usuário ${result.insertedId} inserido com sucesso`)
+
+        res.redirect('/')
+    } catch(err) {
+        console.error('Erro ao cadastrar usuario', err)
+        res.status(500).send('Erro ao fazer o regristro da conta, por favor, tente novamente mais tarde')
+    } finally {
+        client.close();
+    }
+
+})
 
 
 app.listen(port, () => {

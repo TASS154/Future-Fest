@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -7,29 +7,49 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
-    <link rel="stylesheet" href="conta.css">
-    <title>Conta</title>
+    <link rel="stylesheet" href="registro.css">
+    <title>Document</title>
 </head>
 
 <body>
-
     <nav>
         <div class="nav-logo">
             <a href="/">
                 <img src="https://i.ibb.co/FY5bCP7/logo.png">
             </a>
         </div>
-
         <ul class="nav-links">
             <li class="link"><a href="time.html">Sobre nós</a></li>
             <li id="link1" class="link"><a href="#cursos">Planos e aulas</a></li>
             <li id="link2" class="link"><a href="#footer">Loja de suplementos</a></li>
-            <li id="link3" class="link"><a href="antigo.html">B-corp</a></li>
+            <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
         </ul>
-        <a href="login.html">
-            <button class="btn">Entrar</button>
-        </a>
     </nav>
+    <header>
+        <h1>Registrar</h1>
+        <form method="post" action="/registro">
+            <div class="mb-3">
+                <label for="email" class="form-label">Insira o Endereço de E-mail aqui</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="inputPassword5" class="form-label">Insira sua senha aqui</label>
+                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="senha">
+                <div id="passwordHelpBlock" class="form-text">
+                    Sua senha deve ter 8-20 caracteres, contendo letras e numeros, não pode conter espaços, caracteres
+                    especiais,
+                    e emojis.
+                </div>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="Check">
+                <label class="form-check-label" for="check">Você concorda com os termos de privacidade?</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <hr>
+            <p>Já é cliente nosso? clique em <a class="login" href="/registro">Entrar</a> </p>
+        </form>
+    </header>
 
     <footer class="container" id="footer">
         <span class="blur"></span>
@@ -70,6 +90,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-</body>
 
 </html>
