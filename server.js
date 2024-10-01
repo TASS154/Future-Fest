@@ -70,6 +70,10 @@ app.get('/planos', (req, res) => {
     res.sendFile(__dirname + '/HTML/planos.html')
 })
 
+app.get('/esqueceu', (req, res) => {
+    res.sendFile(__dirname + '/HTML/esqueceu-a-senha.html')
+})
+
 app.get('/dashboard', (req, res) => {
     res.sendFile(__dirname + '/HTML/dashboard.html')
 })
