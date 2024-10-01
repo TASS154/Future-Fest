@@ -20,7 +20,7 @@
         </div>
         <ul class="nav-links">
             <li class="link"><a href="time.html">Sobre nós</a></li>
-            <li id="link1" class="link"><a href="#cursos">Planos e aulas</a></li>
+            <li id="link1" class="link"><a href="/planos">Planos e aulas</a></li>
             <li id="link2" class="link"><a href="#footer">Loja de suplementos</a></li>
             <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
         </ul>
@@ -40,6 +40,7 @@
                     especiais,
                     e emojis.
                 </div>
+                <div id="error-message" style="color: red; display: none;"></div>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="Check">
@@ -90,5 +91,31 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+
+    <script> document.querySelector('form').addEventListener('submit', function(event) {
+        const password = document.querySelector('input[name="senha"]').value;
+        const checkbox = document.getElementById('Check');
+        const errorMessage = document.getElementById('error-message');
+    
+        // Limpa a mensagem de erro ao submeter o formulário
+        errorMessage.style.display = 'none';
+        errorMessage.textContent = '';
+    
+        const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,20}$/; // 8-20 caracteres, letras e números
+    
+        if (!passwordPattern.test(password)) {
+            errorMessage.textContent = 'A senha deve ter entre 8 e 20 caracteres, contendo letras e números, e não pode conter espaços ou caracteres especiais.';
+            errorMessage.style.display = 'block'; // Mostra a mensagem de erro
+            event.preventDefault(); // Impede o envio do formulário
+            return;
+        }
+    
+        if (!checkbox.checked) {
+            errorMessage.textContent = 'Você deve concordar com os termos de privacidade.';
+            errorMessage.style.display = 'block'; // Mostra a mensagem de erro
+            event.preventDefault(); // Impede o envio do formulário
+            return;
+        }
+    });</script>
 
 </html>

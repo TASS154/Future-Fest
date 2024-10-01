@@ -22,7 +22,7 @@
 
     <ul class="nav-links">
       <li class="link"><a href="time.html">Sobre nós</a></li>
-      <li id="link1" class="link"><a href="#cursos">Planos e aulas</a></li>
+      <li id="link1" class="link"><a href="/planos">Planos e aulas</a></li>
       <li id="link2" class="link"><a href="#footer">Loja de suplementos</a></li>
       <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
     </ul>
@@ -32,22 +32,17 @@
   </nav>
   <header>
     <h1>Entrar</h1>
-    <form method="POST">
+    <form method="POST" action="/login">
       <div class="mb-3">
         <label for="email" class="form-label">Insira o Endereço de E-mail aqui</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
       </div>
       <div class="mb-3">
         <label for="inputPassword5" class="form-label">Insira sua senha aqui</label>
-        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <input type="password" id="inputPassword5" class="form-control" name="senha" aria-describedby="passwordHelpBlock" required>
         <div id="passwordHelpBlock" class="form-text">
-          Sua senha deve ter 8-20 caracteres, contendo letras e numeros, não pode conter espaços, caracteres especiais,
-          e emojis.
+          Sua senha deve ter 8-20 caracteres, contendo letras e números, não pode conter espaços, caracteres especiais, e emojis.
         </div>
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="Check">
-        <label class="form-check-label" for="check">Você concorda com os termos de privacidade?</label>
       </div>
       <button type="submit" class="btn btn-primary">Entrar</button>
       <p>Esqueceu a senha? Clique <a href="/esquece" class="esquece">aqui</a></p>

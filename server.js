@@ -2,12 +2,13 @@ const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const app = express();
 const path = require('path')
+const bcrypt = require('bcrypt');
 const port = 3000;
 const methodOverride = require('method-override');
 const fs = require('fs');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '/HTML')));
 
@@ -69,9 +70,44 @@ app.get('/planos', (req, res) => {
     res.sendFile(__dirname + '/HTML/planos.html')
 })
 
+app.post('/login', async (req, res) => {
+    const { email, senha } = req.body;
+
+    const client = new MongoClient(url);
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        // Procura o usuário pelo e-mail
+        const user = await collection.findOne({ email });
+
+        // Verifica se o e-mail existe
+        if (!user) {
+            return res.status(401).send('E-mail não encontrado.'); // Email não registrado
+        }
+
+        console.log(user)
+
+        // Verifica se a senha está correta
+        const match = await bcrypt.compare(senha, user.senha);
+        if (!match) {
+            return res.status(401).send('Senha incorreta.'); // Senha incorreta
+        }
+
+        // Se tudo estiver correto, você pode redirecionar o usuário ou fazer o que precisar
+        res.redirect('/dashboard'); // Redireciona para uma página de sucesso
+    } catch (err) {
+        console.error('Erro ao fazer login', err);
+        res.status(500).send('Erro ao fazer login, por favor, tente novamente mais tarde.');
+    } finally {
+        client.close();
+    }
+});
+
 app.post('/registro', async (req, res) => {
     const newUser = req.body
-
     const client = new MongoClient(url)
 
     try {
@@ -84,7 +120,7 @@ app.post('/registro', async (req, res) => {
         console.log(`usuário ${result.insertedId} inserido com sucesso`)
 
         res.redirect('/')
-    } catch(err) {
+    } catch (err) {
         console.error('Erro ao cadastrar usuario', err)
         res.status(500).send('Erro ao fazer o regristro da conta, por favor, tente novamente mais tarde')
     } finally {
