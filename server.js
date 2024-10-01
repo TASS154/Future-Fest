@@ -3,7 +3,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 const app = express();
 const path = require('path')
 const bcrypt = require('bcrypt');
-const port = 3000;
+const port = 3001;
 const methodOverride = require('method-override');
 const fs = require('fs');
 
@@ -70,6 +70,10 @@ app.get('/planos', (req, res) => {
     res.sendFile(__dirname + '/HTML/planos.html')
 })
 
+app.get('/dashboard', (req, res) => {
+    res.sendFile(__dirname + '/HTML/dashboard.html')
+})
+
 app.post('/login', async (req, res) => {
     const { email, senha } = req.body;
 
@@ -90,14 +94,11 @@ app.post('/login', async (req, res) => {
 
         console.log(user)
 
-        // Verifica se a senha está correta
-        const match = await bcrypt.compare(senha, user.senha);
-        if (!match) {
+        if (senha !== user.senha) {
             return res.status(401).send('Senha incorreta.'); // Senha incorreta
-        }
-
-        // Se tudo estiver correto, você pode redirecionar o usuário ou fazer o que precisar
-        res.redirect('/dashboard'); // Redireciona para uma página de sucesso
+        } else {
+            res.redirect('/dashboard')
+        };
     } catch (err) {
         console.error('Erro ao fazer login', err);
         res.status(500).send('Erro ao fazer login, por favor, tente novamente mais tarde.');
