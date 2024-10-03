@@ -30,7 +30,7 @@ app.get('/planos', (req, res) => {
 })
 
 app.get('/loja', (req, res) => {
-    res.sendFile(__dirname + '/HTML/loja.html')
+    res.sendFile(__dirname + '/HTML/dadossuplemento.html')
 })
 
 app.get('/B-corp', (req, res) => {
@@ -138,6 +138,69 @@ app.post('/registro', async (req, res) => {
 
 })
 
+// saida do banco de dados para cards
+
+
+function criarCard(suplemento) {
+    let cards = '';
+    suplemento.forEach(suplemento => {
+        cards += `
+        <div class="card mb-3">
+            <img src="/images/${suplemento.img}" class="card-img-top w-100 h-auto" alt="${suplemento.nome}">
+            <div class="card-body">
+                <h5 class="card-title">${suplemento.nome}</h5>
+                <p class="card-text">${suplemento.desc}</p>
+                <p class="card-text"><strong>Preço:</strong> R$ ${suplemento.preco}</p>
+                <a href="${suplemento.url_info}" class="btn btn-primary">Mais Informações</a>
+            </div>
+        </div>
+        `;
+    });
+    return cards;
+}
+function criarCard(suplemento) {
+    let cards = '';
+    suplemento.forEach(suplemento => {
+        cards += `
+        <div class="card mb-3">
+            <img src="/images/${suplemento.imagem}" class="card-img-top w-100 h-auto" alt="${suplemento.nome}">
+            <div class="card-body">
+                <h5 class="card-title">${suplemento.nome}</h5>
+                <p class="card-text">${suplemento.desc}</p>
+                <p class="card-text"><strong>Preço:</strong> R$ ${suplemento.preco}</p>
+                <a href="${suplemento.url_info}" class="btn btn-primary">Mais Informações</a>
+            </div>
+        </div>
+        `;
+    });
+    return cards;
+}
+function criarCard(suplemento) {
+    let cards = '';
+    suplemento.forEach(suplemento => {
+        cards += `
+        <div class="card mb-3">
+            <img src="/images/${suplemento.imagem}" class="card-img-top w-100 h-auto" alt="${suplemento.nome}">
+            <div class="card-body">
+                <h5 class="card-title">${suplemento.nome}</h5>
+                <p class="card-text">${suplemento.desc}</p>
+                <p class="card-text"><strong>Preço:</strong> R$ ${suplemento.preco}</p>
+                <a href="${suplemento.url_info}" class="btn btn-primary">Mais Informações</a>
+            </div>
+        </div>
+        `;
+    });
+    return cards;
+}
+
+
+app.get('/', async (req, res) => {
+    const cardsHtml = suplemento.map(suplemento => criarCard(suplemento)).join('');
+    const pageHtmlPath = path.join(__dirname, 'dadossuplemento.html');
+    let pageHtml = fs.readFileSync(pageHtmlPath, 'utf-8');
+    pageHtml = pageHtml.replace('{{cardsHtml}}', cardsHtml);
+    res.send(pageHtml);
+});
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
