@@ -74,6 +74,10 @@ app.get('/esqueceu', (req, res) => {
     res.sendFile(__dirname + '/HTML/esqueceu-a-senha.html')
 })
 
+app.get('/po', (req, res) => {
+    res.sendFile(__dirname + '/HTML/po.html')
+})
+
 app.get('/dashboard', (req, res) => {
     res.sendFile(__dirname + '/HTML/dashboard.html')
 })
