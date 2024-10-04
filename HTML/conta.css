@@ -78,6 +78,76 @@ nav{
 .btn:hover{
     background-color: #5b0303;
 }
+.profile-img {
+    margin-left: 30px;
+}
+.Seu-Perfil {
+    color: white;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin-top: 2rem;
+    margin-left: 30px;
+}
+.edit {
+    width: 16px; 
+    height: 16px; 
+    vertical-align: middle; 
+    margin-left: 10px; 
+    cursor: pointer; 
+}
+
+
+.form-container {
+    max-width: 400px; 
+    width: 100%;
+}
+
+.form-label {
+    color: white;
+}
+
+
+.col-form-label {
+    white-space: nowrap; 
+    margin-right: 5px; 
+    color: white; 
+}
+
+.form-control-plaintext {
+    color: white;
+    display: inline-block;
+}
+
+
+.text-left {
+    text-align: left;
+}
+
+
+.form-control-plaintext {
+    color: white; 
+    display: inline-block; 
+}
+
+
+.col-sm-10 {
+    display: flex;
+    align-items: center;
+    text-align: left; 
+}
+
+
+.input-sm {
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+#formFile, #nomeUsuario {
+    max-width: 100%; 
+}
+
+
 
 .container{
     max-width: 1200px;

@@ -2,7 +2,6 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.21.0",
-    "express-session": "^1.18.0",
     "method-override": "^3.0.0",
     "mongodb": "^6.9.0"
   }
