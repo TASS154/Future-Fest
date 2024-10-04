@@ -1,5 +1,6 @@
 // Importa as dependências necessárias
 const express = require('express'); // Framework para criação de servidores web
+const session = require('express-session')
 const { MongoClient, ObjectId } = require('mongodb'); // Cliente MongoDB para operações no banco de dados
 const app = express(); // Cria uma instância do aplicativo Express
 const path = require('path'); // Módulo para manipulação de caminhos de arquivos
@@ -19,6 +20,13 @@ const url = 'mongodb://127.0.0.1:27017/'; // URL de conexão ao MongoDB
 const dbName = 'academia'; // Nome do banco de dados
 const collectionUser = 'usuarios'; // Nome da coleção de usuários
 const collectionShop = 'loja'; // Nome da coleção de loja
+
+app.use(session({
+    secret: 'seu-segredo-aqui', // Você deve escolher um segredo forte
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Mude para true se estiver usando HTTPS
+}));
 
 // Roteamento para as páginas HTML
 app.get('/', (req, res) => {
@@ -69,9 +77,52 @@ app.get('/conta', (req, res) => {
     res.sendFile(__dirname + '/HTML/conta.html'); // Página de Conta
 });
 
-app.get('/dashboard', (req, res) => {
-    res.sendFile(__dirname + '/HTML/dashboard.html'); // Página de Dashboard
-});
+app.get('/dashboard', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Redireciona se não estiver logado
+    }
+    
+    const client = new MongoClient(url);
+    try {
+       await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+    
+         const usuario = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+            
+        if (!usuario) {
+            return res.status(404).send('Usuário não encontrado');
+        }
+    
+        const dashboardHTML = `
+        <!DOCTYPE html>
+        <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8">
+            <title>Dashboard</title>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        </head>
+        <body>
+            <div class="container">
+                <h1>Bem-vindo, ${usuario.nome}!</h1>
+                <a href='/conta/${req.session.userId}'>
+                <img src="${usuario.foto}" alt="Foto de perfil" class="img-thumbnail" style="width: 200px; height: 200px;">
+            </a>
+                <p>Email: ${usuario.email}</p>
+                <a href="/logout">Sair</a>
+            </div>
+        </body>
+        </html>
+        `;
+    
+            res.send(dashboardHTML);
+        } catch (err) {
+            console.error('Erro ao acessar dashboard', err);
+            res.status(500).send('Erro ao acessar o dashboard, por favor, tente novamente mais tarde.');
+        } finally {
+            client.close();
+        }
+    });
 
 app.get('/conta/:id', async (req, res) => {
     const client = new MongoClient(url);
@@ -212,7 +263,8 @@ app.post('/registro', async (req, res) => {
         const result = await collection.insertOne(newUser);
         console.log(`usuário ${result.insertedId} inserido com sucesso`); // Log do ID do usuário inserido
 
-        res.redirect('/'); // Redireciona para a página inicial
+        req.session.userId = result.insertedId; // Armazena o ID do usuário na sessão
+        return res.redirect(`/dashboard`); // Redireciona para a página inicial
     } catch (err) {
         console.error('Erro ao cadastrar usuario', err); // Log de erro
         res.status(500).send('Erro ao fazer o registro da conta, por favor, tente novamente mais tarde'); // Resposta em caso de erro
