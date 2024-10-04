@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <nav>
+    <nav class="navbar">
         <div class="nav-logo">
             <a href="/">
                 <img src="https://i.ibb.co/FY5bCP7/logo.png">
@@ -24,35 +24,73 @@
             <li id="link2" class="link"><a href="#footer">Loja de suplementos</a></li>
             <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
         </ul>
+        <a href="/login">
+            <button class="btn">Entrar</button>
+        </a>
     </nav>
     <header>
         <h1>Registrar</h1>
-        <form method="post" action="/registro">
-            <div class="mb-3">
-                <label for="email" class="form-label">Insira o Endereço de E-mail aqui</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-            </div>
-            <div class="mb-3">
-                <label for="inputPassword5" class="form-label">Insira sua senha aqui</label>
-                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="senha">
-                <div id="passwordHelpBlock" class="form-text">
-                    Sua senha deve ter 8-20 caracteres, contendo letras e numeros, não pode conter espaços, caracteres
-                    especiais,
-                    e emojis.
+        <form id="registerForm" method="post" action="/registro">
+            <!-- Parte 1 -->
+            <div class="step" id="step-1">
+                <div class="mb-3">
+                    <label for="Usuario" class="form-label">Insira o Nome De Usuário</label>
+                    <input class="form-control" type="text" placeholder="Insira o nome de Usuário"
+                        aria-label="default input" maxlength="50">
                 </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Insira o Endereço de E-mail aqui</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                        placeholder="Insira o Endereço de E-mail">
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword5" class="form-label">Insira sua senha aqui</label>
+                    <input type="password" id="inputPassword5" class="form-control" name="senha"
+                        placeholder="Insira a senha">
+                    <div id="passwordHelpBlock" class="form-text">Sua senha deve ter 8-20 caracteres, contendo letras e
+                        números.</div>
+                    <div id="error-message" style="color: red; display: none;"></div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="nextStep(2)">Próximo</button>
             </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="Check">
-                <label class="form-check-label" for="check">Você concorda com os termos de privacidade?</label>
+
+            <!-- Parte 2 -->
+            <div class="step" id="step-2" style="display: none;">
+                <div class="mb-3">
+                    <label for="Telefone" class="form-label">Insira o seu Número de Telefone</label>
+                    <input class="form-control" type="Number" placeholder="Insira o número de telefone" maxlength="15">
+                </div>
+                <div class="mb-3">
+                    <label for="CPF" class="form-label">Insira o seu CPF</label>
+                    <input class="form-control" type="text" placeholder="Insira o CPF" maxlength="15">
+                </div>
+                <label for="nascimento">Data De Nascimento:</label>
+                <input type="date" id="birthday" name="Data de Nascimento">
+                <br><br>
+                <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep(3)">Próximo</button>
             </div>
-            <div>
-                <input type="hidden" class="form-control" name="foto" value="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">
+
+            <!-- Parte 3 -->
+            <div class="step" id="step-3" style="display: none;">
+                <div class="mb-3">
+                    <label for="Renda" class="form-label">Insira sua renda</label>
+                    <input class="form-control" type="Number" placeholder="Insira a renda" maxlength="5">
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Voltar</button>
+                <button type="submit" class="btn btn-primary">Confirmar</button>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
-            <hr>
-            <div id="error-message" style="color: red; display: none;"></div>
-            <p>Já é cliente nosso? clique em <a class="login" href="/registro">Entrar</a> </p>
+
+            <br>
+            <nav aria-label="..." class="paginationn">
+                <ul class="pagination pagination-lg">
+                    <li class="page-item" id="page-1"><a class="page-link" href="#" onclick="goToStep(1)">1</a></li>
+                    <li class="page-item" id="page-2"><a class="page-link" href="#" onclick="goToStep(2)">2</a></li>
+                    <li class="page-item" id="page-3"><a class="page-link" href="#" onclick="goToStep(3)">3</a></li>
+                </ul>
+            </nav>
         </form>
+
     </header>
 
     <footer class="container" id="footer">
@@ -83,42 +121,46 @@
     <div class="copyright">
         FitLab &copy; 2023 Lucas S. Bomtempo, Thiago Alexandre e Henrique Luiz.
     </div>
-</body>
-<script src="script.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
 
-    <script> document.querySelector('form').addEventListener('submit', function(event) {
-        const password = document.querySelector('input[name="senha"]').value;
-        const checkbox = document.getElementById('Check');
-        const errorMessage = document.getElementById('error-message');
-    
-        // Limpa a mensagem de erro ao submeter o formulário
-        errorMessage.style.display = 'none';
-        errorMessage.textContent = '';
-    
-        const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,20}$/; // 8-20 caracteres, letras e números
-    
-        if (!passwordPattern.test(password)) {
-            errorMessage.textContent = 'A senha deve ter entre 8 e 20 caracteres, contendo letras e números, e não pode conter espaços ou caracteres especiais.';
-            errorMessage.style.display = 'block'; // Mostra a mensagem de erro
-            event.preventDefault(); // Impede o envio do formulário
-            return;
-        }
-    
-        if (!checkbox.checked) {
-            errorMessage.textContent = 'Você deve concordar com os termos de privacidade.';
-            errorMessage.style.display = 'block'; // Mostra a mensagem de erro
-            event.preventDefault(); // Impede o envio do formulário
-            return;
-        }
-    });</script>
+    <script src="registro.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (event) {
+            const password = document.querySelector('input[name="senha"]').value;
+            const checkbox = document.getElementById('Check');
+            const errorMessage = document.getElementById('error-message');
+
+            // Limpa a mensagem de erro ao submeter o formulário
+            errorMessage.style.display = 'none';
+            errorMessage.textContent = '';
+
+            const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,20}$/; // 8-20 caracteres, letras e números
+
+            if (!passwordPattern.test(password)) {
+                errorMessage.textContent = 'A senha deve ter entre 8 e 20 caracteres, contendo letras e números, e não pode conter espaços ou caracteres especiais.';
+                errorMessage.style.display = 'block'; // Mostra a mensagem de erro
+                event.preventDefault(); // Impede o envio do formulário
+                return;
+            }
+
+            if (!checkbox.checked) {
+                errorMessage.textContent = 'Você deve concordar com os termos de privacidade.';
+                errorMessage.style.display = 'block'; // Mostra a mensagem de erro
+                event.preventDefault(); // Impede o envio do formulário
+                return;
+            }
+        });
+    </script>
+
+</body>
 
 </html>
