@@ -28,6 +28,20 @@ app.use(session({
     cookie: { secure: false } // Mude para true se estiver usando HTTPS
 }));
 
+function criarCard(suplemento) {
+    return `
+<div class="card mb-3">
+<img src="${suplemento.img}" class="card-img-top w-100 h-100 h-auto" alt="${suplemento. Nome}">
+    <div class="card-body">
+    <h5 class="card-title">${suplemento.Nome}</h5>
+    <h3 class="card-text">${suplemento.Preço}R$</h3>
+    <p class="card-text">${suplemento.uso}</p>
+    <p class="card-text">${suplemento.ingredientes}</p> 
+</div>
+</div>
+`
+}
+
 // Roteamento para as páginas HTML
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/HTML/home.html'); // Página inicial
@@ -39,10 +53,6 @@ app.get('/sobrenos', (req, res) => {
 
 app.get('/planos', (req, res) => {
     res.sendFile(__dirname + '/HTML/planos.html'); // Página de Planos
-});
-
-app.get('/loja', (req, res) => {
-    res.sendFile(__dirname + '/HTML/loja.html'); // Página da Loja
 });
 
 app.get('/B-corp', (req, res) => {
@@ -163,9 +173,9 @@ app.get('/conta', async (req, res) => {
                     <label for="nomeUsuario" class="form-label">Nome de Usuário:</label>
                     <div class="nome-container">
                         <span id="nomeDisplay">${usuario.nome}</span>
-                        <img src="https://i.ibb.co/DkQS76X/edit.png" alt="editar" class="edit" id="editIcon">
+                        <img src="https://i.ibb.co/DkQS76X/edit.png" alt="editar" class="edit" id="editNome">
                     </div>
-                    <input class="form-control input-sm" type="text" id="nomeInput" placeholder="Seu nome de usuário" style="display: none;">
+                    <input class="form-control input-sm" type="text" id="nomeInput" name="novoNome" placeholder="Seu nome de usuário" style="display: none;">
                     <button id="confirmButton" class="btn btn-primary" style="display: none;">Salvar</button>
                 </div>
                 <div class="mb-3 row align-items-center">
@@ -239,6 +249,38 @@ document.getElementById('confirmButton1').addEventListener('click', function () 
     } catch (err) {
         console.error('Erro ao buscar usuário', err);
         res.status(500).send('Erro ao buscar usuário, por favor, tente novamente mais tarde.');
+    } finally {
+        client.close(); // Fecha a conexão com o banco de dados
+    }
+});
+
+app.post('/conta/change', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Redireciona para login se não estiver logado
+    }
+
+    const novoNome = req.body.novoNome; // Obtém o novo nome do corpo da requisição
+    const client = new MongoClient(url);
+
+    try {
+        await client.connect(); // Conecta ao MongoDB
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        // Atualiza o nome do usuário no banco de dados
+        const result = await collection.updateOne(
+            { _id: new ObjectId(req.session.userId) },
+            { $set: { nome: novoNome } }
+        );
+
+        if (result.modifiedCount === 0) {
+            return res.status(404).send('Usuário não encontrado ou o nome não foi atualizado');
+        }
+
+        res.redirect('/conta'); // Redireciona de volta para a página da conta
+    } catch (err) {
+        console.error('Erro ao atualizar nome do usuário', err);
+        res.status(500).send('Erro ao atualizar nome, por favor, tente novamente mais tarde.');
     } finally {
         client.close(); // Fecha a conexão com o banco de dados
     }
@@ -377,6 +419,32 @@ app.post('/registro', async (req, res) => {
         res.status(500).send('Erro ao fazer o registro da conta, por favor, tente novamente mais tarde'); // Resposta em caso de erro
     } finally {
         client.close(); // Fecha a conexão com o banco de dados
+    }
+});
+
+app.get('/loja', async (req, res) => {
+    const client = new MongoClient(url);
+
+    try {
+        // Conecta ao banco de dados
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionShop);
+
+        // Obtém todos os usuários da coleção
+        const suplementos = await collection.find({}).toArray();
+
+        // Retorna os usuários como resposta
+        const cardsHtml = suplementos.map(suplemento => criarCard(suplemento)).join('');
+        const pageHtmlPath = path.join(__dirname + '/HTML/loja.html');
+        let pageHtml = fs.readFileSync(pageHtmlPath, 'utf-8');
+        pageHtml = pageHtml.replace('{{cardsHtml}}', cardsHtml);
+        res.send(pageHtml);
+    } catch (err) {
+        console.error('Erro ao acessar o MongoDB:', err);
+        res.status(500).send('Erro ao acessar o banco de dados');
+    } finally {
+        await client.close(); // Fecha a conexão com o banco de dados
     }
 });
 
