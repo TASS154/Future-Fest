@@ -30,13 +30,14 @@ app.use(session({
 
 function criarCard(suplemento) {
     return `
+    <link rel="stylesheet" href="loja.css">
 <div class="card mb-3">
-<img src="${suplemento.img}" class="card-img-top w-100 h-100 h-auto" alt="${suplemento. Nome}">
+<img src="${suplemento.img}" class="card-img-top" style="width: 100px; height: 100px;" alt="${suplemento. Nome}">
     <div class="card-body">
     <h5 class="card-title">${suplemento.Nome}</h5>
     <h3 class="card-text">${suplemento.Preço}R$</h3>
-    <p class="card-text">${suplemento.uso}</p>
-    <p class="card-text">${suplemento.ingredientes}</p> 
+    <p class="card-text"><strong>Usos:</strong> ${suplemento.uso}</p> <br>
+    <p class="card-text"><strong>Ingreditentes:</strong> ${suplemento.ingredientes}</p> 
 </div>
 </div>
 `
@@ -387,6 +388,7 @@ app.post('/login', async (req, res) => {
         if (senha !== user.senha) {
             return res.status(401).send('Senha incorreta.'); // Resposta se a senha estiver incorreta
         } else {
+            req.session.userId = user._id;
             res.redirect('/dashboard'); // Redireciona para o dashboard se o login for bem-sucedido
         }
     } catch (err) {

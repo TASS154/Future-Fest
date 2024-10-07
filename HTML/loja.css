@@ -96,15 +96,77 @@ nav{
     box-shadow: 0 0 1000px 50px #5b0303;
     z-index: -100;
 }
-
-header{
-    position: relative;
-    padding-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    gap: 2rem;
+.Logo-Store{
+    display: block;
+    margin: 0 auto; 
+    text-align: center;
+    width: 340px;
+    height: 250px;
 }
+
+
+.search-bar {
+    display: flex;
+    justify-content: center; 
+    margin: 20px 0;
+}
+
+.search-input {
+    width: 494px;
+    height: 32px;
+    padding: 5px;
+    background-color: #000; 
+    border: 2px solid #ccc; 
+    border-radius: 5px 0 0 5px;
+    color: #ccc; 
+    font-size: 16px;
+}
+
+.search-input::placeholder {
+    color: #ccc;
+}
+
+.search-btn {
+    position: relative; 
+    padding: 5px 20px;
+    background-color: #5b0303;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    height: 32px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.search-btn:hover {
+    background-color: #a00000;
+}
+
+.search-text {
+    position: relative;
+    z-index: 2; 
+    color: #fff;
+}
+
+
+
+
+
+
+.Produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 20px; 
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin: 50px;
+}
+
 
 header .content h4{
     margin-bottom: 1rem;
@@ -444,6 +506,12 @@ form {
 .carousel-inner img {
     height: 400px; 
     object-fit: cover; 
+}
+
+.card-img-top {
+    width: 100px; /* Define a largura */
+    height: 100px; /* Define a altura */
+    object-fit: cover; /* Mantém a proporção da imagem, cortando o que exceder */
 }
 
 
