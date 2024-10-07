@@ -73,92 +73,99 @@ app.get('/registro', (req, res) => {
     res.sendFile(__dirname + '/HTML/registro.html'); // Página de Registro
 });
 
-app.get('/conta', (req, res) => {
-    res.sendFile(__dirname + '/HTML/conta.html'); // Página de Conta
-});
-
 app.get('/dashboard', async (req, res) => {
     if (!req.session.userId) {
-        return res.redirect('/login'); // Redireciona se não estiver logado
+        return res.redirect('/login'); // Redireciona para login se não estiver logado
     }
-    
-    const client = new MongoClient(url);
-    try {
-       await client.connect();
-        const db = client.db(dbName);
-        const collection = db.collection(collectionUser);
-    
-         const usuario = await collection.findOne({ _id: new ObjectId(req.session.userId) });
-            
-        if (!usuario) {
-            return res.status(404).send('Usuário não encontrado');
-        }
-    
-        const dashboardHTML = `
-        <!DOCTYPE html>
-        <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8">
-            <title>Dashboard</title>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        </head>
-        <body>
-            <div class="container">
-                <h1>Bem-vindo, ${usuario.nome}!</h1>
-                <a href='/conta/${req.session.userId}'>
-                <img src="${usuario.foto}" alt="Foto de perfil" class="img-thumbnail" style="width: 200px; height: 200px;">
-            </a>
-                <p>Email: ${usuario.email}</p>
-                <a href="/logout">Sair</a>
-            </div>
-        </body>
-        </html>
-        `;
-    
-            res.send(dashboardHTML);
-        } catch (err) {
-            console.error('Erro ao acessar dashboard', err);
-            res.status(500).send('Erro ao acessar o dashboard, por favor, tente novamente mais tarde.');
-        } finally {
-            client.close();
-        }
-    });
 
-app.get('/conta/:id', async (req, res) => {
-    const client = new MongoClient(url);
-    const id = req.params.id; // Extrai o ID da URL
+    const client = new MongoClient(url); // Conecta ao MongoDB
     try {
         await client.connect();
         const db = client.db(dbName);
         const collection = db.collection(collectionUser);
 
-        // Busca o usuário pelo ID
-        const usuario = await collection.findOne({ _id: new ObjectId(id) }); // Certifique-se de usar ObjectId
+        // Obtém o usuário logado pelo ID da sessão
+        const usuario = await collection.findOne({ _id: new ObjectId(req.session.userId) });
 
         if (!usuario) {
-            return res.status(404).send('Usuário não encontrado'); // Retorna 404 se o usuário não existir
+            return res.status(404).send('Usuário não encontrado');
+        }
+
+        // HTML dinâmico gerado com base no usuário logado
+        const conteudoDinamico = `
+        <link rel="stylesheet" href="dashboard.css">
+            <a href='/conta'>
+            <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
+            </a>
+            <h2>Bem-vindo, ${usuario.nome}!</h2>
+            <p>Email: ${usuario.email}</p>
+            <a href="/logout" class="btn btn-danger">Sair</a>
+        `;
+
+        // Lê o arquivo HTML base
+        const caminhoHtmlBase = path.join(__dirname, 'HTML', 'dashboard.html');
+        fs.readFile(caminhoHtmlBase, 'utf-8', (err, data) => {
+            if (err) {
+                console.error('Erro ao ler arquivo HTML base', err);
+                return res.status(500).send('Erro ao carregar o dashboard');
+            }
+
+            // Substitui o placeholder pelo conteúdo dinâmico
+            const paginaModificada = data.replace('<!-- PLACEHOLDER -->', conteudoDinamico);
+
+            // Envia a página modificada como resposta
+            res.send(paginaModificada);
+        });
+
+    } catch (err) {
+        console.error('Erro ao acessar dashboard', err);
+        res.status(500).send('Erro ao acessar o dashboard, por favor, tente novamente mais tarde.');
+    } finally {
+        client.close();
+    }
+});
+
+app.get('/conta', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Redireciona para login se não estiver logado
+    }
+
+    const client = new MongoClient(url);
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        // Obtém o usuário logado pelo ID da sessão
+        const usuario = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+
+        if (!usuario) {
+            return res.status(404).send('Usuário não encontrado');
         }
 
         // Gera o HTML com os dados do usuário
         const display = `
+        <link rel="stylesheet" href="conta.css">
         <div class="profile-img">
-            <img src="${usuario.foto}" alt="Imagem de Perfil" class="img-thumbnail" id="profileImage"
-                style="width: 200px; height: 200px;">
+            <img src="${usuario.foto}" alt="Imagem de Perfil" class="img-thumbnail" id="profileImage" style="width: 200px; height: 200px;">
         </div>
         <div class="Seu-Perfil">
             <div class="form-container">
+            <form method="POST" action='/conta/upload' enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Vamos lá, mostre sua foto! (Aceitamos: PNG e JPG)</label>
                     <input class="form-control input-sm" type="file" id="formFile">
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
+            </form>
+            <form method="POST" action='/conta/change'> 
                 <div class="mb-3">
                     <label for="nomeUsuario" class="form-label">Nome de Usuário:</label>
                     <div class="nome-container">
-                        <span id="nomeDisplay">${usuario.nome}</span> <!-- Use o campo correto do usuário -->
+                        <span id="nomeDisplay">${usuario.nome}</span>
                         <img src="https://i.ibb.co/DkQS76X/edit.png" alt="editar" class="edit" id="editIcon">
                     </div>
-                    <input class="form-control input-sm" type="text" id="nomeInput" placeholder="Seu nome de usuário"
-                        style="display: none;">
+                    <input class="form-control input-sm" type="text" id="nomeInput" placeholder="Seu nome de usuário" style="display: none;">
                     <button id="confirmButton" class="btn btn-primary" style="display: none;">Salvar</button>
                 </div>
                 <div class="mb-3 row align-items-center">
@@ -167,19 +174,68 @@ app.get('/conta/:id', async (req, res) => {
                 </div>
             </div>
         </div>
-    </form>
+        </form>
+        <form method="POST" action='/conta/delete'>
+            <button type="submit" class="btn btn-danger btn-apagar">
+                <img src="https://i.ibb.co/Ss6dxLd/trashh.png" alt="Icone de apagar Conta" class="i-apagar">
+                <span class="btn-apagar-text">Apagar Conta</span>
+            </button>
+        </form>
+        <script>
+        document.getElementById('editNome').addEventListener('click', function () {
+    document.getElementById('nomeDisplay').style.display = 'none';
+    document.getElementById('nomeInput').style.display = 'block';
+    document.getElementById('nomeInput').value = document.getElementById('nomeDisplay').textContent;
+    document.getElementById('editNome').style.display = 'none';
+    document.getElementById('confirmButton').style.display = 'inline-block';
+});
 
-    <form method="POST" action='/conta/${id}'>
-    <button type="submit" class="btn btn-danger btn-apagar">
-        <img src="https://i.ibb.co/Ss6dxLd/trashh.png" alt="Icone de apagar Conta" class="i-apagar">
-        <span class="btn-apagar-text">Apagar Conta</span>
-    </button>
+document.getElementById('confirmButton').addEventListener('click', function () {
+    const novoNome = document.getElementById('nomeInput').value;
+    document.getElementById('nomeDisplay').textContent = novoNome;
+    document.getElementById('nomeDisplay').style.display = 'inline-block';
+    document.getElementById('nomeInput').style.display = 'none';
+    document.getElementById('confirmButton').style.display = 'none';
+    document.getElementById('editNome').style.display = 'inline-block';
+});
 
 
-</form>
+//Email
+document.getElementById('editEmail').addEventListener('click', function () {
+    document.getElementById('nomeDisplay1').style.display = 'none';
+    document.getElementById('nomeInput1').style.display = 'block';
+    document.getElementById('nomeInput1').value = document.getElementById('nomeDisplay').textContent;
+    document.getElementById('editEmail').style.display = 'none';
+    document.getElementById('confirmButton1').style.display = 'inline-block';
+});
+
+document.getElementById('confirmButton1').addEventListener('click', function () {
+    const novoNome = document.getElementById('nomeInput1').value;
+    document.getElementById('nomeDisplay1').textContent = novoNome;
+    document.getElementById('nomeDisplay1').style.display = 'inline-block';
+    document.getElementById('nomeInput1').style.display = 'none';
+    document.getElementById('confirmButton1').style.display = 'none';
+    document.getElementById('editEmail').style.display = 'inline-block';
+});
+
+        </script>    
         `;
 
-        res.send(display); // Envia o HTML gerado como resposta
+        // Lê o arquivo HTML base
+        const caminhoHtmlBase = path.join(__dirname, 'HTML', 'conta.html');
+        fs.readFile(caminhoHtmlBase, 'utf-8', (err, data) => {
+            if (err) {
+                console.error('Erro ao ler arquivo HTML base', err);
+                return res.status(500).send('Erro ao carregar a página da conta');
+            }
+
+            // Substitui o placeholder pelo conteúdo dinâmico
+            const paginaModificada = data.replace('<!-- PLACEHOLDER -->', display);
+
+            // Envia a página modificada como resposta
+            res.send(paginaModificada);
+        });
+
     } catch (err) {
         console.error('Erro ao buscar usuário', err);
         res.status(500).send('Erro ao buscar usuário, por favor, tente novamente mais tarde.');
@@ -188,7 +244,58 @@ app.get('/conta/:id', async (req, res) => {
     }
 });
 
-app.post('/conta/:id', async (req, res) => {
+app.post('/conta/upload', (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login');
+    }
+
+    // Aqui, precisamos ler o arquivo do request
+    const file = req.body.file; // Aqui está o arquivo vindo do front-end
+
+    // Verifique se o arquivo está presente
+    if (!file) {
+        return res.status(400).send('Nenhum arquivo recebido.');
+    }
+
+    const fileName = `${req.session.userId}_${Date.now()}${path.extname(file.name)}`;
+    const uploadPath = path.join(__dirname, 'uploads', fileName);
+
+    // Escreve o arquivo no sistema de arquivos
+    fs.writeFile(uploadPath, file.data, (err) => {
+        if (err) {
+            console.error('Erro ao salvar o arquivo', err);
+            return res.status(500).send('Erro ao salvar o arquivo.');
+        }
+
+        const imageUrl = `http://localhost:${port}/uploads/${fileName}`;
+
+        const client = new MongoClient(url);
+        client.connect()
+            .then(() => {
+                const db = client.db(dbName);
+                const collection = db.collection(collectionUser);
+
+                return collection.updateOne(
+                    { _id: new ObjectId(req.session.userId) },
+                    { $set: { foto: imageUrl } }
+                );
+            })
+            .then(result => {
+                if (result.modifiedCount === 0) {
+                    return res.status(404).send('Usuário não encontrado ou a foto não foi atualizada');
+                }
+
+                res.redirect(`/conta/${req.session.userId}`);
+            })
+            .catch(err => {
+                console.error('Erro ao atualizar a imagem no MongoDB', err);
+                res.status(500).send('Erro ao atualizar a imagem no banco de dados');
+            })
+            .finally(() => client.close());
+    });
+});
+
+app.post('/conta/delete', async (req, res) => {
     const id = req.params.id; // Obtém o ID da URL
     const client = new MongoClient(url);
 
@@ -198,7 +305,7 @@ app.post('/conta/:id', async (req, res) => {
         const collection = db.collection(collectionUser);
 
         // Exclui o usuário pelo ID
-        const result = await collection.deleteOne({ _id: new ObjectId(id) });
+        const result = await collection.deleteOne({  _id: new ObjectId(req.session.userId) });
 
         if (result.deletedCount === 0) {
             return res.status(404).send('Usuário não encontrado'); // Retorna 404 se o usuário não existir

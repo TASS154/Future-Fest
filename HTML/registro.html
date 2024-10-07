@@ -35,7 +35,7 @@
             <div class="step" id="step-1">
                 <div class="mb-3">
                     <label for="Usuario" class="form-label">Insira o Nome De Usuário</label>
-                    <input class="form-control" type="text" placeholder="Insira o nome de Usuário"
+                    <input name="nome" class="form-control" type="text" placeholder="Insira o nome de Usuário"
                         aria-label="default input" maxlength="50">
                 </div>
                 <div class="mb-3">
@@ -58,14 +58,14 @@
             <div class="step" id="step-2" style="display: none;">
                 <div class="mb-3">
                     <label for="Telefone" class="form-label">Insira o seu Número de Telefone</label>
-                    <input class="form-control" type="Number" placeholder="Insira o número de telefone" maxlength="15">
+                    <input name="numero" class="form-control" type="Number" placeholder="Insira o número de telefone" maxlength="15">
                 </div>
                 <div class="mb-3">
                     <label for="CPF" class="form-label">Insira o seu CPF</label>
-                    <input class="form-control" type="text" placeholder="Insira o CPF" maxlength="15">
+                    <input name="cpf" class="form-control" type="text" placeholder="Insira o CPF" maxlength="15">
                 </div>
                 <label for="nascimento">Data De Nascimento:</label>
-                <input type="date" id="birthday" name="Data de Nascimento">
+                <input name="nascimento" type="date" id="birthday" name="Data de Nascimento">
                 <br><br>
                 <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Voltar</button>
                 <button type="button" class="btn btn-primary" onclick="nextStep(3)">Próximo</button>
@@ -75,9 +75,10 @@
             <div class="step" id="step-3" style="display: none;">
                 <div class="mb-3">
                     <label for="Renda" class="form-label">Insira sua renda</label>
-                    <input class="form-control" type="Number" placeholder="Insira a renda" maxlength="5">
+                    <input name="renda" class="form-control" type="Number" placeholder="Insira a renda" maxlength="5">
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Voltar</button>
+                <input name="foto" type="hidden" value="https://braverplayers.org/wp-content/uploads/2022/09/blank-pfp.png">
                 <button type="submit" class="btn btn-primary">Confirmar</button>
             </div>
 

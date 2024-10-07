@@ -441,4 +441,20 @@ form {
     object-fit: cover; /* Isso garante que as imagens não fiquem distorcidas */
 }
 
+.profile-image {
+    position: absolute;
+    top: 20px; /* Ajuste conforme necessário */
+    right: 20px; /* Ajuste conforme necessário */
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff; /* Borda opcional para destaque */
+    transition: all 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
 
