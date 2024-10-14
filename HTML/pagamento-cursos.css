@@ -92,45 +92,36 @@ nav{
 }
 
 header {
-    text-align: center;
+    text-align: left;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-h1 {
+h1, h2, h3, h4, p, a, li {
     margin-bottom: 1rem;
     color: white;
 }
-.registro{
-    color: #a11000;
-}
-
-.background {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(to right, url(https://i.ibb.co/9nC6MPY/pilates.jpg) 50%, black 50%);
-    background-size: cover;
-    background-position: left;
-    background-repeat: no-repeat;
-}
-
 .bg {
-    width: 50%;
-    padding: 2rem;
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background-color: gray;
 }
-
-#silver {
+.planos {
+    display: flex;
+    text-align: left;
+    justify-content: left;
+}
+.Back {
     width: 50px;
     height: 50px;
 }
 
+#Silver {
+    width: 120px;
+    height: 120px;
+}
+.registro{
+    color: #a11000;
+}
 
 section .header{
     margin-bottom: 1rem;

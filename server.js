@@ -69,8 +69,8 @@ app.get('/cursos', (req, res) => {
 });
 
 
-app.get('/silver', (req, res) => {
-    res.sendFile(__dirname + '/HTML/silver.html'); // Página de Registro
+app.get('/CartaoSilver', (req, res) => {
+    res.sendFile(__dirname + '/HTML/CartaoSilver.html'); // Página de Registro
 });
 
 app.get('/pp', (req, res) => {
@@ -370,72 +370,80 @@ app.post('/conta/delete', async (req, res) => {
 
 // Rota para login
 app.post('/login', async (req, res) => {
-    const { email, senha } = req.body; // Extrai email e senha do corpo da requisição
-
-    const client = new MongoClient(url); // Cria uma nova instância do cliente MongoDB
+    const { email, senha } = req.body;
+    const client = new MongoClient(url);
 
     try {
-        await client.connect(); // Conecta ao banco de dados
-        const db = client.db(dbName); // Seleciona o banco de dados
-        const collection = db.collection(collectionUser); // Seleciona a coleção de usuários
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
 
-        // Procura o usuário pelo e-mail
         const user = await collection.findOne({ email });
 
-        // Verifica se o e-mail existe
         if (!user) {
-            return res.status(401).send('E-mail não encontrado.'); // Resposta se o email não foi encontrado
+            return res.send(`
+                <h1>E-mail não encontrado.</h1>
+                <a href="/login" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Login</a>
+                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
+            `);
         }
 
-        console.log(user); // Log do usuário encontrado
-
-        // Verifica a senha (aqui deveria ser usado bcrypt para comparar senhas por questão de segurança)
         if (senha !== user.senha) {
-            return res.status(401).send('Senha incorreta.'); // Resposta se a senha estiver incorreta
-        } else {
-            req.session.userId = user._id;
-            res.redirect('/dashboard'); // Redireciona para o dashboard se o login for bem-sucedido
+            return res.send(`
+                <h1>Senha incorreta.</h1>
+                <a href="/login" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Login</a>
+                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
+            `);
         }
+
+        req.session.userId = user._id;
+        res.redirect('/dashboard');
     } catch (err) {
-        console.error('Erro ao fazer login', err); // Log de erro
-        res.status(500).send('Erro ao fazer login, por favor, tente novamente mais tarde.'); // Resposta em caso de erro
+        console.error('Erro ao fazer login', err);
+        res.status(500).send('Erro ao fazer login, por favor, tente novamente mais tarde.');
     } finally {
-        client.close(); // Fecha a conexão com o banco de dados
+        client.close();
     }
 });
 
 // Rota para registro de novos usuários
 app.post('/registro', async (req, res) => {
-    const newUser = req.body; // Extrai os dados do novo usuário do corpo da requisição
-    const client = new MongoClient(url); // Cria uma nova instância do cliente MongoDB
+    const newUser = req.body;
+    const client = new MongoClient(url);
 
     try {
-        await client.connect(); // Conecta ao banco de dados
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
 
-        const db = client.db(dbName); // Seleciona o banco de dados
-        const collection = db.collection(collectionUser); // Seleciona a coleção de usuários
+        const existentUser = await collection.findOne({ nome: newUser.nome });
+        const existentEmail = await collection.findOne({ email: newUser.email });
 
-        // Insere o novo usuário na coleção
+        if (existentUser) {
+            return res.send(`
+                <h1>Usuário já existente, tente outro</h1>
+                <a href="/registro" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Registro</a>
+                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
+            `);
+        }
+
+        if (existentEmail) {
+            return res.send(`
+                <h1>Email já existente, tente outro</h1>
+                <a href="/registro" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Registro</a>
+                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
+            `);
+        }
+
         const result = await collection.insertOne(newUser);
-        console.log(`usuário ${result.insertedId} inserido com sucesso`); // Log do ID do usuário inserido
+        req.session.userId = result.insertedId;
 
-        req.session.userId = result.insertedId; // Armazena o ID do usuário na sessão
-
-        await collection.updateOne(
-            { _id: new ObjectId(req.session.userId) }, // Seleciona o usuário recém-inserido
-            {
-                $set: {
-                    desconto: newUser.renda <= 1200 // Define desconto como true ou false
-                }
-            }
-        );
-
-        return res.redirect(`/dashboard`); // Redireciona para a página inicial
+        return res.redirect('/dashboard');
     } catch (err) {
-        console.error('Erro ao cadastrar usuario', err); // Log de erro
-        res.status(500).send('Erro ao fazer o registro da conta, por favor, tente novamente mais tarde'); // Resposta em caso de erro
+        console.error('Erro ao fazer registro', err);
+        res.status(500).send('Erro ao registrar, por favor, tente novamente mais tarde.');
     } finally {
-        client.close(); // Fecha a conexão com o banco de dados
+        client.close();
     }
 });
 
