@@ -68,6 +68,11 @@ app.get('/cursos', (req, res) => {
     res.sendFile(__dirname + '/HTML/cursos.html'); // Página de Cursos
 });
 
+
+app.get('/silver', (req, res) => {
+    res.sendFile(__dirname + '/HTML/silver.html'); // Página de Registro
+});
+
 app.get('/pp', (req, res) => {
     res.sendFile(__dirname + '/HTML/pp.html'); // Página PP
 });
@@ -415,6 +420,16 @@ app.post('/registro', async (req, res) => {
         console.log(`usuário ${result.insertedId} inserido com sucesso`); // Log do ID do usuário inserido
 
         req.session.userId = result.insertedId; // Armazena o ID do usuário na sessão
+
+        await collection.updateOne(
+            { _id: new ObjectId(req.session.userId) }, // Seleciona o usuário recém-inserido
+            {
+                $set: {
+                    desconto: newUser.renda <= 1200 // Define desconto como true ou false
+                }
+            }
+        );
+
         return res.redirect(`/dashboard`); // Redireciona para a página inicial
     } catch (err) {
         console.error('Erro ao cadastrar usuario', err); // Log de erro
