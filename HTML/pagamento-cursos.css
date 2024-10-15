@@ -79,11 +79,12 @@ nav{
     background-color: #5b0303;
 }
 
-.container{
+.container {
     max-width: 1200px;
     margin: auto;
     padding: 5rem 2rem;
 }
+
 
 .blur{
     position: absolute;
@@ -100,16 +101,45 @@ header {
 
 h1, h2, h3, h4, p, a, li {
     margin-bottom: 1rem;
-    color: white;
+    color: black;
 }
-.bg {
-    background-color: gray;
+
+#background {
+    background-color: whitesmoke;
 }
-.planos {
-    display: flex;
-    text-align: left;
-    justify-content: left;
+
+
+.plano, .pagamento {
+    background-color: whitesmoke; 
+    padding: 20px;
+    border-radius: 10px;
 }
+
+.pagamento h2, .pagamento label, .pagamento input, .pagamento select {
+    color: black;
+}
+
+.pagamento input::placeholder {
+    color: black;
+}
+
+.linha-separadora .linha {
+    height: 100%;
+    width: 2px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .linha-separadora {
+        display: none;
+    }
+}
+
 .Back {
     width: 50px;
     height: 50px;
@@ -122,6 +152,8 @@ h1, h2, h3, h4, p, a, li {
 .registro{
     color: #a11000;
 }
+
+
 
 section .header{
     margin-bottom: 1rem;
@@ -254,30 +286,33 @@ section .header{
     border-color: #5b0303;
 }
 
-footer{
-    position: relative;
+footer {
+    width: 100%;
+    background-color: #27272a; 
+    padding: 2rem;
     display: grid;
     grid-template-columns: 400px repeat(3, 1fr);
     gap: 2rem;
+    color: #fff;
 }
 
-footer .column .logo{
+footer .column .logo {
     max-width: 100px;
     margin-bottom: 2rem;
 }
 
-footer .column p{
+footer .column p {
     color: #ccc;
     margin-bottom: 2rem;
 }
 
-footer .column .socials{
+footer .column .socials {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-footer .column .socials a{
+footer .column .socials a {
     color: #ccc;
     border: 1px solid #ccc;
     padding: 5px 10px;
@@ -286,37 +321,37 @@ footer .column .socials a{
     transition: all 0.3s ease;
 }
 
-footer .column .socials a:hover{
+footer .column .socials a:hover {
     color: #fff;
     background-color: #5b0303;
     border-color: #5b0303;
 }
 
-footer .column h4{
+footer .column h4 {
     color: #fff;
     margin-bottom: 2rem;
     font-size: 1.2rem;
     font-weight: 500;
 }
 
-footer .column > a{
+footer .column > a {
     display: block;
     color: #ccc;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
-footer .column > a:hover{
+footer .column > a:hover {
     color: #5b0303;
 }
 
-.copyright{
-    max-width: 1200px;
-    margin: auto;
+.copyright {
+    width: 100%;
+    background-color: #27272a; 
+    text-align: center;
     padding: 1rem;
     color: #fff;
     font-size: 0.8rem;
-    text-align: center;
 }
 
 @media (width < 900px){

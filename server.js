@@ -32,7 +32,7 @@ function criarCard(suplemento) {
     return `
     <link rel="stylesheet" href="loja.css">
 <div class="card mb-3">
-<img src="${suplemento.img}" class="card-img-top" style="width: 100px; height: 100px;" alt="${suplemento. Nome}">
+<img src="${suplemento.img}" class="card-img-top" style="width: 100px; height: 100px;" alt="${suplemento.Nome}">
     <div class="card-body">
     <h5 class="card-title">${suplemento.Nome}</h5>
     <h3 class="card-text">${suplemento.Preço}R$</h3>
@@ -69,8 +69,8 @@ app.get('/cursos', (req, res) => {
 });
 
 
-app.get('/CartaoSilver', (req, res) => {
-    res.sendFile(__dirname + '/HTML/CartaoSilver.html'); // Página de Registro
+app.get('/ComprarAssinatura', (req, res) => {
+    res.sendFile(__dirname + '/HTML/ComprarFitLab.html'); // Página de Registro
 });
 
 app.get('/pp', (req, res) => {
@@ -353,7 +353,7 @@ app.post('/conta/delete', async (req, res) => {
         const collection = db.collection(collectionUser);
 
         // Exclui o usuário pelo ID
-        const result = await collection.deleteOne({  _id: new ObjectId(req.session.userId) });
+        const result = await collection.deleteOne({ _id: new ObjectId(req.session.userId) });
 
         if (result.deletedCount === 0) {
             return res.status(404).send('Usuário não encontrado'); // Retorna 404 se o usuário não existir
@@ -435,7 +435,20 @@ app.post('/registro', async (req, res) => {
             `);
         }
 
-        const result = await collection.insertOne(newUser);
+        const CriptoSenha = await bcrypt.hash(req.body.senha, 15)
+
+        const result = await collection.insertOne({
+            nome: req.body.nome,
+            senha: CriptoSenha,
+            renda: req.body.renda,
+            nascimento: req.body.nascimento,
+            email: req.body.email,
+            numero: req.body.numero,
+            cpf: req.body.cpf,
+            foto: req.body.foto,
+            desconto: req.body.desconto
+        }
+        );
         req.session.userId = result.insertedId;
 
         return res.redirect('/dashboard');

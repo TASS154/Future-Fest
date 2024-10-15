@@ -29,3 +29,16 @@ function updatePagination() {
         }
     });
 }
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); 
+
+        if (document.getElementById('step-1').style.display !== 'none') {
+            nextStep(2);
+        } else if (document.getElementById('step-2').style.display !== 'none') {
+            nextStep(3);
+        }
+    }
+});
+
