@@ -60,10 +60,47 @@
                         </p>
                     </div>
 
-                    <a href="/ComprarAssinatura">
-                        <button class="btn">MATRICULE-SE</button>
-                    </a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FitLabModal">
+                        MATRICULE-SE
+                    </button>
                 </div>
+
+                <div class="modal fade" id="FitLabModal" tabindex="-1" aria-labelledby="FitLabModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content bg-dark text-light">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="FitLabModalLabel">Escolha o Método de Pagamento</h1>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1" value="cartao">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Cartão de Crédito ou Cartão De Débito
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault2" value="paypal" checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        PayPal
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="btnPagamentoFitLab">Começar
+                                    Pagamento</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div class="card">
                     <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
@@ -223,7 +260,7 @@
             </footer>
 
             <div class="copyright">
-                FitLab &copy; 2023 Lucas S. Bomtempo, Thiago Alexandre e Henrique Luiz.
+                FitLab &copy; 2024 Lucas S. Bomtempo, Breno Levy, Thiago Alexandre e Henrique Luiz.
             </div>
             <script src="planos.js"></script>
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

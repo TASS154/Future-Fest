@@ -22,6 +22,12 @@ body{
     font-family: 'Poppins', sans-serif;
     background-color:   #18181B;
 }
+.planos, .lds, .bco, .cai{
+    width: 40px; 
+    height: 40px; 
+    margin-left: 2px;
+
+}
 
 nav{
     max-width: 1200px;
@@ -79,12 +85,11 @@ nav{
     background-color: #5b0303;
 }
 
-.container {
+.container{
     max-width: 1200px;
     margin: auto;
     padding: 5rem 2rem;
 }
-
 
 .blur{
     position: absolute;
@@ -92,68 +97,62 @@ nav{
     z-index: -100;
 }
 
-header {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
+header{
+    position: relative;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
+    gap: 2rem;
 }
 
-h1, h2, h3, h4, p, a, li {
+header .content h4{
     margin-bottom: 1rem;
-    color: black;
+    color: #ccc;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
-#background {
-    background-color: whitesmoke;
+header .content h1{
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 4rem;
 }
 
-
-.plano, .pagamento {
-    background-color: whitesmoke; 
-    padding: 20px;
-    border-radius: 10px;
+header .content h1 span{
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #fff;
 }
 
-.pagamento h2, .pagamento label, .pagamento input, .pagamento select {
-    color: black;
+header .content p{
+    margin-bottom: 2rem;
+    color: #ccc;
 }
 
-.pagamento input::placeholder {
-    color: black;
+header .image{
+    position: relative;
 }
 
-.linha-separadora .linha {
-    height: 100%;
-    width: 2px;
-    background-color: #fff;
-    margin: 0 auto;
+header .image::before{
+    content: "o";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 38rem;
+    font-weight: 400;
+    line-height: 20rem;
+    color: #5b0303;
+    opacity: 0.2;
+    z-index: -100;
 }
 
-@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-    }
-
-    .linha-separadora {
-        display: none;
-    }
+header .image img{
+    max-width: 600px;
+    margin: auto;
 }
-
-.Back {
-    width: 50px;
-    height: 50px;
-}
-
-#Silver {
-    width: 120px;
-    height: 120px;
-}
-.registro{
-    color: #a11000;
-}
-
-
 
 section .header{
     margin-bottom: 1rem;
@@ -286,33 +285,30 @@ section .header{
     border-color: #5b0303;
 }
 
-footer {
-    width: 100%;
-    background-color: #27272a; 
-    padding: 2rem;
+footer{
+    position: relative;
     display: grid;
     grid-template-columns: 400px repeat(3, 1fr);
     gap: 2rem;
-    color: #fff;
 }
 
-footer .column .logo {
+footer .column .logo{
     max-width: 100px;
     margin-bottom: 2rem;
 }
 
-footer .column p {
+footer .column p{
     color: #ccc;
     margin-bottom: 2rem;
 }
 
-footer .column .socials {
+footer .column .socials{
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-footer .column .socials a {
+footer .column .socials a{
     color: #ccc;
     border: 1px solid #ccc;
     padding: 5px 10px;
@@ -321,37 +317,37 @@ footer .column .socials a {
     transition: all 0.3s ease;
 }
 
-footer .column .socials a:hover {
+footer .column .socials a:hover{
     color: #fff;
     background-color: #5b0303;
     border-color: #5b0303;
 }
 
-footer .column h4 {
+footer .column h4{
     color: #fff;
     margin-bottom: 2rem;
     font-size: 1.2rem;
     font-weight: 500;
 }
 
-footer .column > a {
+footer .column > a{
     display: block;
     color: #ccc;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
-footer .column > a:hover {
+footer .column > a:hover{
     color: #5b0303;
 }
 
-.copyright {
-    width: 100%;
-    background-color: #27272a; 
-    text-align: center;
+.copyright{
+    max-width: 1200px;
+    margin: auto;
     padding: 1rem;
     color: #fff;
     font-size: 0.8rem;
+    text-align: center;
 }
 
 @media (width < 900px){
@@ -393,12 +389,61 @@ footer .column > a:hover {
     }
 }
 
+/* Estilização básica para o formulário */
 form {
     display: flex;
     flex-direction: column;
     max-width: 300px;
     margin: 0 auto;
-    color: white;
   }
   
+  .certo{
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .butao{
+    padding: 10px 20px;
+    background-color: #5b0303;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .butao:hover {
+    background-color: #5b0303;
+  }
+  
+  .cookie-alert {
+    background-color: #222;
+    color: #fff;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 1000;
+    
+}
+.cookie-alert button {
+    background-color: #5b0303;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+
+.carousel-inner img {
+    height: 400px; 
+    object-fit: cover; 
+}
+
 

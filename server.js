@@ -56,6 +56,10 @@ app.get('/planos', (req, res) => {
     res.sendFile(__dirname + '/HTML/planos.html'); // Página de Planos
 });
 
+app.get('/FitLab', (req, res) => {
+    res.sendFile(__dirname + '/HTML/ComprarFitLab.html');
+});
+
 app.get('/B-corp', (req, res) => {
     res.sendFile(__dirname + '/HTML/B-corp.html'); // Página B-corp
 });
@@ -68,9 +72,20 @@ app.get('/cursos', (req, res) => {
     res.sendFile(__dirname + '/HTML/cursos.html'); // Página de Cursos
 });
 
+app.get('/Silver', (req, res) => {
+    res.sendFile(__dirname + '/HTML/Silver.html');
+});
 
-app.get('/ComprarAssinatura', (req, res) => {
-    res.sendFile(__dirname + '/HTML/ComprarFitLab.html'); // Página de Registro
+app.get('/FitLab', (req, res) => {
+    res.sendFile(__dirname + '/HTML/ComprarFitLab.html');
+});
+
+app.get('/Gold', (req, res) => {
+    res.sendFile(__dirname + '/HTML/gold.html');
+});
+
+app.get('/Diamond', (req, res) => {
+    res.sendFile(__dirname + '/HTML/diamond.html');
 });
 
 app.get('/pp', (req, res) => {
@@ -370,7 +385,8 @@ app.post('/conta/delete', async (req, res) => {
 
 // Rota para login
 app.post('/login', async (req, res) => {
-    const { email, senha } = req.body;
+    const email = req.body.email;
+    const senha = req.body.senha
     const client = new MongoClient(url);
 
     try {
@@ -380,6 +396,8 @@ app.post('/login', async (req, res) => {
 
         const user = await collection.findOne({ email });
 
+        const mathc = await bcrypt.compare(senha, user.senha)
+
         if (!user) {
             return res.send(`
                 <h1>E-mail não encontrado.</h1>
@@ -388,7 +406,10 @@ app.post('/login', async (req, res) => {
             `);
         }
 
-        if (senha !== user.senha) {
+        if (mathc) {
+            req.session.userId = user._id;
+            res.redirect('/dashboard');
+        } else {
             return res.send(`
                 <h1>Senha incorreta.</h1>
                 <a href="/login" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Login</a>
@@ -396,8 +417,7 @@ app.post('/login', async (req, res) => {
             `);
         }
 
-        req.session.userId = user._id;
-        res.redirect('/dashboard');
+
     } catch (err) {
         console.error('Erro ao fazer login', err);
         res.status(500).send('Erro ao fazer login, por favor, tente novamente mais tarde.');
@@ -485,6 +505,38 @@ app.get('/loja', async (req, res) => {
         await client.close(); // Fecha a conexão com o banco de dados
     }
 });
+
+app.post('/FitLab', async (req, res) => {
+    const payInfo = req.body
+    const client = new MongoClient(url)
+
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        const user = await collection.findOne({ nome: payInfo.nome })
+
+        console.log(user)
+
+        if (!user) {
+            res.send(`<h1>Usuário não encontrado</h1> <br> <a href="/FitLab"> tente novamente! </a> `)
+        }
+
+        const plan = await collection.updateOne({ nome: user.nome }, { $set: { "Plano": "FitLab" } })
+
+
+        console.log(plan)
+
+        res.redirect('/dashboard')
+
+    } catch (err) {
+        console.error("erro ao cadastrar no plano, tente novamente mais tarde", err)
+    } finally {
+        await client.close()
+    }
+})
 
 // Inicia o servidor na porta especificada
 app.listen(port, () => {

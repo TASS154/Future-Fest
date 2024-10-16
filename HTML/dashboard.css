@@ -277,7 +277,7 @@ section .header{
     width: 90%;
     height: 90%;
     border-radius: 50%;
-    background: #ffffff;
+    background: #424549;
     font-size: 24px;
     color: red;
     line-height: 135px;
@@ -380,6 +380,19 @@ section .header{
     .progress{ margin-bottom: 20px; }
 }
 
+.Img-FitBot{
+    width: 70px;
+    height: 70px;
+}
+
+.i-fitbot{
+    width: 20px;
+    height: 20px;
+}
+
+hr{
+    background-color: gray;
+}
 
 .sem-sublinhado {
     text-decoration: none;
