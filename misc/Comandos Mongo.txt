@@ -16,28 +16,28 @@ db.alunos.insertOne({
 db.loja.insertMany([
     {
         "Nome": "Whey Protein",
-        "img": "https://ibb.co/2Pg2xC5", // Substitua pela URL da imagem
+        "img": "https://i.ibb.co/J25LVGC/Group-9.png", // Substitua pela URL da imagem
         "Preço": "199,99",
         "uso": ["aumento de massa muscular", "recuperação muscular", "suporte ao sistema imunológico"],
         "ingredientes": ["proteína concentrada do soro do leite", "aromatizantes", "emulsificantes", "edulcorantes"]
     },
     {
         "Nome": "Vitamina C + Zinco",
-        "img": "https://ibb.co/1L2CVvT", // Substitua pela URL da imagem
+        "img": "https://i.ibb.co/XbJnB2t/Group-10-removebg-1.png", // Substitua pela URL da imagem
         "Preço": "49,99",
         "uso": ["fortalecimento do sistema imunológico", "aumento da absorção de ferro", "antioxidante"],
         "ingredientes": ["ácido ascórbico (vitamina C)", "citrato de zinco", "aromatizantes", "edulcorantes"]
     },
     {
         "Nome": "Ômega 3",
-        "img": "https://ibb.co/SK8t1w3", // Substitua pela URL da imagem
+        "img": "https://i.ibb.co/YtMcKBL/Group-12.png", // Substitua pela URL da imagem
         "Preço": "89,99",
         "uso": ["saúde cardiovascular", "redução de inflamações", "saúde cerebral"],
         "ingredientes": ["óleo de peixe", "glicerina", "antioxidantes"]
     },
     {
         "Nome": "Pré-Treino",
-        "img": "https://ibb.co/mS3M2V2", // Substitua pela URL da imagem
+        "img": "https://i.ibb.co/jHS1QPQ/Group-13.png", // Substitua pela URL da imagem
         "Preço": "89,99",
         "uso": ["aumento de energia", "melhora no desempenho", "foco durante o treino"],
         "ingredientes": ["beta-alanina", "arginina", "cafeína", "creatina", "vitaminas B"]

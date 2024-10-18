@@ -24,26 +24,36 @@ body{
     background-color:   #18181B;
 }
 
-nav{
+h1, h2, h3, h4, p, a {
+    color: white;
+}
+
+nav {
     max-width: 1200px;
     margin: auto;
     padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    position: relative;
 }
 
-.nav-logo{
+.nav-logo {
     max-width: 100px;
+    margin-right: auto;
 }
-
-.nav-links{
+.nav-links {
     list-style: none;
     display: flex;
-    align-items: center;
-    gap: 3rem;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 4rem; 
+    white-space: nowrap; 
 }
+
+
 
 .link a{
     position: relative;
@@ -65,6 +75,7 @@ nav{
 .link a:hover::after{
     width: 70%;
 }
+
 
 .btn{
     padding: 1rem 2rem;
@@ -381,6 +392,9 @@ section .header{
 }
 
 .Img-FitBot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 70px;
     height: 70px;
 }
@@ -399,14 +413,16 @@ hr{
     color: white; 
 }
 
-.pricing{
+.pricing {
     margin-top: 4rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
-.pricing .card{
+
+.pricing .card {
+    min-width: 280px; 
     padding: 3rem 2rem;
     background-color: #27272a;
     display: flex;
@@ -415,6 +431,7 @@ hr{
     border-radius: 15px;
     transition: all 0.3s ease;
 }
+
 
 .pricing .card:hover{
     background-color: #323232;
@@ -426,11 +443,10 @@ hr{
     margin-bottom: 2rem;
 }
 
-.pricing .card h4{
-    margin-bottom: 1rem;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 500;
+.pricing .card h4, 
+.pricing .card p {
+    word-wrap: break-word; /* Faz com que o texto longo quebre dentro do card */
+    text-align: center; /* Centraliza o texto no card */
 }
 
 .pricing .card h3{

@@ -1,21 +1,31 @@
-document.getElementById('btnPagamento').addEventListener('click', function() {
-    const metodoPagamento = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+// FitLab B-Corp
+document.getElementById('btnPagamentoFitLab').addEventListener('click', function () {
+    const metodoPagamento = document.querySelector('input[name="flexRadioSilver"]:checked').value;
 
     if (metodoPagamento === 'cartao') {
-        window.location.href = '/CartaoSilver'; 
+        window.location.href = '/FitLab';
     } else if (metodoPagamento === 'paypal') {
-        window.location.href = '/ppSilver'; 
+        window.location.href = '/FitLab';
     }
 });
 
-document.getElementById('btnPagamentoFitLab').addEventListener('click', function () {
-    window.location.href = "/FitLab";
+// FitLab Silver
+document.getElementById('btnPagamentoSilver').addEventListener('click', function () {
+    const metodoPagamento = document.querySelector('input[name="flexRadioSilver"]:checked').value;
+
+    if (metodoPagamento === 'cartao') {
+        window.location.href = '/silver';
+    } else if (metodoPagamento === 'paypal') {
+        window.location.href = '/ppSilver';
+    }
 });
 
+// Gold
 document.getElementById('btnPagamentoGold').addEventListener('click', function () {
-    window.location.href = "/Gold";
+    window.location.href = "/gold";
 });
 
+// Diamond
 document.getElementById('btnPagamentoDiamond').addEventListener('click', function () {
-    window.location.href = "/Diamond";
+    window.location.href = "/diamond";
 });

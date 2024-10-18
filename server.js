@@ -56,9 +56,29 @@ app.get('/planos', (req, res) => {
     res.sendFile(__dirname + '/HTML/planos.html'); // Página de Planos
 });
 
+app.get('/time', (req, res) => {
+    res.sendFile(__dirname + '/HTML/time.html');
+})
+
+// começo dos planos
+
 app.get('/FitLab', (req, res) => {
     res.sendFile(__dirname + '/HTML/ComprarFitLab.html');
 });
+
+app.get('/Prata', (req, res) => {
+    res.sendFile(__dirname + '/HTML/CartaoSilver.html');
+});
+
+app.get('/Gold', (req, res) => {
+    res.sendFile(__dirname + '/HTML/gold.html');
+});
+
+app.get('/Diamond', (req, res) => {
+    res.sendFile(__dirname + '/HTML/diamond.html');
+});
+
+//fim dos planos
 
 app.get('/B-corp', (req, res) => {
     res.sendFile(__dirname + '/HTML/B-corp.html'); // Página B-corp
@@ -131,6 +151,52 @@ app.get('/dashboard', async (req, res) => {
             <h2>Bem-vindo, ${usuario.nome}!</h2>
             <p>Email: ${usuario.email}</p>
             <a href="/logout" class="btn btn-danger">Sair</a>
+
+            <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 col-sm-6">
+                    <div class="progress red">
+                        <span class="progress-left">
+                            <span class="progress-bar"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar"></span>
+                        </span>
+                        <div class="progress-value">90%</div>
+                    </div>
+                    <h1>Progresso 1</h1>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="progress orange">
+                        <span class="progress-left">
+                            <span class="progress-bar"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar"></span>
+                        </span>
+                        <div class="progress-value">50%</div>
+                    </div>
+                    <h1>Progresso 2</h1>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="progress green">
+                        <span class="progress-left">
+                            <span class="progress-bar"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar"></span>
+                        </span>
+                        <div class="progress-value">75%</div>
+                    </div>
+                    <h1>Progresso 3</h1>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h1>Sua Assinatura</h1>
+        <hr>
+        <p> ${usuario.Plano} </p>
+        </div>
         `;
 
         // Lê o arquivo HTML base
@@ -470,6 +536,14 @@ app.post('/registro', async (req, res) => {
         }
         );
         req.session.userId = result.insertedId;
+
+        if (req.body.renda <= 1200) {
+            appDesconto = await collection.updateOne({_id: result.insertedId}, {$set: {desconto: true}})
+        } else {
+            appDesconto = await collection.updateOne({_id: result.insertedId}, {$set: {desconto: false}})
+        }
+
+        console.log(result.insertedId)
 
         return res.redirect('/dashboard');
     } catch (err) {
