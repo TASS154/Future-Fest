@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
+ 
 *{
     padding: 0;
     margin: 0;
@@ -8,26 +8,26 @@
     box-sizing: border-box;
     color: white;
 }
-
-
+ 
+ 
 img{
     width: 100%;
     display: flex;
 }
-
+ 
 a{
     text-decoration: none;
 }
-
+ 
 body{
     font-family: 'Poppins', sans-serif;
     background-color:   #18181B;
 }
-
+ 
 h1, h2, h3, h4, p, a {
     color: white;
 }
-
+ 
 nav {
     max-width: 1200px;
     margin: auto;
@@ -37,7 +37,7 @@ nav {
     justify-content: space-between;
     position: relative;
 }
-
+ 
 .nav-logo {
     max-width: 100px;
     margin-right: auto;
@@ -49,18 +49,18 @@ nav {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    gap: 4rem; 
-    white-space: nowrap; 
+    gap: 4rem;
+    white-space: nowrap;
 }
-
-
-
+ 
+ 
+ 
 .link a{
     position: relative;
     padding-bottom: 0.75rem;
     color: #fff;
 }
-
+ 
 .link a::after{
     content: "";
     position: absolute;
@@ -71,12 +71,12 @@ nav {
     background-color: #d81d1d;
     transition: all 0.3s ease;
 }
-
+ 
 .link a:hover::after{
     width: 70%;
 }
-
-
+ 
+ 
 .btn{
     padding: 1rem 2rem;
     font-size: 1rem;
@@ -86,23 +86,23 @@ nav {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
+ 
 .btn:hover{
     background-color: #5b0303;
 }
-
+ 
 .container{
     max-width: 1200px;
     margin: auto;
     padding: 5rem 2rem;
 }
-
+ 
 .blur{
     position: absolute;
     box-shadow: 0 0 1000px 50px #5b0303;
     z-index: -100;
 }
-
+ 
 header{
     position: relative;
     padding-top: 2rem;
@@ -111,14 +111,14 @@ header{
     align-items: center;
     gap: 2rem;
 }
-
+ 
 header .content h4{
     margin-bottom: 1rem;
     color: #ccc;
     font-size: 1rem;
     font-weight: 600;
 }
-
+ 
 header .content h1{
     color: #fff;
     margin-bottom: 1rem;
@@ -126,21 +126,21 @@ header .content h1{
     font-weight: 700;
     line-height: 4rem;
 }
-
+ 
 header .content h1 span{
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px #fff;
 }
-
+ 
 header .content p{
     margin-bottom: 2rem;
     color: #ccc;
 }
-
+ 
 header .image{
     position: relative;
 }
-
+ 
 header .image::before{
     content: "o";
     position: absolute;
@@ -154,12 +154,12 @@ header .image::before{
     opacity: 0.2;
     z-index: -100;
 }
-
+ 
 header .image img{
     max-width: 600px;
     margin: auto;
 }
-
+ 
 section .header{
     margin-bottom: 1rem;
     color: #fff;
@@ -167,14 +167,14 @@ section .header{
     font-size: 2.25rem;
     font-weight: 600;
 }
-
+ 
 .features{
     margin-top: 4rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
-
+ 
 .features .card{
     background-color: #27272a;
     padding: 1rem;
@@ -182,12 +182,12 @@ section .header{
     border-radius: 15px;
     transition: all 0.3s ease;
 }
-
+ 
 .features .card:hover{
     background-color: #323232;
     border-color: #fff;
 }
-
+ 
 .features .card span{
     display: inline-block;
     background-color: #5b0303;
@@ -197,34 +197,98 @@ section .header{
     color: #fff;
     border-radius: 5px;
 }
-
+ 
 .features .card h4{
     margin-bottom: 0.5rem;
     color: #fff;
     font-size: 1.2rem;
     font-weight: 600;
 }
-
+ 
 .features .card p{
     color: #ccc;
     margin-bottom: 1rem;
 }
-
+ 
 .features .card a{
     color: #fff;
     transition: all 0.3s ease;
 }
-
+ 
 .features .card a:hover{
     color: #5b0303;
 }
-
+ 
 .sub-header{
     max-width: 600px;
     margin: auto;
     text-align: center;
     color: #ccc;
 }
+
+
+.conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.entrada {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.settingsa {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    text-decoration: underline;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Imagem e sua animação */
+.s {
+    width: 70px;
+    height: 70px;
+    transition: transform 0.5s ease-in-out;
+    display: inline-block;
+}
+
+.s1 {
+    display: block;
+    transition: transform 0.5s ease-in-out;
+}
+
+.s2 {
+    display: block;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+/* Aumenta e rotaciona a imagem e o texto */
+.s:hover, .s1:hover, .s2:hover {
+    transform: scale(1.1);
+}
+
+.s:hover {
+    transform: rotate(360deg) scale(1.1); /* Apenas a imagem gira e aumenta */
+}
+
+
+
+.settingsa h2, .settingsa p {
+    transition: transform 0.5s ease-in-out;
+    margin: 0;
+}
+
+.settingsa:hover {
+    transform: scale(1.05);
+}
+
+
 .progress{
     width: 150px;
     height: 150px;
@@ -297,28 +361,28 @@ section .header{
     top: 5%;
     left: 5%;
 }
-
+ 
 .progress.red .progress-bar{
     border-color: red;
 }
 .progress.red .progress-left .progress-bar{
     animation: loading-2 1.5s linear forwards 1.8s;
 }
-
+ 
 .progress.orange .progress-bar{
     border-color: orange;
 }
 .progress.red .progress-left .progress-bar{
     animation: loading-2 1.5s linear forwards 1.8s;
 }
-
+ 
 .progress.green .progress-bar{
     border-color: green;
 }
 .progress.green .progress-left .progress-bar {
     animation: loading-3 1.5s linear forwards 1.8s;
 }
-
+ 
 @keyframes loading-3 {
     0% {
         -webkit-transform: rotate(0deg);
@@ -329,14 +393,14 @@ section .header{
         transform: rotate(36deg);
     }
 }
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 @keyframes loading-1{
     0%{
         -webkit-transform: rotate(0deg);
@@ -390,7 +454,13 @@ section .header{
 @media only screen and (max-width: 990px){
     .progress{ margin-bottom: 20px; }
 }
-
+.Img-FitBot1 {
+    display: block;
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
+}
+ 
 .Img-FitBot{
     display: flex;
     align-items: center;
@@ -398,31 +468,79 @@ section .header{
     width: 70px;
     height: 70px;
 }
-
+ 
 .i-fitbot{
     width: 20px;
     height: 20px;
 }
-
+ 
 hr{
     background-color: gray;
 }
-
-.sem-sublinhado {
-    text-decoration: none;
-    color: white; 
+#offcanvasMA{
+    display: flex;
+    justify-content:center;
 }
-
+.fitbot-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+ 
+  .linha-do-perfil {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+  }
+ 
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+ 
+.messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+ 
+.message {
+    max-width: 70%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+ 
+.message.received {
+    background-color: #e0e0e0;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+}
+ 
+.message.sent {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+}
+ 
+.message-input {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+ 
+ 
+ 
 .pricing {
     margin-top: 4rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
-
-
+ 
+ 
 .pricing .card {
-    min-width: 280px; 
+    min-width: 280px;
     padding: 3rem 2rem;
     background-color: #27272a;
     display: flex;
@@ -431,24 +549,24 @@ hr{
     border-radius: 15px;
     transition: all 0.3s ease;
 }
-
-
+ 
+ 
 .pricing .card:hover{
     background-color: #323232;
     border-color: #fff;
 }
-
+ 
 .pricing .card .content{
     flex: 1;
     margin-bottom: 2rem;
 }
-
-.pricing .card h4, 
+ 
+.pricing .card h4,
 .pricing .card p {
     word-wrap: break-word; /* Faz com que o texto longo quebre dentro do card */
     text-align: center; /* Centraliza o texto no card */
 }
-
+ 
 .pricing .card h3{
     color: #fff;
     padding-bottom: 1rem;
@@ -457,52 +575,52 @@ hr{
     font-weight: 600;
     border-bottom: 2px dashed #fff;
 }
-
+ 
 .pricing .card p{
     color: #fff;
     margin-bottom: 0.75rem;
 }
-
+ 
 .pricing .card p i{
     color: #ccc;
     font-size: 1.2rem;
     margin-right: 0.3rem;
 }
-
+ 
 .pricing .card button{
     color: #fff;
     background-color: transparent;
     border: 2px solid #fff;
 }
-
+ 
 .pricing .card button:hover{
     background-color: #5b0303;
     border-color: #5b0303;
 }
-
+ 
 footer{
     position: relative;
     display: grid;
     grid-template-columns: 400px repeat(3, 1fr);
     gap: 2rem;
 }
-
+ 
 footer .column .logo{
     max-width: 100px;
     margin-bottom: 2rem;
 }
-
+ 
 footer .column p{
     color: #ccc;
     margin-bottom: 2rem;
 }
-
+ 
 footer .column .socials{
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-
+ 
 footer .column .socials a{
     color: #ccc;
     border: 1px solid #ccc;
@@ -511,31 +629,31 @@ footer .column .socials a{
     border-radius: 100%;
     transition: all 0.3s ease;
 }
-
+ 
 footer .column .socials a:hover{
     color: #fff;
     background-color: #5b0303;
     border-color: #5b0303;
 }
-
+ 
 footer .column h4{
     color: #fff;
     margin-bottom: 2rem;
     font-size: 1.2rem;
     font-weight: 500;
 }
-
+ 
 footer .column > a{
     display: block;
     color: #ccc;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
-
+ 
 footer .column > a:hover{
     color: #5b0303;
 }
-
+ 
 .copyright{
     max-width: 1200px;
     margin: auto;
@@ -544,7 +662,7 @@ footer .column > a:hover{
     font-size: 0.8rem;
     text-align: center;
 }
-
+ 
 @media (width < 900px){
     .nav-links{
         display: none;
@@ -565,25 +683,25 @@ footer .column > a:hover{
         grid-template-columns: 1fr 200px;
     }
 }
-
+ 
 @media (width < 600px){
     header .image::before{
         display: none;
     }
-
+ 
     .features{
         grid-template-columns: repeat(1, 1fr);
     }
-
+ 
     .pricing{
         grid-template-columns: repeat(1, 1fr);
     }
-
+ 
     footer{
         grid-template-columns: 1fr 150px;
     }
 }
-
+ 
 /* Estilização básica para o formulário */
 form {
     display: flex;
@@ -591,7 +709,7 @@ form {
     max-width: 300px;
     margin: 0 auto;
   }
-  
+ 
   .certo{
     padding: 10px;
     margin: 5px 0;
@@ -599,7 +717,7 @@ form {
     border-radius: 5px;
     font-size: 16px;
   }
-  
+ 
   .butao{
     padding: 10px 20px;
     background-color: #5b0303;
@@ -610,11 +728,11 @@ form {
     cursor: pointer;
     transition: background-color 0.3s;
   }
-  
+ 
   .butao:hover {
     background-color: #5b0303;
   }
-  
+ 
   .cookie-alert {
     background-color: #222;
     color: #fff;
@@ -625,7 +743,7 @@ form {
     right: 0;
     text-align: center;
     z-index: 1000;
-    
+   
 }
 .cookie-alert button {
     background-color: #5b0303;
@@ -634,13 +752,13 @@ form {
     cursor: pointer;
     padding: 5px 10px;
 }
-
-
+ 
+ 
 .carousel-inner img {
     height: 400px; /* Ajuste a altura conforme necessário */
     object-fit: cover; /* Isso garante que as imagens não fiquem distorcidas */
 }
-
+ 
 .profile-image {
     position: absolute;
     top: 20px; /* Ajuste conforme necessário */
@@ -652,9 +770,7 @@ form {
     border: 3px solid #fff; /* Borda opcional para destaque */
     transition: all 0.3s ease;
 }
-
+ 
 .profile-image:hover {
     transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
-
-

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat com IA</title>
+</head>
+<body>
+    <h1>Chat com IA</h1>
+    <div>
+        <textarea id="userInput" placeholder="Digite sua mensagem..."></textarea>
+    </div>
+    <button id="sendBtn">Enviar</button>
+    <div>
+        <h3>Resposta da IA:</h3>
+        <p id="aiResponse"></p>
+    </div>
+
+    <script>
+        document.getElementById('sendBtn').addEventListener('click', async () => {
+            const userInput = document.getElementById('userInput').value;
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ userInput })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('aiResponse').innerText = data.response;
+                } else {
+                    document.getElementById('aiResponse').innerText = `Erro: ${data.error}`;
+                }
+            } catch (error) {
+                document.getElementById('aiResponse').innerText = `Erro: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

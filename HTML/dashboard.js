@@ -22,3 +22,16 @@ $(document).ready(function () {
         }
     });
 });
+document.getElementById('sendMessageBtn').addEventListener('click', function ()) {
+    const messageInput = document.getElementById('chatMessageInput');
+    const messageText = messageInput.value;
+
+    if (messageText.trim()) {
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('message', 'sent');
+        messageContainer.innerHTML = `<p>${messageText}</p>`;
+
+        document.querySelector('.messages').appendChild(messageContainer);
+        messageInput.value = ''; // Limpa o campo de input
+    }
+}

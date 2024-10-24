@@ -202,6 +202,16 @@ h1 {
     width: 100%;
   }
 
+  .m{
+    text-decoration: underline;
+    text-align: center;
+  }
+
+  .opcoes a, .opcoes p {
+    color: white;
+}
+
+
 section .header{
     margin-bottom: 1rem;
     color: #fff;
@@ -445,4 +455,3 @@ form {
     color: white;
   }
   
-
