@@ -248,6 +248,24 @@ section .header{
     padding: 20px;
     border-radius: 5px;
 }
+.silver-card {
+    background-color: #27272a; /* Fundo cinza */
+    color: #ffffff; /* Texto branco */
+    padding: 20px;
+    border-radius: 5px;
+}
+.gold-card {
+    background-color: #27272a; /* Fundo cinza */
+    color: #ffffff; /* Texto branco */
+    padding: 20px;
+    border-radius: 4px;
+}
+.diamond-card {
+    background-color: #27272a; /* Fundo cinza */
+    color: #ffffff; /* Texto branco */
+    padding: 20px;
+    border-radius: 4px;
+}
 
 .entrada {
     display: flex;
