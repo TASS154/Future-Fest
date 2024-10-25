@@ -272,50 +272,126 @@ app.get('/conta', async (req, res) => {
 
         // Gera o HTML com os dados do usuário
         const display = `
-    <link rel="stylesheet" href="conta.css">
+        <link rel="stylesheet" href="conta.css">
+        <div class="profile-img text-center mb-4">
+            <img src="${usuario.foto}" alt="Imagem de Perfil" class="img-thumbnail" id="profileImage" style="width: 200px; height: 200px;">
+        </div>
+        <div class="Seu-Perfil">
+            <div class="form-container">
+                <form method="POST" action='/conta/upload' enctype="multipart/form-data" class="mb-4">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Vamos lá, mostre sua foto! (Aceitamos: PNG e JPG)</label>
+                        <input class="form-control" type="file" id="formFile" name="foto" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Escolha uma imagem de perfil.</small>
+                        <button type="submit" class="btn btn-primary mt-3">Upload</button>
+                    </div>
+                </form>
 
-<div class="profile-img text-center mb-4">
-    <img src="${usuario.foto}" alt="Imagem de Perfil" class="img-thumbnail" id="profileImage" style="width: 200px; height: 200px;">
-</div>
-
-<div class="Seu-Perfil">
-    <div class="form-container">
-        <form method="POST" action='/conta/upload' enctype="multipart/form-data" class="mb-4">
+                <form method="POST" action='/conta/change'>
+                    <div class="mb-3">
+                        <label for="nomeUsuario" class="form-label">Nome de Usuário:</label>
+                        <div class="nome-container d-flex align-items-center">
+                            <span id="nomeDisplay" class="me-2">${usuario.nome}</span>
+                            <img src="https://i.ibb.co/DkQS76X/edit.png" alt="Editar Nome" class="edit" id="editNome" style="cursor: pointer;" aria-label="Editar Nome">
+                        </div>
+                        <input class="form-control" type="text" id="nomeInput" name="novoNome" placeholder="Seu nome de usuário" style="display: none;" aria-label="Novo Nome">
+                        <button id="confirmButton" class="btn btn-primary mt-3" style="display: none;" aria-label="Salvar Nome" type="submit">Salvar</button>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <label for="staticEmail" class="col-auto col-form-label">Endereço de E-mail:</label>
+                        <div class="col-auto">
+                            <span>${usuario.email}</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form method="POST" action='/conta/delete'>
+        <button type="submit" class="btn btn-danger btn-apagar mt-3"> <!-- Aumentar margem superior -->
+            <img src="https://i.ibb.co/Ss6dxLd/trashh.png" alt="Ícone de apagar Conta" class="i-apagar me-2" aria-hidden="true">
+            <span class="btn-apagar-text">Apagar Conta</span>
+        </button>
+    </form>
+    
+    <div class="container mt-0"> 
+        <a class="m" data-bs-toggle="collapse" href="#avancado" role="button" aria-expanded="false"
+            aria-controls="avancado">
+            Opções Avançadas..
+        </a>
+    
+        <div class="collapse" id="avancado">
+            <div class="card-title mt-3">
+                <h3>Coloque mais informações</h3>
+                <h4>Para o FitBot dar resultados mais precisos</h4>
+                <p class="ne">Coloque "Nenhum", se não tiver algum dos campos específicos!</p>
+            </div>
             <div class="mb-3">
-                <label for="formFile" class="form-label">Vamos lá, mostre sua foto! (Aceitamos: PNG e JPG)</label>
-                <input class="form-control" type="file" id="formFile" name="foto" aria-describedby="fileHelp">
-                <small id="fileHelp" class="form-text text-muted">Escolha uma imagem de perfil.</small>
-                <button type="submit" class="btn btn-primary mt-3">Upload</button> <!-- Aumentar margem superior -->
+                <div class="Generos">
+                    <p>Qual o seu Gênero</p>
+                    <div class="d-flex align-items-center justify-content-center gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">Prefiro não dizer...</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">Homem</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                            <label class="form-check-label" for="flexRadioDefault3">Mulher</label>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-
-        <form method="POST" action='/conta/change'>
+    
             <div class="mb-3">
-                <label for="nomeUsuario" class="form-label">Nome de Usuário:</label>
-                <div class="nome-container d-flex align-items-center">
-                    <span id="nomeDisplay" class="me-2">${usuario.nome}</span>
-                    <img src="https://i.ibb.co/DkQS76X/edit.png" alt="Editar Nome" class="edit" id="editNome" style="cursor: pointer;" aria-label="Editar Nome">
-                </div>
-                <input class="form-control" type="text" id="nomeInput" name="novoNome" placeholder="Seu nome de usuário" style="display: none;" aria-label="Novo Nome">
-                <button id="confirmButton" class="btn btn-primary mt-3" style="display: none;" aria-label="Salvar Nome">Salvar</button> <!-- Aumentar margem superior -->
+                <label for="AlergiaA" class="form-label">Você tem alguma Alergia Alimentar</label>
+                <input type="text" class="form-control" id="alergiaA" placeholder="Exemplo: Glúten, nozes">
             </div>
-            <div class="mb-3 row align-items-center">
-                <label for="staticEmail" class="col-auto col-form-label">Endereço de E-mail:</label>
-                <div class="col-auto">
-                    <span>${usuario.email}</span>
-                </div>
+            <div class="mb-3">
+                <label for="condicaoS" class="form-label">Condições de Saúde:</label>
+                <input type="text" class="form-control" id="condicaoS"
+                    placeholder="Exemplo: Diabetes, Problemas cardíacos">
             </div>
-        </form>
+            <div class="mb-3">
+                <p>Nível de Atividade física</p>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Prefiro não comentar</option>
+                    <option value="1">Sedentário</option>
+                    <option value="2">Moderadamente ativo</option>
+                    <option value="3">Muito ativo</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <p>Objetivo</p>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Prefiro não comentar</option>
+                    <option value="1">Perda de peso</option>
+                    <option value="2">Aumento de massa muscular</option>
+                    <option value="3">Melhora de resistência</option>
+                    <option value="4">Recuperação de lesões</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="prefAlimentar" class="form-label">Preferências Alimentares:</label>
+                <input type="text" class="form-control" id="prefAlimentar" placeholder="Exemplo: Vegetariano, vegano">
+            </div>
+            <div class="mb-3">
+                <label for="histLesao" class="form-label">Histórico de Lesões:</label>
+                <input type="text" class="form-control" id="histLesao"
+                    placeholder="Exemplo: Lesões Musculares, Fraturas">
+            </div>
+            <div class="mb-3">
+                <label for="supAtual" class="form-label">Suplementos Atuais:</label>
+                <input type="text" class="form-control" id="supAtual" placeholder="Exemplo: Creatina, vitamina D">
+            </div>
+            <div class="saver">
+                <button type="button" class="btn btn-danger">Salvar</button>
+            </div>
+        </div>
     </div>
-</div>
-
-<form method="POST" action='/conta/delete'>
-    <button type="submit" class="btn btn-danger btn-apagar mt-3"> <!-- Aumentar margem superior -->
-        <img src="https://i.ibb.co/Ss6dxLd/trashh.png" alt="Ícone de apagar Conta" class="i-apagar me-2" aria-hidden="true">
-        <span class="btn-apagar-text">Apagar Conta</span>
-    </button>
-</form>
-
+    
 <script>
     document.getElementById('editNome').addEventListener('click', toggleEditNome);
     document.getElementById('confirmButton').addEventListener('click', salvarNome);
