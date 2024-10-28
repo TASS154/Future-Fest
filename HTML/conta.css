@@ -272,6 +272,19 @@ h1 {
   .opcoes a, .opcoes p {
     color: white;
 }
+.toast {
+    background-color: #000; 
+    color: #fff; 
+}
+
+.toast-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-close {
+    filter: invert(1); 
+}
+
 
 
 section .header{

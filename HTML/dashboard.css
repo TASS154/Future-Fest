@@ -395,21 +395,21 @@ section .header{
 }
  
 .progress.red .progress-bar{
-    border-color: red;
+    border-color: #f01805;
 }
 .progress.red .progress-left .progress-bar{
     animation: loading-2 1.5s linear forwards 1.8s;
 }
  
 .progress.orange .progress-bar{
-    border-color: orange;
+    border-color: #fff700;
 }
 .progress.red .progress-left .progress-bar{
     animation: loading-2 1.5s linear forwards 1.8s;
 }
  
 .progress.green .progress-bar{
-    border-color: green;
+    border-color: #78f542;
 }
 .progress.green .progress-left .progress-bar {
     animation: loading-3 1.5s linear forwards 1.8s;

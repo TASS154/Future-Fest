@@ -32,7 +32,6 @@ function criarCard(suplemento) {
     return `
     <link rel="stylesheet" href="loja.css">
 <div class="card mb-3">
-<img src="${suplemento.img}" class="card-img-top" style="width: 100px; height: 100px;" alt="${suplemento.Nome}">
     <div class="card-body">
     <h5 class="card-title">${suplemento.Nome}</h5>
     <h3 class="card-text">${suplemento.Preço}R$</h3>
@@ -57,10 +56,6 @@ app.get('/voltar-home', (req, res) => {
 });
 app.get('/sobrenos', (req, res) => {
     res.sendFile(__dirname + '/HTML/sobrenos.html'); // Página "Sobre Nós"
-});
-
-app.get('/loja', (req, res) => {
-    res.sendFile(__dirname + '/HTML/loja.html'); // Página de Planos
 });
 
 app.get('/planos', (req, res) => {
@@ -126,6 +121,9 @@ app.get('/pp', (req, res) => {
 app.get('/termos', (req, res) => {
     res.sendFile(__dirname + '/HTML/termos.html'); // Página de Termos
 });
+app.get('/comofunciona', (req, res) => {
+    res.sendFile(__dirname + '/HTML/comofunciona.html'); // Página de Termos
+});
 
 app.get('/email', (req, res) => {
     res.sendFile(__dirname + '/HTML/email.html'); // Página de Email
@@ -134,6 +132,19 @@ app.get('/email', (req, res) => {
 app.get('/registro', (req, res) => {
     res.sendFile(__dirname + '/HTML/registro.html'); // Página de Registro
 });
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send('Erro ao sair');
+        }
+        // página inicial após sair
+        res.redirect('/');
+    });
+});
+
+
+// sair da cona 
 
 app.get('/dashboard', async (req, res) => {
     if (!req.session.userId) {
@@ -194,7 +205,7 @@ app.get('/dashboard', async (req, res) => {
                         </span>
                         <div class="progress-value">90%</div>
                     </div>
-                    <h1>Progresso 1</h1>
+                    <h1>Academia (Treinamento de Força)</h1>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="progress orange">
@@ -206,7 +217,7 @@ app.get('/dashboard', async (req, res) => {
                         </span>
                         <div class="progress-value">50%</div>
                     </div>
-                    <h1>Progresso 2</h1>
+                    <h1>Pilates</h1>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="progress green">
@@ -218,15 +229,185 @@ app.get('/dashboard', async (req, res) => {
                         </span>
                         <div class="progress-value">75%</div>
                     </div>
-                    <h1>Progresso 3</h1>
+                    <h1>Condicionamento Físico</h1>
                 </div>
             </div>
         </div>
+        <div class="container text-center mb-5">
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="Img-FitBot1 mb-3">
+        <h1>Falar com o FitBot</h1>
         <hr>
-        <h1>Sua Assinatura</h1>
-        <hr>
-        <p> ${usuario.Plano} </p>
+        <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasMA" aria-controls="offcanvasMA">
+            <img src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Marcar Aula
+        </button>
+        <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasIS" aria-controls="offcanvasIS"><img src="https://i.ibb.co/zRXNPxc/fitbotl.png"
+                class="i-fitbot" alt="fitbot-icone"> Indicar
+            Suplementos</button>
+        <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasLista" aria-controls="offcanvasLista"><img
+                src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Listar
+            exercícios para fazer em casa</button>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="assinaturas">
+            <h1 class="assinatura-l">Sua assinatura</h1>
+            <h1 class="assinatura-r">Aprimorar assinatura</h1>
         </div>
+        <hr>
+        <div class="row gy-4 align-items-start">
+            <div class="col-md-4 d-flex justify-content-between align-items-start">
+                <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
+                    <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
+                        alt="FitLab And B-Corp">
+                    <div class="content">
+                        <h4>R$: 0,00/m - Fitlab B-corp</h4>
+                        <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                        <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                        <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
+                    </div>
+                </div>
+                <div class="vl"></div>
+            </div>
+            <div class="card me-2 mb-3 silver-card" style="width: 18rem;">
+                <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
+                <div class="content">
+                    <h4>R$: 99,89/m - Fitlab Silver</h4>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
+                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SilverModal">
+                    MATRICULE-SE
+                </button>
+            </div>
+            <div class="card me-2 mb-3 gold-card" style="width: 18rem;">
+                <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
+                <div class="content">
+                    <h4>R$: 150,00/m - Fitlab Gold</h4>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GoldModal">
+                    MATRICULE-SE
+                </button>
+            </div>
+        </div>
+        <div class="card me-2 mb-3 diamond-card" style="width: 18rem;">
+            <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
+            <div class="content">
+                <h4>R$: 200,00/m - Fitlab Diamond</h4>
+                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
+                <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
+                <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+                <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DiamondModal">
+                MATRICULE-SE
+            </button>
+        </div>
+
+    </div>
+
+
+    </div>
+    </div>
+
+    </div>
+
+    <!-- Offcanvas Marcar Aula -->
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMA">
+        <div class="offcanvas-header d-flex align-items-center">
+            <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+            <h5 class="offcanvas-title mb-0">FitBot</h5>
+            <div data-bs-theme="dark">
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+        </div>
+        <hr class="linha-do-perfil">
+
+        <div class="offcanvas-body">
+            <div class="chat-container">
+                <div class="messages">
+                    <div class="message received">
+                        <p>Olá! Como posso te ajudar hoje?</p>
+                    </div>
+                    <!-- Aqui as novas mensagens enviadas aparecerão -->
+                </div>
+                <div class="message-input d-flex mt-3">
+                    <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
+                        name="MA">Eu quero marcar uma aula amanhã, me mande os horários disponíveis!</textarea>
+                    <button class="btn btn-primary ms-2" id="sendMessageBtn">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Indicar Suplementos-->
+
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasIS" aria-labelledby="offcanvasIS">
+        <div class="offcanvas-header d-flex align-items-center">
+            <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+            <h5 class="offcanvas-title mb-0">FitBot</h5>
+            <div data-bs-theme="dark">
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+        </div>
+        <hr class="linha-do-perfil">
+
+        <div class="offcanvas-body">
+            <div class="chat-container">
+                <div class="messages">
+                    <div class="message received">
+                        <p>Olá! Como posso te ajudar hoje?</p>
+                    </div>
+                    <!-- Aqui as novas mensagens enviadas aparecerão -->
+                </div>
+                <div class="message-input d-flex mt-3">
+                    <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
+                        name="IS">Me indique suplementos para o meu treinamento!</textarea>
+                    <button class="btn btn-primary ms-2" id="sendMessageBtn">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Offcanvas de Listar-->
+
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLista"
+        aria-labelledby="offcanvasLista">
+        <div class="offcanvas-header d-flex align-items-center">
+            <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+            <h5 class="offcanvas-title mb-0">FitBot</h5>
+            <div data-bs-theme="dark">
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+        </div>
+        <hr class="linha-do-perfil">
+
+        <div class="offcanvas-body">
+            <div class="chat-container">
+                <div class="messages">
+                    <div class="message received">
+                        <p>Olá! Como posso te ajudar hoje?</p>
+                    </div>
+                    <!-- Aqui as novas mensagens enviadas aparecerão -->
+                </div>
+                <div class="message-input d-flex mt-3">
+                    <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
+                        name="IS">Liste exercícios para eu fazer na minha casa!</textarea>
+                    <button class="btn btn-primary ms-2" id="sendMessageBtn">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
         `;
 
         // Lê o arquivo HTML base
@@ -251,6 +432,7 @@ app.get('/dashboard', async (req, res) => {
         client.close();
     }
 });
+
 
 app.get('/conta', async (req, res) => {
     if (!req.session.userId) {
@@ -278,24 +460,16 @@ app.get('/conta', async (req, res) => {
         </div>
         <div class="Seu-Perfil">
             <div class="form-container">
-                <form method="POST" action='/conta/upload' enctype="multipart/form-data" class="mb-4">
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Vamos lá, mostre sua foto! (Aceitamos: PNG e JPG)</label>
-                        <input class="form-control" type="file" id="formFile" name="foto" aria-describedby="fileHelp">
-                        <small id="fileHelp" class="form-text text-muted">Escolha uma imagem de perfil.</small>
-                        <button type="submit" class="btn btn-primary mt-3">Upload</button>
-                    </div>
-                </form>
 
                 <form method="POST" action='/conta/change'>
                     <div class="mb-3">
                         <label for="nomeUsuario" class="form-label">Nome de Usuário:</label>
                         <div class="nome-container d-flex align-items-center">
                             <span id="nomeDisplay" class="me-2">${usuario.nome}</span>
-                            <img src="https://i.ibb.co/DkQS76X/edit.png" alt="Editar Nome" class="edit" id="editNome" style="cursor: pointer;" aria-label="Editar Nome">
+                            <img src="https://i.ibb.co/DkQS76X/edit.png" alt="Editar Nome" class="edit" id="editNome" style="cursor: pointer;" aria-label="Editar Nome" >
                         </div>
                         <input class="form-control" type="text" id="nomeInput" name="novoNome" placeholder="Seu nome de usuário" style="display: none;" aria-label="Novo Nome">
-                        <button id="confirmButton" class="btn btn-primary mt-3" style="display: none;" aria-label="Salvar Nome" type="submit">Salvar</button>
+                        <button type="submit" id="confirmButton" class="btn btn-primary mt-3" style="display: none;" aria-label="Salvar Nome" >Salvar</button>
                     </div>
                     <div class="mb-3 row align-items-center">
                         <label for="staticEmail" class="col-auto col-form-label">Endereço de E-mail:</label>
@@ -383,14 +557,27 @@ app.get('/conta', async (req, res) => {
                     placeholder="Exemplo: Lesões Musculares, Fraturas">
             </div>
             <div class="mb-3">
-                <label for="supAtual" class="form-label">Suplementos Atuais:</label>
-                <input type="text" class="form-control" id="supAtual" placeholder="Exemplo: Creatina, vitamina D">
-            </div>
-            <div class="saver">
-                <button type="button" class="btn btn-danger">Salvar</button>
+            <div>
+            <label for="supAtual" class="form-label">Suplementos Atuais:</label>
+            <input type="text" class="form-control" id="supAtual" placeholder="Exemplo: Creatina, vitamina D">
+        </div>
+        <div class="saver">
+            <button type="button" class="btn btn-danger" id="saveButton">Salvar</button>
+            <br><br>
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="https://i.ibb.co/BcstXfr/FitBot.png" class="rounded me-2" alt="FitBot" width="50px" height="50px">>
+                        <strong class="me-auto">FitBot Agradece!</strong>
+                        <small>Agora</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Informações salvas com sucesso!
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
     
 <script>
     document.getElementById('editNome').addEventListener('click', toggleEditNome);
@@ -411,7 +598,6 @@ app.get('/conta', async (req, res) => {
     }
 
     function salvarNome(event) {
-        event.preventDefault(); // Impede o envio do formulário
         const nomeInput = document.getElementById('nomeInput');
         const nomeDisplay = document.getElementById('nomeDisplay');
         const editNomeBtn = document.getElementById('editNome');
@@ -472,25 +658,28 @@ app.post('/conta/change', async (req, res) => {
         return res.redirect('/login'); // Redireciona para login se não estiver logado
     }
 
-    const novoNome = req.body.novoNome; // Obtém o novo nome do corpo da requisição
+    console.log("antes do try")
+
+    const novonome = req.body.novoNome; // Obtém o novo nome do corpo da requisição
     const client = new MongoClient(url);
 
     try {
         await client.connect(); // Conecta ao MongoDB
         const db = client.db(dbName);
         const collection = db.collection(collectionUser);
-
+        console.log("depois do try")
         // Atualiza o nome do usuário no banco de dados
         const result = await collection.updateOne(
             { _id: new ObjectId(req.session.userId) },
-            { $set: { nome: novoNome } }
+            { $set: { nome: novonome } }
         );
+        console.log("depois do result")
+
 
         if (result.modifiedCount === 0) {
             return res.status(404).send('Usuário não encontrado ou o nome não foi atualizado');
         }
-
-        res.redirect('/conta'); // Redireciona de volta para a página da conta
+        console.log(result)
     } catch (err) {
         console.error('Erro ao atualizar nome do usuário', err);
         res.status(500).send('Erro ao atualizar nome, por favor, tente novamente mais tarde.');
@@ -631,6 +820,15 @@ app.post('/registro', async (req, res) => {
         const existentUser = await collection.findOne({ nome: newUser.nome });
         const existentEmail = await collection.findOne({ email: newUser.email });
 
+        // Verifique se as senhas coincidem
+        if (newUser.senha !== newUser.confirmarSenha) {
+            return res.send(`
+            <h1>As senhas não coincidem. Tente novamente.</h1>
+            <a href="/registro" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Registro</a>
+            <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
+        `);
+        }
+
         if (existentUser) {
             return res.send(`
                 <h1>Usuário já existente, tente outro</h1>
@@ -688,6 +886,7 @@ app.get('/loja', async (req, res) => {
         await client.connect();
         const db = client.db(dbName);
         const collection = db.collection(collectionShop);
+
 
         // Obtém todos os usuários da coleção
         const suplementos = await collection.find({}).toArray();

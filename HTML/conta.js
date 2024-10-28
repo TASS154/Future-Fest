@@ -78,8 +78,11 @@ if (saveButton) {
         console.log('Dados salvos:', dadosUsuario);
 
         localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
-
-        alert("Informações salvas com sucesso!");
+        document.getElementById('saveButton').addEventListener('click', function () {
+            var toastElement = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        });
     });
 }
 

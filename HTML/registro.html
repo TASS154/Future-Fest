@@ -49,7 +49,14 @@
                         placeholder="Insira a senha">
                     <div id="passwordHelpBlock" class="form-text">Sua senha deve ter 8-20 caracteres, contendo letras e
                         números.</div>
-                    <div id="error-message" style="color: red; display: none;"></div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirme sua senha</label>
+                    <input type="password" id="confirmPassword" class="form-control" name="confirmarSenha"
+                        placeholder="Confirme sua senha">
+                    <div id="confirmPasswordHelpBlock" class="form-text">As senhas devem coincidir.</div>
+                    <div id="error-confirm-message" style="color: red; display: none;"></div>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="nextStep(2)">Próximo</button>
             </div>
@@ -58,15 +65,20 @@
             <div class="step" id="step-2" style="display: none;">
                 <div class="mb-3">
                     <label for="Telefone" class="form-label">Insira o seu Número de Telefone</label>
-                    <input name="numero" class="form-control" type="Number" placeholder="Insira o número de telefone"
-                        maxlength="15">
+                    <input name="numero" class="form-control" type="text" placeholder="Insira o número de telefone"
+                        maxlength="15" inputmode="numeric" pattern="\d*" title="Apenas números são permitidos">
+
                 </div>
                 <div class="mb-3">
                     <label for="CPF" class="form-label">Insira o seu CPF</label>
                     <input name="cpf" class="form-control" type="text" placeholder="Insira o CPF" maxlength="12">
                 </div>
-                <label for="nascimento">Data De Nascimento:</label>
-                <input name="nascimento" type="date" id="birthday" name="Data de Nascimento">
+                <div class="mb-3">
+                    <label for="nascimento">Data De Nascimento:</label>
+                    <input name="nascimento" type="date" id="birthday" required>
+                    <span id="date-error" style="color: red; display: none;">Data de nascimento deve estar entre 1940 e
+                        2024.</span>
+                </div>
                 <br><br>
                 <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Voltar</button>
                 <button type="button" class="btn btn-primary" onclick="nextStep(3)">Próximo</button>
@@ -78,6 +90,7 @@
                     <label for="Renda" class="form-label">Insira sua renda</label>
                     <input name="renda" class="form-control" type="Number" placeholder="Insira a renda" maxlength="5">
                 </div>
+                <div id="error-message" style="color: red; display: none;"></div>
                 <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Voltar</button>
                 <input name="foto" type="hidden"
                     value="https://braverplayers.org/wp-content/uploads/2022/09/blank-pfp.png">
@@ -107,14 +120,14 @@
         </div>
         <div class="column">
             <h4>A FitLab</h4>
-            <a href="#cursos">Todos os cursos </a>
-            <a href="site.html">Como funciona</a>
+            <a href="/planos">Todos os planos </a>
+            <a href="/comofunciona">Como funciona</a>
         </div>
         <div class="column">
             <h4>INSTITUCIONAL</h4>
             <a href="#sbr">Sobre Nós</a>
-            <a href="po.html">Política de privacidade</a>
-            <a href="termos.html">Termos de uso</a>
+            <a href="/po">Política de privacidade</a>
+            <a href="/termos">Termos de uso</a>
         </div>
         <form>
             <input class="certo" type="email" placeholder="Digite o seu e-mail" required>

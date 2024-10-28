@@ -42,3 +42,19 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+
+document.getElementById('birthday').setAttribute('min', '1940-01-01');
+document.getElementById('birthday').setAttribute('max', '2024-12-31');
+
+document.getElementById('birthday').addEventListener('input', function() {
+    const dataNascimento = new Date(this.value);
+    const minDate = new Date('1940-01-01');
+    const maxDate = new Date('2024-12-31');
+    const errorMessage = document.getElementById('date-error');
+    
+    if (dataNascimento < minDate || dataNascimento > maxDate) {
+        errorMessage.style.display = 'block';
+    } else {
+        errorMessage.style.display = 'none';
+    }
+});
