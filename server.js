@@ -458,6 +458,42 @@ app.get('/conta', async (req, res) => {
         <div class="profile-img text-center mb-4">
             <img src="${usuario.foto}" alt="Imagem de Perfil" class="img-thumbnail" id="profileImage" style="width: 200px; height: 200px;">
         </div>
+        <div class="tc">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileImageModal">
+        Trocar imagem de perfil
+    </button>
+      </div>
+    <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color: black; color: white;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileImageModalLabel" style="font-size: 2rem;">Selecione a sua imagem de perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+    <div class="row">
+        <div class="col-3">
+            <img src="https://i.ibb.co/MNsgggy/Profile1.png" alt="Imagem 1" class="img-fluid profile-option" data-id="1">
+        </div>
+        <div class="col-3">
+            <img src="https://i.ibb.co/j64bYRG/Profile2.png" alt="Imagem 2" class="img-fluid profile-option" data-id="2">
+        </div>
+        <div class="col-3">
+            <img src="https://i.ibb.co/zNYZ3X7/Profile3.png" alt="Imagem 3" class="img-fluid profile-option" data-id="3">
+        </div>
+        <div class="col-3">
+            <img src="https://i.ibb.co/rQ1MzrL/Profile4.png" alt="Imagem 4" class="img-fluid profile-option" data-id="4">
+        </div>
+    </div>
+</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <div class="Seu-Perfil">
             <div class="form-container">
 

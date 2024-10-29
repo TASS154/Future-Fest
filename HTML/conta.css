@@ -100,6 +100,18 @@ nav{
     margin-top: 2rem;
     margin-left: 30px;
 }
+
+.tc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selected {
+    border: 3px solid white; /* Borda azul para destacar */
+    border-radius: 5px;
+    box-shadow: 0 0 8px white;
+}
+
 .edit {
     width: 16px; 
     height: 16px; 
@@ -180,6 +192,15 @@ nav{
     text-decoration: none;
     margin-bottom: 10px;
 }
+.modal-body img {
+    cursor: pointer;
+    border: 2px solid transparent; 
+}
+
+.modal-body img:hover {
+    border-color: white; /* Altera a borda para branco ao passar o mouse */
+}
+
 
 .collapse {
     width: 100%;

@@ -109,3 +109,58 @@ function carregarDadosUsuario() {
 
 window.addEventListener('load', carregarDadosUsuario);
 
+let selectedImageSrc = '';
+
+document.querySelectorAll('.profile-option').forEach(image => {
+    image.addEventListener('click', () => {
+        selectedImageSrc = image.src;
+        document.querySelectorAll('.profile-option').forEach(img => img.classList.remove('selected'));
+        image.classList.add('selected'); 
+    });
+});
+
+document.querySelectorAll('.profile-option').forEach(image => {
+    image.addEventListener('click', () => {
+        // Define a imagem selecionada
+        selectedImageSrc = image.src;
+        
+        // Remove a classe 'selected' de todas as imagens
+        document.querySelectorAll('.profile-option').forEach(img => img.classList.remove('selected'));
+        
+        // Adiciona a classe 'selected' à imagem clicada
+        image.classList.add('selected');
+    });
+});
+
+window.addEventListener('load', () => {
+    const savedImageSrc = localStorage.getItem('profileImageSrc');
+    if (savedImageSrc) {
+        const profileImage = document.getElementById('profileImage');
+        profileImage.src = savedImageSrc;
+
+        document.querySelectorAll('.profile-option').forEach(img => {
+            if (img.src === savedImageSrc) {
+                img.classList.add('selected');
+            }
+        });
+    }
+});
+
+document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
+    if (selectedImageSrc) {
+        const profileImage = document.getElementById('profileImage');
+        profileImage.src = selectedImageSrc;
+        
+        localStorage.setItem('profileImageSrc', selectedImageSrc);
+        
+        const modal = bootstrap.Modal.getInstance(document.getElementById('profileImageModal'));
+        modal.hide();
+    }
+});
+
+window.addEventListener('load', () => {
+    const savedImageSrc = localStorage.getItem('profileImageSrc');
+    if (savedImageSrc) {
+        document.getElementById('profileImage').src = savedImageSrc;
+    }
+});
