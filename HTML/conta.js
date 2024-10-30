@@ -111,6 +111,7 @@ window.addEventListener('load', carregarDadosUsuario);
 
 let selectedImageSrc = '';
 
+// Captura a imagem selecionada
 document.querySelectorAll('.profile-option').forEach(image => {
     image.addEventListener('click', () => {
         selectedImageSrc = image.src;
@@ -119,45 +120,35 @@ document.querySelectorAll('.profile-option').forEach(image => {
     });
 });
 
-document.querySelectorAll('.profile-option').forEach(image => {
-    image.addEventListener('click', () => {
-        // Define a imagem selecionada
-        selectedImageSrc = image.src;
-        
-        // Remove a classe 'selected' de todas as imagens
-        document.querySelectorAll('.profile-option').forEach(img => img.classList.remove('selected'));
-        
-        // Adiciona a classe 'selected' à imagem clicada
-        image.classList.add('selected');
-    });
-});
-
-window.addEventListener('load', () => {
-    const savedImageSrc = localStorage.getItem('profileImageSrc');
-    if (savedImageSrc) {
+// Ao clicar no botão "Salvar mudanças"
+document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
+    if (selectedImageSrc) {
+        // Atualiza a imagem de perfil na página
         const profileImage = document.getElementById('profileImage');
-        profileImage.src = savedImageSrc;
-
-        document.querySelectorAll('.profile-option').forEach(img => {
-            if (img.src === savedImageSrc) {
-                img.classList.add('selected');
-            }
+        profileImage.src = selectedImageSrc;
+        
+        // Envia a imagem selecionada para o servidor
+        fetch('/conta/save-image', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ imageUrl: selectedImageSrc })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Imagem salva com sucesso:', data);
+            // Fechar o modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('profileImageModal'));
+            modal.hide();
+        })
+        .catch(error => {
+            console.error('Erro ao salvar a imagem:', error);
         });
     }
 });
 
-document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
-    if (selectedImageSrc) {
-        const profileImage = document.getElementById('profileImage');
-        profileImage.src = selectedImageSrc;
-        
-        localStorage.setItem('profileImageSrc', selectedImageSrc);
-        
-        const modal = bootstrap.Modal.getInstance(document.getElementById('profileImageModal'));
-        modal.hide();
-    }
-});
-
+// Carrega a imagem de perfil salva ao carregar a página
 window.addEventListener('load', () => {
     const savedImageSrc = localStorage.getItem('profileImageSrc');
     if (savedImageSrc) {

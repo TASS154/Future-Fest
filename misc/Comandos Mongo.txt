@@ -13,6 +13,8 @@ db.alunos.insertOne({
 	"Senha": "1234"
 })
 
+Use academia
+
 db.loja.insertMany([
     {
         "Nome": "Whey Protein",

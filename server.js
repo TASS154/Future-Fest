@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt'); // Módulo para criptografia de senhas
 const port = 3000; // Porta em que o servidor irá escutar
 const methodOverride = require('method-override'); // Middleware para permitir métodos HTTP que não são suportados pelo HTML
 const fs = require('fs'); // Módulo para operações de sistema de arquivos
+//const IA = require('./IA.mjs')
 
 // Middleware para lidar com requisições JSON e URL-encoded
 app.use(express.json());
@@ -33,6 +34,7 @@ function criarCard(suplemento) {
     <link rel="stylesheet" href="loja.css">
 <div class="card mb-3">
     <div class="card-body">
+    <img src=${suplemento.img}>
     <h5 class="card-title">${suplemento.Nome}</h5>
     <h3 class="card-text">${suplemento.Preço}R$</h3>
     <p class="card-text"><strong>Usos:</strong> ${suplemento.uso}</p> <br>
@@ -800,10 +802,39 @@ app.post('/conta/delete', async (req, res) => {
     }
 });
 
+app.post('/conta/save-image', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(403).send('Não autorizado'); // Se não estiver logado
+    }
+
+    const { imageUrl } = req.body; // Captura a URL da imagem
+    const client = new MongoClient(url);
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        // Atualiza o campo da foto do usuário logado
+        await collection.updateOne(
+            { _id: new ObjectId(req.session.userId) },
+            { $set: { foto: imageUrl } }
+        );
+
+        res.json({ message: 'Imagem de perfil atualizada com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao atualizar a imagem:', error);
+        res.status(500).send('Erro ao atualizar a imagem');
+    } finally {
+        await client.close();
+    }
+});
+
 // Rota para login
+// server.js
 app.post('/login', async (req, res) => {
     const email = req.body.email;
-    const senha = req.body.senha
+    const senha = req.body.senha;
     const client = new MongoClient(url);
 
     try {
@@ -812,36 +843,25 @@ app.post('/login', async (req, res) => {
         const collection = db.collection(collectionUser);
 
         const user = await collection.findOne({ email });
-
-        const mathc = await bcrypt.compare(senha, user.senha)
-
         if (!user) {
-            return res.send(`
-                <h1>E-mail não encontrado.</h1>
-                <a href="/login" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Login</a>
-                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
-            `);
+            return res.json({ error: "E-mail não encontrado" });
         }
 
-        if (mathc) {
-            req.session.userId = user._id;
-            res.redirect('/dashboard');
-        } else {
-            return res.send(`
-                <h1>Senha incorreta.</h1>
-                <a href="/login" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Login</a>
-                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
-            `);
+        const match = await bcrypt.compare(senha, user.senha);
+        if (!match) {
+            return res.json({ error: "Senha incorreta" });
         }
 
-
+        req.session.userId = user._id;
+        res.redirect('/dashboard');
     } catch (err) {
         console.error('Erro ao fazer login', err);
-        res.status(500).send('Erro ao fazer login, por favor, tente novamente mais tarde.');
+        res.status(500).json({ error: 'Erro ao fazer login, por favor, tente novamente mais tarde.' });
     } finally {
         client.close();
     }
 });
+
 
 // Rota para registro de novos usuários
 app.post('/registro', async (req, res) => {

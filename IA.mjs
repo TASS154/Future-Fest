@@ -103,3 +103,4 @@ console.error(chalk.red('Erro encontrado: '), error.message);
 }
 // Chama a função runChat para iniciar o chat
 runChat();
+
