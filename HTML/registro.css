@@ -112,6 +112,9 @@ h1 {
 .registro{
     color: #a11000;
 }
+#passwordHelpBlock, #confirmPasswordHelpBlock {
+    color: white;
+}
 
 section .header{
     margin-bottom: 1rem;
@@ -243,7 +246,9 @@ section .header{
     background-color: #5b0303;
     border-color: #5b0303;
 }
-
+.tp{
+    color: cyan;
+}
 .carregar {
     position: fixed;
     top: 0;

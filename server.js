@@ -34,6 +34,7 @@ app.use(session({
 function criarCard(suplemento) {
     return `
     <link rel="stylesheet" href="loja.css">
+    <a href='/pagamento'>
 <div class="card mb-3">
     <div class="card-body">
     <img src=${suplemento.img}>
@@ -43,6 +44,7 @@ function criarCard(suplemento) {
     <p class="card-text"><strong>Ingreditentes:</strong> ${suplemento.ingredientes}</p> 
 </div>
 </div>
+</a>
 `
 }
 
@@ -68,7 +70,11 @@ app.get('/planos', (req, res) => {
 
 app.get('/time', (req, res) => {
     res.sendFile(__dirname + '/HTML/time.html');
-})
+});
+
+app.get('/pagamento', (req, res) => {
+    res.sendFile(__dirname + '/HTML/pagamento.html');
+});
 
 // começo dos planos
 
@@ -348,7 +354,7 @@ app.get('/dashboard', async (req, res) => {
                 <div class="message-input d-flex mt-3">
                     <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
                         name="MA">Eu quero marcar uma aula amanhã, me mande os horários disponíveis!</textarea>
-                    <button class="btn btn-primary ms-2" id="sendMessageBtn">Enviar</button>
+                    <button class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
                 </div>
             </div>
         </div>
@@ -377,7 +383,7 @@ app.get('/dashboard', async (req, res) => {
                 <div class="message-input d-flex mt-3">
                     <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
                         name="IS">Me indique suplementos para o meu treinamento!</textarea>
-                    <button class="btn btn-primary ms-2" id="sendMessageBtn">Enviar</button>
+                    <button class="btn btn-primary ms-2" id="sendMessageBtnIS">Enviar</button>
                 </div>
             </div>
         </div>
@@ -407,7 +413,7 @@ app.get('/dashboard', async (req, res) => {
                 <div class="message-input d-flex mt-3">
                     <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
                         name="IS">Liste exercícios para eu fazer na minha casa!</textarea>
-                    <button class="btn btn-primary ms-2" id="sendMessageBtn">Enviar</button>
+                    <button class="btn btn-primary ms-2" id="sendMessageBtnLista">Enviar</button>
                 </div>
             </div>
         </div>
