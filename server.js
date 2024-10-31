@@ -8,7 +8,9 @@ const bcrypt = require('bcrypt'); // Módulo para criptografia de senhas
 const port = 3000; // Porta em que o servidor irá escutar
 const methodOverride = require('method-override'); // Middleware para permitir métodos HTTP que não são suportados pelo HTML
 const fs = require('fs'); // Módulo para operações de sistema de arquivos
-//const IA = require('./IA.mjs')
+(async () => {
+    const { myFunction: runChat } = await import('./IA.mjs');
+})();
 
 // Middleware para lidar com requisições JSON e URL-encoded
 app.use(express.json());
@@ -844,7 +846,27 @@ app.post('/login', async (req, res) => {
 
         const user = await collection.findOne({ email });
         if (!user) {
-            return res.json({ error: "E-mail não encontrado" });
+            return res.send(`   document.querySelector('form').addEventListener('submit', async function (event) {
+
+
+                const formData = new FormData(this);
+                const response = await fetch('/login', {
+                  method: 'POST',
+                  body: formData
+                });
+                const data = await response.json();
+                console.log(data)
+                console.log("")
+                console.log(data.error)
+                if (data.error) {
+                  // Exibe o modal com a mensagem de erro
+                  document.getElementById('errorModalBody').textContent = data.error;
+                  $('#errorModal').modal('show');
+                } else {
+                  // Redireciona para o dashboard em caso de sucesso
+                  window.location.href = '/dashboard';
+                }
+              });`);
         }
 
         const match = await bcrypt.compare(senha, user.senha);

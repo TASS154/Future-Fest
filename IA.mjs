@@ -101,6 +101,4 @@ console.error(chalk.red('Erro encontrado: '), error.message);
 // Encerra o processo com código de saída 1 (erro) process.exit(1);
 }
 }
-// Chama a função runChat para iniciar o chat
-runChat();
 

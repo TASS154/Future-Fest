@@ -13,7 +13,7 @@ db.alunos.insertOne({
 	"Senha": "1234"
 })
 
-Use academia
+use academia
 
 db.loja.insertMany([
     {
