@@ -84,10 +84,8 @@ const dicas = [
     "Dica do dia: A flexibilidade no treino melhora a postura e evita dores musculares.",
     "Dica do dia: Estudos mostram que treinos matinais aumentam a disposição ao longo do dia!",
     "Dica do Dia: Na FitLab, você pode registrar alergias e condições para um atendimento melhor da nossa IA."
-  ];
+];
 
-  // Seleciona uma dica aleatória
-  const dicaAleatoria = dicas[Math.floor(Math.random() * dicas.length)];
-  document.getElementById('dica').innerText = dicaAleatoria;
-
-
+// Seleciona uma dica aleatória
+const dicaAleatoria = dicas[Math.floor(Math.random() * dicas.length)];
+document.getElementById('dica').innerText = dicaAleatoria;
