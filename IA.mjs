@@ -45,60 +45,33 @@ const SAFETY_SETTINGS = [{
 
 
 // Função assíncrona que inicializa e executa o chat com o modelo de IA 
-async function runChat() {
-// Cria e inicia um spinner para indicar que o chat está sendo inicializado 
-const spinner = ora('Inicializando chat...').start();
-try {
-    // Cria uma instância da classe GoogleGenerativeAI com a chave da API 
-    const genAI = new GoogleGenerativeAI (API_KEY);
-    // Obtém o modelo generativo especificado usando o nome do modelo
-    const model = genAI.getGenerativeModel({
-        model: MODEL_NAME
-    });
+export async function runChat() {
+    const spinner = ora('Inicializando chat...').start();
+    try {
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+        
+        const chat = model.startChat({
+            generationConfig: GENERATION_CONFIG,
+            safetySettings: SAFETY_SETTINGS,
+            history: [],
+        });
 
-    // Inicia uma sessão de chat com as configurações de geração e segurança definidas 
-    const chat = model.startChat({
-        generationConfig: GENERATION_CONFIG, safetySettings: SAFETY_SETTINGS,
-        history: [],
-    });
- // Inicializa o histórico do chat como vazio
-    // Para o spinner, pois a inicialização foi concluída 
-    spinner.stop();
-    // Loop infinito para ler entradas do usuário e gerar respostas 
-    while (true) {
-    // Lê a entrada do usuário, exibindo um prompt verde "Você: 
-    const userInput = promptSync (chalk.green('Você: '));
-    // Verifica se a entrada do usuário é 'exit' (ignora maiúsculas/minúsculas) 
-    if (userInput.toLowerCase() === 'exit')
- {
-    // Exibe uma mensagem de despedida e encerra o processo
-    console.log(chalk.yellow('Até breve!'));
-    process.exit(0); // Encerra o processo com código de saída e (sucesso)
-    
-}
-// Envia a mensagem do usuário para o chat e aguarda a resposta 
-const result = await chat.sendMessage(userInput);
-
-// Verifica se houve um erro na resposta da IA
-if (result.error) {
-    // Exibe uma mensagem de erro em vermelho
-console.error(chalk.red('AI Erro:'), result.error.message);
-continue;
-} 
-// Continua o loop para permitir novas entradas do usuário
-// Obtém o texto da resposta da IA
-const response = result.response.text();
-// Exibe a resposta da IA em azul
-console.log(chalk.blue('AI:'), response);
-
-}
-
-} catch (error) {
-// Para o spinner se ocorrer um erro
-spinner.stop();
-// Exibe uma mensagem de erro em vermelho
-console.error(chalk.red('Erro encontrado: '), error.message);
-// Encerra o processo com código de saída 1 (erro) process.exit(1);
-}
+        spinner.stop();
+        
+        // Aqui você pode lidar com uma única interação, em vez de um loop infinito
+        const userInput = promptSync(chalk.green('Você: '));
+        const result = await chat.sendMessage(userInput);
+        
+        if (result.error) {
+            console.error(chalk.red('AI Erro:'), result.error.message);
+        } else {
+            const response = result.response.text();
+            console.log(chalk.blue('AI:'), response);
+        }
+    } catch (error) {
+        spinner.stop();
+        console.error(chalk.red('Erro encontrado: '), error.message);
+    }
 }
 

@@ -8,8 +8,12 @@ const bcrypt = require('bcrypt'); // Módulo para criptografia de senhas
 const port = 3000; // Porta em que o servidor irá escutar
 const methodOverride = require('method-override'); // Middleware para permitir métodos HTTP que não são suportados pelo HTML
 const fs = require('fs'); // Módulo para operações de sistema de arquivos
+let runChat; // Declara runChat fora da IIFE
+
 (async () => {
-    const { myFunction: runChat } = await import('./IA.mjs');
+    const { myFunction: importedRunChat } = await import('./IA.mjs');
+    runChat = importedRunChat; // Armazena a função importada em runChat
+    console.log(runChat)
 })();
 
 // Middleware para lidar com requisições JSON e URL-encoded
@@ -60,6 +64,11 @@ app.get('/calculadora', (req, res) => {
 app.get('/voltar-home', (req, res) => {
     res.sendFile(__dirname + '/HTML/home.html'); // Página calculadora
 });
+
+app.get('/sei', (req, res) => {
+    res.sendFile(__dirname + '/HTML/sei.html')
+});
+
 app.get('/sobrenos', (req, res) => {
     res.sendFile(__dirname + '/HTML/sobrenos.html'); // Página "Sobre Nós"
 });
@@ -333,92 +342,88 @@ app.get('/dashboard', async (req, res) => {
     </div>
 
     <!-- Offcanvas Marcar Aula -->
-    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMA">
-        <div class="offcanvas-header d-flex align-items-center">
-            <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
-            <h5 class="offcanvas-title mb-0">FitBot</h5>
-            <div data-bs-theme="dark">
-                <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMA">
+    <div class="offcanvas-header d-flex align-items-center">
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+        <h5 class="offcanvas-title mb-0">FitBot</h5>
+        <div data-bs-theme="dark">
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <hr class="linha-do-perfil">
+    </div>
+    <hr class="linha-do-perfil">
 
-        <div class="offcanvas-body">
+    <div class="offcanvas-body">
+        <form action="/marcar-aula" method="POST">
             <div class="chat-container">
                 <div class="messages">
                     <div class="message received">
                         <p>Olá! Como posso te ajudar hoje?</p>
                     </div>
-                    <!-- Aqui as novas mensagens enviadas aparecerão -->
                 </div>
                 <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
-                        name="MA">Eu quero marcar uma aula amanhã, me mande os horários disponíveis!</textarea>
-                    <button class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
+                    <textarea class="form-control" id="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..." name="message">Eu quero marcar uma aula amanhã, me mande os horários disponíveis!</textarea>
+                    <button type="submit" class="btn btn-primary ms-2">Enviar</button>
                 </div>
             </div>
+        </form>
+    </div>
+</div>
+
+<!-- Offcanvas Indicar Suplementos -->
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasIS" aria-labelledby="offcanvasIS">
+    <div class="offcanvas-header d-flex align-items-center">
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+        <h5 class="offcanvas-title mb-0">FitBot</h5>
+        <div data-bs-theme="dark">
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
     </div>
+    <hr class="linha-do-perfil">
 
-    <!-- Offcanvas Indicar Suplementos-->
-
-    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasIS" aria-labelledby="offcanvasIS">
-        <div class="offcanvas-header d-flex align-items-center">
-            <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
-            <h5 class="offcanvas-title mb-0">FitBot</h5>
-            <div data-bs-theme="dark">
-                <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-        </div>
-        <hr class="linha-do-perfil">
-
-        <div class="offcanvas-body">
+    <div class="offcanvas-body">
+        <form action="/indicar-suplementos" method="POST">
             <div class="chat-container">
                 <div class="messages">
                     <div class="message received">
                         <p>Olá! Como posso te ajudar hoje?</p>
                     </div>
-                    <!-- Aqui as novas mensagens enviadas aparecerão -->
                 </div>
                 <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
-                        name="IS">Me indique suplementos para o meu treinamento!</textarea>
-                    <button class="btn btn-primary ms-2" id="sendMessageBtnIS">Enviar</button>
+                    <textarea class="form-control" id="chatMessageInputIS" rows="4" placeholder="Digite sua mensagem..." name="message">Me indique suplementos para o meu treinamento!</textarea>
+                    <button type="submit" class="btn btn-primary ms-2">Enviar</button>
                 </div>
             </div>
+        </form>
+    </div>
+</div>
+
+<!-- Offcanvas Listar -->
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLista" aria-labelledby="offcanvasLista">
+    <div class="offcanvas-header d-flex align-items-center">
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+        <h5 class="offcanvas-title mb-0">FitBot</h5>
+        <div data-bs-theme="dark">
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
     </div>
+    <hr class="linha-do-perfil">
 
-    <!--Offcanvas de Listar-->
-
-    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLista"
-        aria-labelledby="offcanvasLista">
-        <div class="offcanvas-header d-flex align-items-center">
-            <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
-            <h5 class="offcanvas-title mb-0">FitBot</h5>
-            <div data-bs-theme="dark">
-                <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-        </div>
-        <hr class="linha-do-perfil">
-
-        <div class="offcanvas-body">
+    <div class="offcanvas-body">
+        <form action="/listar-exercicios" method="POST">
             <div class="chat-container">
                 <div class="messages">
                     <div class="message received">
                         <p>Olá! Como posso te ajudar hoje?</p>
                     </div>
-                    <!-- Aqui as novas mensagens enviadas aparecerão -->
                 </div>
                 <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" id="chatMessageInput" rows="4" placeholder="Digite sua mensagem..."
-                        name="IS">Liste exercícios para eu fazer na minha casa!</textarea>
-                    <button class="btn btn-primary ms-2" id="sendMessageBtnLista">Enviar</button>
+                    <textarea class="form-control" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..." name="message">Liste exercícios para eu fazer na minha casa!</textarea>
+                    <button type="submit" class="btn btn-primary ms-2">Enviar</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-        `;
+</div>`;
 
         // Lê o arquivo HTML base
         const caminhoHtmlBase = path.join(__dirname, 'HTML', 'dashboard.html');
@@ -851,45 +856,72 @@ app.post('/login', async (req, res) => {
         const collection = db.collection(collectionUser);
 
         const user = await collection.findOne({ email });
+        const mathc = await bcrypt.compare(senha, user.senha)
         if (!user) {
-            return res.send(`   document.querySelector('form').addEventListener('submit', async function (event) {
-
-
-                const formData = new FormData(this);
-                const response = await fetch('/login', {
-                  method: 'POST',
-                  body: formData
-                });
-                const data = await response.json();
-                console.log(data)
-                console.log("")
-                console.log(data.error)
-                if (data.error) {
-                  // Exibe o modal com a mensagem de erro
-                  document.getElementById('errorModalBody').textContent = data.error;
-                  $('#errorModal').modal('show');
-                } else {
-                  // Redireciona para o dashboard em caso de sucesso
-                  window.location.href = '/dashboard';
-                }
-              });`);
+            return res.send(`
+                <h1>E-mail não encontrado.</h1>
+                <a href="/login" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Login</a>
+                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
+            `);
         }
 
-        const match = await bcrypt.compare(senha, user.senha);
-        if (!match) {
-            return res.json({ error: "Senha incorreta" });
+        if (mathc) {
+            req.session.userId = user._id;
+            res.redirect('/dashboard');
+        } else {
+            return res.send(`
+                <h1>Senha incorreta.</h1>
+                <a href="/login" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Login</a>
+                <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
+            `);
         }
 
-        req.session.userId = user._id;
-        res.redirect('/dashboard');
     } catch (err) {
         console.error('Erro ao fazer login', err);
-        res.status(500).json({ error: 'Erro ao fazer login, por favor, tente novamente mais tarde.' });
+        res.status(500).send('Erro ao fazer login, por favor, tente novamente mais tarde.');
     } finally {
         client.close();
     }
 });
 
+app.post('/listar-exercicios', async (req, res) => {
+    try {
+        await runChat(); // Chama a função como assíncrona
+        console.log('chat iniciado');
+        res.status(200).send('Chat iniciado'); // Responda ao cliente
+    } catch (error) {
+        console.error('erro ao iniciar chat', error); // Log detalhado do erro
+        res.status(500).send('Erro ao iniciar chat'); // Responda com erro
+    } finally {
+        console.log('chat fechado');
+    }
+});
+
+app.post('/marcar-aula', async (req, res) => {
+    try {
+        await runChat(); // Chama a função como assíncrona
+        console.log('chat iniciado');
+        res.status(200).send('Chat iniciado'); // Responda ao cliente
+    } catch (error) {
+        console.error('erro ao iniciar chat', error);
+        res.status(500).send('Erro ao iniciar chat');
+    } finally {
+        console.log('chat fechado');
+    }
+});
+
+app.post('/indicar-suplementos', async (req, res) => {
+    try {
+        await runChat(); // Chama a função como assíncrona
+        console.log('chat iniciado');
+        res.status(200).send('Chat iniciado'); // Responda ao cliente
+    } catch (error) {
+        console.error('erro ao iniciar chat', error);
+        res.status(500).send('Erro ao iniciar chat');
+    } finally {
+        console.log('chat fechado');
+    }
+});
 
 // Rota para registro de novos usuários
 app.post('/registro', async (req, res) => {
