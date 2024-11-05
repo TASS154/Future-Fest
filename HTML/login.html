@@ -32,7 +32,7 @@
   </nav>
   <header>
     <h1>Entrar</h1>
-    <form method="POST" action="/login">
+    <form id="loginForm" method="POST" action="/login">
       <div class="mb-3">
         <label for="email" class="form-label">Insira o Endereço de E-mail aqui</label>
         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
@@ -51,51 +51,23 @@
       <hr>
       <p>Não tem uma conta ainda? clique aqui para se <a class="registro" href="/registro">Registrar</a> </p>
     </form>
-  </header>
-
-  <!-- Modal de Erro -->
-  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content" style="background-color: black;">
-        <div class="modal-header">
-          <h5 class="modal-title" id="errorModalLabel" style="color: red;">Algo deu errado</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" style="color: white;">&times;</span>
-          </buttn>
+    <!-- Spinner de Carregamento -->
+    <div class="carregar d-none" id="spinner">
+      <div class="text-center">
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden"></span>
         </div>
-        <div class="modal-body" style="color: white;" id="errorModalBody">
-          <!-- Mensagem de erro aqui -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        </div>
+        <h2 class="text-light mt-2">Carregando...</h2>
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" class="fiitbot">
+        <h3 id="dica"></h3>
       </div>
     </div>
-  </div>
-  <script>
-    document.querySelector('form').addEventListener('submit', async function (event) {
+  </header>
 
 
-      const formData = new FormData(this);
-      const response = await fetch('/login', {
-        method: 'POST',
-        body: formData
-      });
-      const data = await response.json();
-      console.log(data)
-      console.log("")
-      console.log(data.error)
-      if (data.error) {
-        // Exibe o modal com a mensagem de erro
-        document.getElementById('errorModalBody').textContent = data.error;
-        $('#errorModal').modal('show');
-      } else {
-        // Redireciona para o dashboard em caso de sucesso
-        window.location.href = '/dashboard';
-      }
-    });
-  </script>
+
+
+
   <footer class="container" id="footer">
     <span class="blur"></span>
     <span class="blur"></span>
@@ -125,7 +97,7 @@
     FitLab &copy; 2024 Lucas S. Bomtempo, Breno Levy, Thiago Alexandre e Henrique Luiz.
   </div>
 </body>
-<script src="script.js"></script>
+<script src="login.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

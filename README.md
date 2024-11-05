@@ -20,4 +20,5 @@ O site foi cuidadosamente projetado para oferecer uma navegação intuitiva, com
   Para instalar as dependências necessárias do projeto, use o comando abaixo:
 
 ```bash
-npm install express express-session mongodb bcrypt method-override init -y  @google/generative-ai chalk ora prompt-sync
+npm install express express-session mongodb bcrypt method-override
+```

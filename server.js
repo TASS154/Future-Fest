@@ -8,13 +8,11 @@ const bcrypt = require('bcrypt'); // Módulo para criptografia de senhas
 const port = 3000; // Porta em que o servidor irá escutar
 const methodOverride = require('method-override'); // Middleware para permitir métodos HTTP que não são suportados pelo HTML
 const fs = require('fs'); // Módulo para operações de sistema de arquivos
-let runChat; // Declara runChat fora da IIFE
+const IA = require('./DANE-SE/IA.js')
+const bodyParser = require('body-parser');
 
-(async () => {
-    const { myFunction: importedRunChat } = await import('./IA.mjs');
-    runChat = importedRunChat; // Armazena a função importada em runChat
-    console.log(runChat)
-})();
+
+console.log(IA)
 
 // Middleware para lidar com requisições JSON e URL-encoded
 app.use(express.json());
@@ -361,7 +359,7 @@ app.get('/dashboard', async (req, res) => {
                     </div>
                 </div>
                 <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" id="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..." name="message">Eu quero marcar uma aula amanhã, me mande os horários disponíveis!</textarea>
+                    <textarea class="form-control" name="InputMA" id="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..." name="message">Eu quero marcar uma aula amanhã, me mande os horários disponíveis!</textarea>
                     <button type="submit" class="btn btn-primary ms-2">Enviar</button>
                 </div>
             </div>
@@ -389,7 +387,7 @@ app.get('/dashboard', async (req, res) => {
                     </div>
                 </div>
                 <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" id="chatMessageInputIS" rows="4" placeholder="Digite sua mensagem..." name="message">Me indique suplementos para o meu treinamento!</textarea>
+                    <textarea class="form-control" name="InputIS" id="chatMessageInputIS" rows="4" placeholder="Digite sua mensagem..." name="message">Me indique suplementos para o meu treinamento!</textarea>
                     <button type="submit" class="btn btn-primary ms-2">Enviar</button>
                 </div>
             </div>
@@ -417,7 +415,7 @@ app.get('/dashboard', async (req, res) => {
                     </div>
                 </div>
                 <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..." name="message">Liste exercícios para eu fazer na minha casa!</textarea>
+                    <textarea class="form-control" name="InputListar" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..." name="message">Liste exercícios para eu fazer na minha casa!</textarea>
                     <button type="submit" class="btn btn-primary ms-2">Enviar</button>
                 </div>
             </div>
@@ -885,23 +883,12 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/listar-exercicios', async (req, res) => {
-    try {
-        await runChat(); // Chama a função como assíncrona
-        console.log('chat iniciado');
-        res.status(200).send('Chat iniciado'); // Responda ao cliente
-    } catch (error) {
-        console.error('erro ao iniciar chat', error); // Log detalhado do erro
-        res.status(500).send('Erro ao iniciar chat'); // Responda com erro
-    } finally {
-        console.log('chat fechado');
-    }
-});
+    const Input = req.body.InputListar;
 
-app.post('/marcar-aula', async (req, res) => {
     try {
-        await runChat(); // Chama a função como assíncrona
-        console.log('chat iniciado');
-        res.status(200).send('Chat iniciado'); // Responda ao cliente
+        // Chama a função runChat com a entrada
+        const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
+        res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
     } catch (error) {
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
@@ -910,10 +897,25 @@ app.post('/marcar-aula', async (req, res) => {
     }
 });
 
-app.post('/indicar-suplementos', async (req, res) => {
+// Rota para marcar a aula
+app.post('/marcar-aula', async (req, res) => {
+    const Input = req.body.InputMA;
+
     try {
-        await runChat(); // Chama a função como assíncrona
-        console.log('chat iniciado');
+        // Chama a função runChat com a entrada
+        const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
+        res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
+    } catch (error) {
+        console.error('erro ao iniciar chat', error);
+        res.status(500).send('Erro ao iniciar chat');
+    } finally {
+    }
+});
+
+app.post('/indicar-suplementos', async (req, res) => {
+    const Input = req.body.InputIS
+    try {
+        await IA.runChat(Input); // Chama a função como assíncrona
         res.status(200).send('Chat iniciado'); // Responda ao cliente
     } catch (error) {
         console.error('erro ao iniciar chat', error);
@@ -935,6 +937,7 @@ app.post('/registro', async (req, res) => {
 
         const existentUser = await collection.findOne({ nome: newUser.nome });
         const existentEmail = await collection.findOne({ email: newUser.email });
+
 
         // Verifique se as senhas coincidem
         if (newUser.senha !== newUser.confirmarSenha) {
@@ -959,6 +962,7 @@ app.post('/registro', async (req, res) => {
                 <a href="/registro" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Registro</a>
                 <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
             `);
+            
         }
 
         const CriptoSenha = await bcrypt.hash(req.body.senha, 15)
