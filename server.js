@@ -149,6 +149,9 @@ app.get('/email', (req, res) => {
 app.get('/registro', (req, res) => {
     res.sendFile(__dirname + '/HTML/registro.html'); // Página de Registro
 });
+app.get('/sobre', (req, res) => {
+    res.sendFile(__dirname + '/HTML/time.html'); // Página de Registro
+});
 
 app.get('/logout', (req, res) => {
     req.session.destroy(err => {
@@ -184,186 +187,178 @@ app.get('/dashboard', async (req, res) => {
         // HTML dinâmico gerado com base no usuário logado
         const conteudoDinamico = `
         <link rel="stylesheet" href="dashboard.css">
+        <a href='/conta'>
+        <div class="conteudo"> <!-- Adicione esta div como contêiner -->
+        <div class="entrada">
             <a href='/conta'>
-            <div class="conteudo"> <!-- Adicione esta div como contêiner -->
-            <div class="entrada">
-                <a href='/conta'>
-                    <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
-                </a>
-                <h2>Bem-vindo, ${usuario.nome}!</h2>
-                <p>Email: ${usuario.email}</p>
-                <a href="/logout" class="btn btn-danger">Sair</a>
-            </div>
-            <div class="settingsa">
-                <div class="container my-5">
-                    <div class="row align-items-center">
-                        <a href="/conta" class="d-flex align-items-center text-decoration-none">
-                            <img src="https://i.ibb.co/jLBMHx3/settings.png" alt="Configurações" class="s me-3">
-                            <div>
-                                <h2 class="s1 mb-1">Configure seu Perfil!</h2>
-                                <p class="s2">Para a IA dar resultados mais precisos!</p>
-                            </div>
-                        </a>
-                    </div>
+                <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
+            </a>
+            <h2>Bem-vindo, ${usuario.nome}!</h2>
+            <p>Email: ${usuario.email}</p>
+            <a href="/logout" class="btn btn-danger">Sair</a>
+        </div>
+        <div class="settingsa">
+            <div class="container my-5">
+                <div class="row align-items-center">
+                    <a href="/conta" class="d-flex align-items-center text-decoration-none">
+                        <img src="https://i.ibb.co/jLBMHx3/settings.png" alt="Configurações" class="s me-3">
+                        <div>
+                            <h2 class="s1 mb-1">Configure seu Perfil!</h2>
+                            <p class="s2">Para a IA dar resultados mais precisos!</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-        
+    </div>
+    
 
-            <div class="container">
-            <div class="row text-center">
-                <div class="col-md-4 col-sm-6">
-                    <div class="progress red">
-                        <span class="progress-left">
-                            <span class="progress-bar"></span>
-                        </span>
-                        <span class="progress-right">
-                            <span class="progress-bar"></span>
-                        </span>
-                        <div class="progress-value">90%</div>
-                    </div>
-                    <h1>Academia (Treinamento de Força)</h1>
+        <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 col-sm-6">
+                <div class="progress red">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">90%</div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="progress orange">
-                        <span class="progress-left">
-                            <span class="progress-bar"></span>
-                        </span>
-                        <span class="progress-right">
-                            <span class="progress-bar"></span>
-                        </span>
-                        <div class="progress-value">50%</div>
-                    </div>
-                    <h1>Pilates</h1>
+                <h1>Academia (Treinamento de Força)</h1>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="progress orange">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">50%</div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="progress green">
-                        <span class="progress-left">
-                            <span class="progress-bar"></span>
-                        </span>
-                        <span class="progress-right">
-                            <span class="progress-bar"></span>
-                        </span>
-                        <div class="progress-value">75%</div>
-                    </div>
-                    <h1>Condicionamento Físico</h1>
+                <h1>Pilates</h1>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="progress green">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">75%</div>
                 </div>
+                <h1>Condicionamento Físico</h1>
             </div>
         </div>
-        <div class="container text-center mb-5">
-        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="Img-FitBot1 mb-3">
-        <h1>Falar com o FitBot</h1>
-        <hr>
-        <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasMA" aria-controls="offcanvasMA">
-            <img src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Marcar Aula
-        </button>
-        <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasIS" aria-controls="offcanvasIS"><img src="https://i.ibb.co/zRXNPxc/fitbotl.png"
-                class="i-fitbot" alt="fitbot-icone"> Indicar
-            Suplementos</button>
-        <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasLista" aria-controls="offcanvasLista"><img
-                src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Listar
-            exercícios para fazer em casa</button>
+    </div>
+    <div class="container text-center mb-5">
+    <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="Img-FitBot1 mb-3">
+    <h1>Falar com o FitBot</h1>
+    <hr>
+    <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasMA" aria-controls="offcanvasMA">
+        <img src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Marcar Aula
+    </button>
+    <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasIS" aria-controls="offcanvasIS"><img src="https://i.ibb.co/zRXNPxc/fitbotl.png"
+            class="i-fitbot" alt="fitbot-icone"> Indicar
+        Suplementos</button>
+    <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasLista" aria-controls="offcanvasLista"><img
+            src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Listar
+        exercícios para fazer em casa</button>
+</div>
+<hr>
+<div class="container">
+    <div class="assinaturas">
+        <h1 class="assinatura-l">Sua assinatura</h1>
+        <h1 class="assinatura-r">Aprimorar assinatura</h1>
     </div>
     <hr>
-    <div class="container">
-        <div class="assinaturas">
-            <h1 class="assinatura-l">Sua assinatura</h1>
-            <h1 class="assinatura-r">Aprimorar assinatura</h1>
-        </div>
-        <hr>
-        <div class="row gy-4 align-items-start">
-            <div class="col-md-4 d-flex justify-content-between align-items-start">
-                <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
-                    <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
-                        alt="FitLab And B-Corp">
-                    <div class="content">
-                        <h4>R$: 0,00/m - Fitlab B-corp</h4>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
-                    </div>
-                </div>
-                <div class="vl"></div>
-            </div>
-            <div class="card me-2 mb-3 silver-card" style="width: 18rem;">
-                <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
+    <div class="row gy-4 align-items-start">
+        <div class="col-md-4 d-flex justify-content-between align-items-start">
+            <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
+                <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
+                    alt="FitLab And B-Corp">
                 <div class="content">
-                    <h4>R$: 99,89/m - Fitlab Silver</h4>
+                    <h4>R$: 0,00/m - Fitlab B-corp</h4>
                     <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
                     <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
                 </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SilverModal">
-                    MATRICULE-SE
-                </button>
             </div>
-            <div class="card me-2 mb-3 gold-card" style="width: 18rem;">
-                <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
-                <div class="content">
-                    <h4>R$: 150,00/m - Fitlab Gold</h4>
-                    <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
-                </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GoldModal">
-                    MATRICULE-SE
-                </button>
-            </div>
+            <div class="vl"></div>
         </div>
-        <div class="card me-2 mb-3 diamond-card" style="width: 18rem;">
-            <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
+        <div class="card me-2 mb-3 silver-card" style="width: 18rem;">
+            <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
             <div class="content">
-                <h4>R$: 200,00/m - Fitlab Diamond</h4>
+                <h4>R$: 99,89/m - Fitlab Silver</h4>
                 <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
                 <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
-                <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-                <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
-                <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
+                <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
             </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DiamondModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SilverModal">
                 MATRICULE-SE
             </button>
         </div>
-
+        <div class="card me-2 mb-3 gold-card" style="width: 18rem;">
+            <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
+            <div class="content">
+                <h4>R$: 150,00/m - Fitlab Gold</h4>
+                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
+                <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
+                <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GoldModal">
+                MATRICULE-SE
+            </button>
+        </div>
+    </div>
+    <div class="card me-2 mb-3 diamond-card" style="width: 18rem;">
+        <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
+        <div class="content">
+            <h4>R$: 200,00/m - Fitlab Diamond</h4>
+            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+            <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
+            <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
+            <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+            <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
+        </div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DiamondModal">
+            MATRICULE-SE
+        </button>
     </div>
 
+</div>
 
-    </div>
-    </div>
 
-    </div>
+</div>
+</div>
 
-    <!-- Offcanvas Marcar Aula -->
+</div>
+<!-- Offcanvas Marcar Aula -->
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMA">
     <div class="offcanvas-header d-flex align-items-center">
         <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
         <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <div data-bs-theme="dark">
-            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <hr class="linha-do-perfil">
-
     <div class="offcanvas-body">
-        <form action="/marcar-aula" method="POST">
-            <div class="chat-container">
-                <div class="messages">
-                    <div class="message received">
-                        <p>Olá! Como posso te ajudar hoje?</p>
-                    </div>
-                </div>
-                <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" name="InputMA" id="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..." name="message">Eu quero marcar uma aula amanhã, me mande os horários disponíveis!</textarea>
-                    <button type="submit" class="btn btn-primary ms-2">Enviar</button>
-                </div>
+        <div class="chat-container">
+            <div class="messages" id="chatMessagesMA">
+                <!-- Mensagens irão aparecer aqui -->
             </div>
-        </form>
+            <div class="message-input d-flex mt-3">
+                <textarea class="form-control" id="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -372,26 +367,19 @@ app.get('/dashboard', async (req, res) => {
     <div class="offcanvas-header d-flex align-items-center">
         <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
         <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <div data-bs-theme="dark">
-            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <hr class="linha-do-perfil">
-
     <div class="offcanvas-body">
-        <form action="/indicar-suplementos" method="POST">
-            <div class="chat-container">
-                <div class="messages">
-                    <div class="message received">
-                        <p>Olá! Como posso te ajudar hoje?</p>
-                    </div>
-                </div>
-                <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" name="InputIS" id="chatMessageInputIS" rows="4" placeholder="Digite sua mensagem..." name="message">Me indique suplementos para o meu treinamento!</textarea>
-                    <button type="submit" class="btn btn-primary ms-2">Enviar</button>
-                </div>
+        <div class="chat-container">
+            <div class="messages" id="chatMessagesIS">
+                <!-- Mensagens irão aparecer aqui -->
             </div>
-        </form>
+            <div class="message-input d-flex mt-3">
+                <textarea class="form-control" id="chatMessageInputIS" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnIS">Enviar</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -400,28 +388,23 @@ app.get('/dashboard', async (req, res) => {
     <div class="offcanvas-header d-flex align-items-center">
         <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
         <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <div data-bs-theme="dark">
-            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <hr class="linha-do-perfil">
-
     <div class="offcanvas-body">
-        <form action="/listar-exercicios" method="POST">
-            <div class="chat-container">
-                <div class="messages">
-                    <div class="message received">
-                        <p>Olá! Como posso te ajudar hoje?</p>
-                    </div>
-                </div>
-                <div class="message-input d-flex mt-3">
-                    <textarea class="form-control" name="InputListar" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..." name="message">Liste exercícios para eu fazer na minha casa!</textarea>
-                    <button type="submit" class="btn btn-primary ms-2">Enviar</button>
-                </div>
+        <div class="chat-container">
+            <div class="messages" id="chatMessagesLista">
+                <!-- Mensagens irão aparecer aqui -->
             </div>
-        </form>
+            <div class="message-input d-flex mt-3">
+                <textarea class="form-control" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnLista">Enviar</button>
+            </div>
+        </div>
     </div>
-</div>`;
+</div>
+
+`;
 
         // Lê o arquivo HTML base
         const caminhoHtmlBase = path.join(__dirname, 'HTML', 'dashboard.html');
@@ -707,8 +690,6 @@ app.post('/conta/change', async (req, res) => {
         return res.redirect('/login'); // Redireciona para login se não estiver logado
     }
 
-    console.log("antes do try")
-
     const novonome = req.body.novoNome; // Obtém o novo nome do corpo da requisição
     const client = new MongoClient(url);
 
@@ -716,13 +697,11 @@ app.post('/conta/change', async (req, res) => {
         await client.connect(); // Conecta ao MongoDB
         const db = client.db(dbName);
         const collection = db.collection(collectionUser);
-        console.log("depois do try")
         // Atualiza o nome do usuário no banco de dados
         const result = await collection.updateOne(
             { _id: new ObjectId(req.session.userId) },
             { $set: { nome: novonome } }
         );
-        console.log("depois do result")
 
 
         if (result.modifiedCount === 0) {
@@ -883,9 +862,22 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/listar-exercicios', async (req, res) => {
-    const Input = req.body.InputListar;
+    const client = new MongoClient(url);
+
 
     try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+        const user = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+        if (!user) {
+            return res.status(404).send('Usuário não encontrado');
+        }
+
+        // Agora que 'user' está definido, monta o Input
+        const Input = req.body.InputListar + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
+        console.log(inpu)
+
         // Chama a função runChat com a entrada
         const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
         res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
@@ -893,6 +885,7 @@ app.post('/listar-exercicios', async (req, res) => {
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
     } finally {
+        await client.close();
         console.log('chat fechado');
     }
 });
@@ -962,7 +955,7 @@ app.post('/registro', async (req, res) => {
                 <a href="/registro" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Registro</a>
                 <a href="/" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Voltar para Início</a>
             `);
-            
+
         }
 
         const CriptoSenha = await bcrypt.hash(req.body.senha, 15)

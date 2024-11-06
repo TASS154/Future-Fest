@@ -21,17 +21,51 @@ $(document).ready(function () {
             setProgress(Math.floor(this.countNum));
         }
     });
-});
-document.getElementById('sendMessageBtn').addEventListener('click', function ()) {
-    const messageInput = document.getElementById('chatMessageInput');
-    const messageText = messageInput.value;
 
-    if (messageText.trim()) {
-        const messageContainer = document.createElement('div');
-        messageContainer.classList.add('message', 'sent');
-        messageContainer.innerHTML = `<p>${messageText}</p>`;
+    // Função para enviar e exibir mensagens do usuário e IA
+    function handleMessage(sendButtonId, inputId, chatBoxId) {
+        document.getElementById(sendButtonId).addEventListener('click', function () {
+            const userInput = document.getElementById(inputId).value;
 
-        document.querySelector('.messages').appendChild(messageContainer);
-        messageInput.value = ''; // Limpa o campo de input
+            if (userInput.trim()) {
+                // Exibe a mensagem do usuário
+                appendMessage(userInput, 'user', chatBoxId);
+
+                // Limpa o campo de entrada
+                document.getElementById(inputId).value = '';
+
+                // Simula a resposta da IA após um curto delay
+                setTimeout(() => {
+                    const aiResponse = "Resposta da IA: " + userInput;  // Simulando a IA respondendo
+                    appendMessage(aiResponse, 'ai', chatBoxId);
+                }, 1000);
+            }
+        });
     }
-}
+
+    // Função para adicionar mensagens ao chat
+    function appendMessage(message, sender, chatBoxId) {
+        const chatBox = document.getElementById(chatBoxId);
+
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+
+        if (sender === 'user') {
+            messageDiv.classList.add('user-message');
+        } else {
+            messageDiv.classList.add('ai-message');
+        }
+
+        messageDiv.textContent = message;
+        chatBox.appendChild(messageDiv);
+
+        // Rola para o fim do chat
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Inicializando os bots nos diferentes offcanvases
+    handleMessage('sendMessageBtnMA', 'chatMessageInputMA', 'chatMessagesMA');
+    handleMessage('sendMessageBtnIS', 'chatMessageInputIS', 'chatMessagesIS');
+    handleMessage('sendMessageBtnLista', 'chatMessageInputLista', 'chatMessagesLista');
+
+});

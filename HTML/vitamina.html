@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards de Pagamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="pagamento-cursos.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(270deg, #1a1a1a, #4d4d4d, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card {
+            background-color: #303030;
+            padding: 15px;
+            /* Mantido o padding reduzido */
+            border-radius: 8px;
+            width: 300px;
+            /* Mantido a largura */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-height: 500px;
+            /* Limita a altura máxima */
+            overflow: hidden;
+            /* Esconde conteúdo que transborda */
+            margin-top: 180px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .card input,
+        .card select {
+            width: 100%;
+            padding: 8px;
+            /* Reduzido o padding */
+            margin-bottom: 10px;
+            /* Reduzido o margin */
+            border: 1px solid #303030;
+            border-radius: 4px;
+        }
+
+        .cnt {
+            margin-left: 70px
+        }
+
+        h2 {
+            color: white;
+            margin: 10px 0;
+            /* Adicionando margin ao h2 */
+        }
+
+        label {
+            color: white;
+        }
+
+        .pln {
+            color: white;
+            margin-bottom: 10px;
+            /* Adicionando margin */
+        }
+
+        img {
+            width: 50%;
+            /* Reduzido o tamanho da imagem */
+            margin-left: 25%;
+            /* Centralizando a imagem */
+        }
+
+        #cardimg {
+            height: 60px;
+            /* Mantido a altura */
+            width: 60px;
+            /* Mantido a largura */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <a href="/">
+                <img src="https://i.ibb.co/FY5bCP7/logo.png">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="time.html">Sobre nós</a></li>
+            <li id="link1" class="link"><a href="/planos">Planos e aulas</a></li>
+            <li id="link2" class="link"><a href="/loja">Loja de suplementos</a></li>
+            <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
+        </ul>
+        <a href="/login">
+            <button class="btn">Entrar</button>
+        </a>
+    </nav>
+
+
+    <div class="card">
+        <h3>Pagamento</h3>
+        <label for="nome">Nome do Titular:</label>
+        <input type="text" id="nome" name="nome">
+
+        <label for="numero">Número do Cartão:</label>
+        <input type="text" id="numero" name="numero">
+
+        <label for="validade">Data de Validade:</label>
+        <input type="text" id="validade" name="validade" placeholder="MM/AA">
+
+        <label for="codigo">Código de Segurança:</label>
+        <input type="text" id="codigo" name="codigo" placeholder="CVV">
+
+        <label for="estado"> Estado: </label>
+        <select id="estado" name="estado">
+            <option value="">Selecione um estado</option>
+            <option value="sp">São Paulo</option>
+            <option value="rj">Rio de Janeiro</option>
+            <option value="mg">Minas Gerais</option>
+            <option value="pr">Paraná</option>
+            <option value="ac">Acre</option>
+            <option value="al">Alagoas</option>
+            <option value="ap">Amapá</option>
+            <option value="am">Amazonas</option>
+            <option value="ba">Bahia</option>
+            <option value="ce">Ceará</option>
+            <option value="es">Espírito Santo</option>
+            <option value="go">Goiás</option>
+            <option value="ma">Maranhão</option>
+            <option value="mt">Mato Grosso</option>
+            <option value="ms">Mato Grosso do Sul</option>
+            <option value="pa">Pará</option>
+            <option value="pb">Paraíba</option>
+            <option value="pe">Pernambuco</option>
+            <option value="pi">Piauí</option>
+            <option value="rn">Rio Grande do Norte</option>
+            <option value="rs">Rio Grande do Sul</option>
+            <option value="ro">Rondônia</option>
+            <option value="rr">Roraima</option>
+            <option value="sc">Santa Catarina</option>
+            <option value="se">Sergipe</option>
+            <option value="to">Tocantins</option>
+            <option value="df">Distrito Federal</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <div class="cardimg">
+            <img src="https://i.ibb.co/FY5bCP7/logo.png">
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <img src="https://i.ibb.co/XbJnB2t/Group-10-removebg-1.png">
+
+        <br>
+        <br>
+        <div class="cnt">
+            <h2>R$49,99</h2>
+        </div>
+        <button type="button" class="btn btn-outline-danger">Confirmar pagamento</button>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+</html>

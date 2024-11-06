@@ -23,6 +23,15 @@ body{
     font-family: 'Poppins', sans-serif;
     background-color:   #18181B;
 }
+/* Fazendo as imagens ficarem redondas */
+.img-rounded {
+    border-radius: 45%; /* Aplica o formato circular */
+    object-fit: cover;  /* Garante que a imagem não fique distorcida ao cortar */
+    width: 200%;
+    height: auto;
+    max-width: 400px;  /* Limite o tamanho da imagem */
+    margin: auto;
+}
 
 nav{
     max-width: 1200px;

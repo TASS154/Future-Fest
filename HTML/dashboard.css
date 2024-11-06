@@ -111,7 +111,19 @@ header{
     align-items: center;
     gap: 2rem;
 }
- 
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 10px; /* Ajuste fino para não ficar muito afastado */
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
 header .content h4{
     margin-bottom: 1rem;
     color: #ccc;

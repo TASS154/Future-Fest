@@ -39,162 +39,177 @@
             <!-- Planos -->
             <div class="pricing d-flex flex-wrap justify-content-center">
                 <!-- Linha 1: FitLab B-corp e Silver -->
-                <div class="card me-2 mb-3" style="width: 18rem;">
-                    <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
-                        alt="FitLab And B-Corp">
-                    <div class="content">
-                        <h4>R$: 0,00/m - Fitlab B-corp</h4>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
+                <div class="d-flex gap-5">
+                    <div class="card me-2 mb-3" style="width: 18rem;">
+                        <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
+                            alt="FitLab And B-Corp">
+                        <div class="content">
+                            <h4>R$: 0,00/m - Fitlab B-corp</h4>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#FitLabModal">
+                            MATRICULE-SE
+                        </button>
                     </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FitLabModal">
-                        MATRICULE-SE
-                    </button>
-                </div>
 
-                <div class="modal fade" id="FitLabModal" tabindex="-1" aria-labelledby="FitLabModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content bg-dark text-light">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="FitLabModalLabel">Escolha o Método de Pagamento</h1>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioSilver"
-                                        id="flexRadioSilver1" value="cartao">
-                                    <label class="form-check-label" for="flexRadioSilver1">Cartão de Crédito ou Cartão
-                                        De Débito</label>
+                    <div class="modal fade" id="FitLabModal" tabindex="-1" aria-labelledby="FitLabModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-dark text-light">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="FitLabModalLabel">Escolha o Método de Pagamento
+                                    </h1>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioSilver"
-                                        id="flexRadioSilver2" value="paypal" checked>
-                                    <label class="form-check-label" for="flexRadioSilver2">Cartão Presente</label>
+                                <div class="modal-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioSilver"
+                                            id="flexRadioSilver1" value="cartao">
+                                        <label class="form-check-label" for="flexRadioSilver1">Cartão de Crédito ou
+                                            Cartão
+                                            De Débito</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioSilver"
+                                            id="flexRadioSilver2" value="paypal" checked>
+                                        <label class="form-check-label" for="flexRadioSilver2">Cartão Presente</label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" id="btnPagamentoFitLab">Começar
-                                    Pagamento</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" id="btnPagamentoFitLab">Começar
+                                        Pagamento</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card me-2 mb-3" style="width: 18rem;">
+                        <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
+                        <div class="content">
+                            <h4>R$: 99,89/m - Fitlab Silver</h4>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#SilverModal">
+                            MATRICULE-SE
+                        </button>
+                    </div>
+
+                    <div class="modal fade" id="SilverModal" tabindex="-1" aria-labelledby="SilverModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-dark text-light">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="SilverModalLabel">Escolha o Método de Pagamento
+                                    </h1>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioSilver"
+                                            id="flexRadioSilver1" value="cartao">
+                                        <label class="form-check-label" for="flexRadioSilver1">Cartão de Crédito ou
+                                            Cartão
+                                            De Débito</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioSilver"
+                                            id="flexRadioSilver2" value="paypal" checked>
+                                        <label class="form-check-label" for="flexRadioSilver2">Cartão Presente</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" id="btnPagamentoSilver">Começar
+                                        Pagamento</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="card me-2 mb-3" style="width: 18rem;">
-                    <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
-                    <div class="content">
-                        <h4>R$: 99,89/m - Fitlab Silver</h4>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
-                    </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SilverModal">
-                        MATRICULE-SE
-                    </button>
-                </div>
-
-                <div class="modal fade" id="SilverModal" tabindex="-1" aria-labelledby="SilverModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content bg-dark text-light">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="SilverModalLabel">Escolha o Método de Pagamento</h1>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioSilver"
-                                        id="flexRadioSilver1" value="cartao">
-                                    <label class="form-check-label" for="flexRadioSilver1">Cartão de Crédito ou Cartão
-                                        De Débito</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioSilver"
-                                        id="flexRadioSilver2" value="paypal" checked>
-                                    <label class="form-check-label" for="flexRadioSilver2">Cartão Presente</label>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" id="btnPagamentoSilver">Começar
-                                    Pagamento</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
                 <!-- Linha 2: Gold e Diamond -->
-                <div class="card me-2 mb-3" style="width: 18rem;">
-                    <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
-                    <div class="content">
-                        <h4>R$: 150,00/m - Fitlab Gold</h4>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+                <div class="d-flex gap-5">
+                    <div class="card me-2 mb-3" style="width: 18rem;">
+                        <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
+                        <div class="content">
+                            <h4>R$: 150,00/m - Fitlab Gold</h4>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia
+                            </p>
+                            <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#GoldModal">
+                            MATRICULE-SE
+                        </button>
                     </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GoldModal">
-                        MATRICULE-SE
-                    </button>
-                </div>
 
-                <div class="modal fade" id="GoldModal" tabindex="-1" aria-labelledby="GoldModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content bg-dark text-light">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="GoldModalLabel">Escolha o Método de Pagamento</h1>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioGold"
-                                        id="flexRadioGold1" value="cartao">
-                                    <label class="form-check-label" for="flexRadioGold1">Cartão de Crédito ou Cartão De
-                                        Débito</label>
+                    <div class="modal fade" id="GoldModal" tabindex="-1" aria-labelledby="GoldModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-dark text-light">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="GoldModalLabel">Escolha o Método de Pagamento</h1>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioGold"
-                                        id="flexRadioGold2" value="paypal" checked>
-                                    <label class="form-check-label" for="flexRadioGold2">Cartão Presente</label>
+                                <div class="modal-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioGold"
+                                            id="flexRadioGold1" value="cartao">
+                                        <label class="form-check-label" for="flexRadioGold1">Cartão de Crédito ou Cartão
+                                            De
+                                            Débito</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioGold"
+                                            id="flexRadioGold2" value="paypal" checked>
+                                        <label class="form-check-label" for="flexRadioGold2">Cartão Presente</label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" id="btnPagamentoGold">Começar
-                                    Pagamento</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" id="btnPagamentoGold">Começar
+                                        Pagamento</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="card me-2 mb-3" style="width: 18rem;">
-                    <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
-                    <div class="content">
-                        <h4>R$: 200,00/m - Fitlab Diamond</h4>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
-                        <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
+                    <div class="card me-2 mb-3" style="width: 18rem;">
+                        <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top"
+                            alt="FitLab Diamond">
+                        <div class="content">
+                            <h4>R$: 200,00/m - Fitlab Diamond</h4>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia
+                            </p>
+                            <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+                            <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#DiamondModal">
+                            MATRICULE-SE
+                        </button>
                     </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DiamondModal">
-                        MATRICULE-SE
-                    </button>
                 </div>
 
                 <div class="modal fade" id="DiamondModal" tabindex="-1" aria-labelledby="DiamondModalLabel"

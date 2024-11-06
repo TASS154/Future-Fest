@@ -1,45 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat com IA</title>
+    <title>Chat Simples</title>
+    <link rel="stylesheet" href="style.css"> <!-- Aqui você pode linkar um arquivo CSS externo -->
 </head>
 <body>
-    <h1>Chat com IA</h1>
-    <div>
-        <textarea id="userInput" placeholder="Digite sua mensagem..."></textarea>
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box">
+            <!-- Mensagens serão exibidas aqui -->
+        </div>
+
+        <div class="input-container">
+            <input id="user-input" type="text" placeholder="Digite sua mensagem..." />
+            <button id="send-btn">Enviar</button>
+        </div>
     </div>
-    <button id="sendBtn">Enviar</button>
-    <div>
-        <h3>Resposta da IA:</h3>
-        <p id="aiResponse"></p>
-    </div>
 
-    <script>
-        document.getElementById('sendBtn').addEventListener('click', async () => {
-            const userInput = document.getElementById('userInput').value;
-
-            try {
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ userInput })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    document.getElementById('aiResponse').innerText = data.response;
-                } else {
-                    document.getElementById('aiResponse').innerText = `Erro: ${data.error}`;
-                }
-            } catch (error) {
-                document.getElementById('aiResponse').innerText = `Erro: ${error.message}`;
-            }
-        });
-    </script>
+    <script src="script.js"></script> <!-- Aqui você pode linkar seu arquivo JS -->
 </body>
 </html>
