@@ -45,9 +45,12 @@ $(document).ready(function () {
 });
 
 // Função para adicionar mensagem no chat
-function appendMessage(message, sender) {
-    const chatBox = $('#chat-box');
-    const messageDiv = $('<div>').addClass('message');
+function appendIaMessage(message) {
+    const chatBox = document.getElementById('chat-box');
+    const messageBubble = document.createElement('div');
+    messageBubble.classList.add('ia-response'); // Classe para a cor preta
+    messageBubble.textContent = message;
+    chatBox.appendChild(messageBubble);
 
     // Verifica se a mensagem é do usuário ou da IA
     if (sender === 'user') {
@@ -73,7 +76,7 @@ $(document).ready(function () {
 
             // Simulação de resposta da IA (substitua com lógica real)
             setTimeout(function () {
-                $('#chatMessagesMA').append(`<div class="message ai-message"><p>Como posso ajudar mais?</p></div>`);
+                $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">Como posso ajudar mais?</p></div>`);
                 $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight); // Rolar para a última mensagem
             }, 1000); // Espera 1 segundo para simular a resposta da IA
 
@@ -84,4 +87,9 @@ $(document).ready(function () {
         // Rolar o chat para baixo após enviar
         $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
     });
+});
+
+document.getElementById('offcanvasMA').addEventListener('shown.bs.offcanvas', function () {
+    // Definindo o valor do textarea quando o offcanvas for aberto
+    document.getElementById('chatMessageInputMA').value = "Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?";
 });

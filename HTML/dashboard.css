@@ -27,6 +27,9 @@ body{
 h1, h2, h3, h4, p, a {
     color: white;
 }
+#ia-m {
+    color: black;
+}
  
 nav {
     max-width: 1200px;
@@ -111,11 +114,19 @@ header{
     align-items: center;
     gap: 2rem;
 }
-.offcanvas-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  margin-bottom: 10px; /* Ajuste fino para não ficar muito afastado */
+
+.ai-message {
+    background-color: #f0f0f0; /* Cor de fundo cinza claro */
+    color: black; /* Texto escuro */
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 60%;
+    margin: 10px 0;
+    align-self: flex-start; /* Alinha à esquerda */
+    word-wrap: break-word;
+}
+.IA-m {
+    color: black;
 }
 
 .chat-container {
@@ -250,23 +261,25 @@ section .header{
     position: relative; /* Necessário para a posição absoluta do input */
     display: flex;
     flex-direction: column;
-    padding-bottom: 80px; /* Deixe um espaço para o input e botão */
-    justify-content: flex-start; /* Ajuste para alinhar o conteúdo mais para cima */
+    justify-content: flex-start; 
+    display: flex;
+    flex-direction: column;
+    height: 50%; /* Para garantir que o offcanvas ocupe toda a altura */
 }
-
 /* Ajustes para o chat */
 .chat-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 20px; /* Mover as mensagens para cima */
-    max-height: 400px; /* Limitar a altura do chat */
+    max-height: 1000px; /* Limitar a altura do chat */
     overflow-y: auto;
 }
 
-.messages {
+#chatMessagesMA {
     display: flex;
     flex-direction: column;
+    height: 1000px;
     gap: 10px;
 }
 
@@ -276,24 +289,22 @@ section .header{
     max-width: 70%;
     word-wrap: break-word;
 }
-
 .user-message {
-    background-color: #007bff; /* Azul */
+    background-color: #007bff; /* Cor de fundo azul */
     color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 0;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 60%;
+    margin: 10px 0;
+    align-self: flex-end; /* Alinha à direita */
+    word-wrap: break-word;
 }
-
-.ai-message {
-    background-color: #f1f1f1; /* Cinza */
-    color: black;
-    align-self: flex-start;
-    border-bottom-left-radius: 0;
-}
-
 .message-input {
     display: flex;
     gap: 10px;
+}
+textarea {
+    color: black; 
 }
 
 .message-input textarea {
@@ -321,9 +332,10 @@ section .header{
 /* Estilo do input e botão de envio */
 .input-container {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 0;
     right: 0;
+    width: 100%;
     padding: 15px;
     background-color: #333; /* Cor de fundo do input e botão, se necessário */
 }
@@ -648,13 +660,15 @@ hr{
   }
  
   .chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
     padding-bottom: 60px; /* Ajuste para garantir que a área de chat não seja sobreposta */
+}
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    color: black;
 
 }
- 
+
 .messages {
     flex-grow: 1;
     overflow-y: auto;
@@ -673,6 +687,21 @@ hr{
     align-self: flex-start;
     border-top-left-radius: 0;
 }
+.message.ai-message {
+    background-color: #f0f0f0; /* Cor de fundo clara para IA */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 80%;
+}
+
+.message-input {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+
  
 .message.sent {
     background-color: #007bff;
@@ -685,7 +714,7 @@ hr{
     border-top: 1px solid #ccc;
     padding-top: 10px;
 }
- 
+
  
  
 .pricing {

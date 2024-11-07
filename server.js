@@ -237,17 +237,18 @@ app.get('/', async (req, res) => {
         <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <hr class="linha-do-perfil">
-    <div class="offcanvas-body">
-    <!-- Chat container com balõezinhos de mensagens -->
-    <div class="chat-container">
-        <div id="chat-box" class="chat-box">
-            <!-- As mensagens serão exibidas aqui -->
+    <div class="offcanvas-body d-flex flex-column">
+        <!-- Chat container com balõezinhos de mensagens -->
+        <div class="chat-container">
+            <div id="chat-box" class="chat-box flex-grow-1">
+                <!-- As mensagens serão exibidas aqui -->
+            </div>
         </div>
-    </div>
-    <div class="input-container position-absolute bottom-0 start-0 end-0 p-3">
-        <div class="d-flex">
-            <input id="user-input" type="text" placeholder="Digite sua mensagem..." class="form-control me-2" />
-            <button id="send-btn" class="btn btn-primary">Enviar</button>
+        <div class="input-container mt-auto">
+            <div class="d-flex">
+                <textarea id="chatMessageInputMA" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
+                <button id="sendMessageBtnMA" class="btn btn-primary">Enviar</button>
+            </div>
         </div>
     </div>
 </div>
@@ -297,6 +298,7 @@ app.get('/', async (req, res) => {
         </div>
     </div>
 </div>
+
 
 `;
 
@@ -836,46 +838,46 @@ app.get('/conta', async (req, res) => {
             </div>
     
             <div class="mb-3">
-                <label for="AlergiaA" class="form-label">Você tem alguma Alergia Alimentar</label>
-                <input type="text" class="form-control" id="alergiaA" placeholder="Exemplo: Glúten, nozes">
+                <label for="alergias" class="form-label">Você tem alguma Alergia Alimentar</label>
+                <input type="text" class="form-control" id="alergias" placeholder="Exemplo: Glúten, nozes">
             </div>
             <div class="mb-3">
-                <label for="condicaoS" class="form-label">Condições de Saúde:</label>
-                <input type="text" class="form-control" id="condicaoS"
+                <label for="condicaoDeSaude" class="form-label">Condições de Saúde:</label>
+                <input type="text" class="form-control" id="condicaoDeSaude"
                     placeholder="Exemplo: Diabetes, Problemas cardíacos">
             </div>
             <div class="mb-3">
                 <p>Nível de Atividade física</p>
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Prefiro não comentar</option>
-                    <option value="1">Sedentário</option>
-                    <option value="2">Moderadamente ativo</option>
-                    <option value="3">Muito ativo</option>
+                    <option value="sedentário">Sedentário</option>
+                    <option value="moderadamente ativo">Moderadamente ativo</option>
+                    <option value="muito ativo">Muito ativo</option>
                 </select>
             </div>
             <div class="mb-3">
                 <p>Objetivo</p>
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Prefiro não comentar</option>
-                    <option value="1">Perda de peso</option>
-                    <option value="2">Aumento de massa muscular</option>
-                    <option value="3">Melhora de resistência</option>
-                    <option value="4">Recuperação de lesões</option>
+                    <option value="perda de peso">Perda de peso</option>
+                    <option value="aumento de massa muscular">Aumento de massa muscular</option>
+                    <option value="melhoria de resiliência">Melhora de resistência</option>
+                    <option value="recuperação de lesões">Recuperação de lesões</option>
                 </select>
             </div>
             <div class="mb-3">
-                <label for="prefAlimentar" class="form-label">Preferências Alimentares:</label>
-                <input type="text" class="form-control" id="prefAlimentar" placeholder="Exemplo: Vegetariano, vegano">
+                <label for="preferenciaAlimentar" class="form-label">Preferências Alimentares:</label>
+                <input type="text" class="form-control" id="preferenciaAlimentar" placeholder="Exemplo: Vegetariano, vegano">
             </div>
             <div class="mb-3">
-                <label for="histLesao" class="form-label">Histórico de Lesões:</label>
-                <input type="text" class="form-control" id="histLesao"
+                <label for="históricoDeLesão" class="form-label">Histórico de Lesões:</label>
+                <input type="text" class="form-control" id="históricoDeLesão"
                     placeholder="Exemplo: Lesões Musculares, Fraturas">
             </div>
             <div class="mb-3">
             <div>
-            <label for="supAtual" class="form-label">Suplementos Atuais:</label>
-            <input type="text" class="form-control" id="supAtual" placeholder="Exemplo: Creatina, vitamina D">
+            <label for="suplementostuais" class="form-label">Suplementostuais:</label>
+            <input type="text" class="form-control" id="suplementostuais" placeholder="Exemplo: Creatina, vitamina D">
         </div>
         <div class="saver">
             <button type="button" class="btn btn-danger" id="saveButton">Salvar</button>
@@ -942,10 +944,79 @@ app.get('/conta', async (req, res) => {
             //     document.getElementById('confirmButton1').style.display = 'none';
             //     document.getElementById('editEmail').style.display = 'inline-block';
             // });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const avancadoLink = document.querySelector('.m');
+                const avancadoContent = document.getElementById('avancado');
+            
+                avancadoLink.textContent = 'Mostrar opções avançadas';
+            
+                avancadoLink.addEventListener('click', function () {
+                    const isExpanded = avancadoContent.classList.contains('show');
+            
+                    if (isExpanded) {
+                        avancadoLink.textContent = 'Mostrar opções avançadas';
+                    } else {
+                        avancadoLink.textContent = 'Fechar opções avançadas';
+                    }
+                });
+            
+                avancadoContent.addEventListener('shown.bs.collapse', function () {
+                    avancadoLink.textContent = 'Fechar opções avançadas';
+                });
+            
+                avancadoContent.addEventListener('hidden.bs.collapse', function () {
+                    avancadoLink.textContent = 'Mostrar opções avançadas';
+                });
+            });
+            
+            
+            // Repita o mesmo padrão para os outros botões...
+            
+            if (saveButton) {
+                saveButton.addEventListener('click', function () {
+                    const genero = document.querySelector('input[name="flexRadioDefault"]:checked').nextElementSibling.textContent.trim();
+                    const alergias = document.getElementById('alergias').value;
+                    const condicaoDeSaude = document.getElementById('condicaoDeSaude').value;
+                    const atividadeFisica = document.querySelector('.form-select').value;
+                    const objetivo = document.querySelectorAll('.form-select')[1].value;
+                    const preferenciaAlimentar = document.getElementById('preferenciaAlimentar').value;
+                    const históricoDeLesão = document.getElementById('históricoDeLesão').value;
+                    const suplementostuais = document.getElementById('suplementostuais').value;
+            
+                    const dadosUsuario = {
+                        genero: genero,
+                        alergias: alergias,
+                        condicaoDeSaude: condicaoDeSaude,
+                        atividadeFisica: atividadeFisica,
+                        objetivo: objetivo,
+                        preferenciaAlimentar: preferenciaAlimentar,
+                        históricoDeLesão: históricoDeLesão,
+                        suplementostuais: suplementostuais
+                    };
+                    
+                    fetch('/conta/save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dadosUsuario) // Enviando os dados como JSON
+                    })
+
+                    console.log('Dados salvos:', dadosUsuario);
+            
+                    localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
+                    document.getElementById('saveButton').addEventListener('click', function () {
+                        var toastElement = document.getElementById('liveToast');
+                        var toast = new bootstrap.Toast(toastElement);
+                        toast.show();
+                    });
+                });
+            }
         </script>
          
-        
         `;
+
         // Lê o arquivo HTML base
         const caminhoHtmlBase = path.join(__dirname, 'HTML', 'conta.html');
         fs.readFile(caminhoHtmlBase, 'utf-8', (err, data) => {
@@ -1099,6 +1170,51 @@ app.post('/conta/save-image', async (req, res) => {
     } catch (error) {
         console.error('Erro ao atualizar a imagem:', error);
         res.status(500).send('Erro ao atualizar a imagem');
+    } finally {
+        await client.close();
+    }
+});
+
+app.post('/conta/save', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).send({ message: 'Usuário não está logado' });
+    }
+
+    const { genero, alergiaA, condicaoS, atividadeFisica, objetivo, prefAlimentar, histLesao, supAtual } = req.body;
+
+    const client = new MongoClient(url);
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        // Atualizar as informações do usuário no banco de dados
+        const updateResult = await collection.updateOne(
+            { _id: new ObjectId(req.session.userId) },
+            {
+                $set: {
+                    genero,
+                    alergias,
+                    condicaoDeSaude,
+                    atividadeFisica,
+                    objetivo,
+                    prefAlimentar,
+                    histLesao,
+                    supAtual
+                }
+            }
+        );
+
+        if (updateResult.modifiedCount === 0) {
+            return res.status(400).send({ message: 'Erro ao salvar as informações do usuário' });
+        }
+
+        // Enviar uma resposta de sucesso
+        res.status(200).json({ message: 'Informações salvas com sucesso' });
+
+    } catch (error) {
+        console.error('Erro ao salvar dados do usuário:', error);
+        res.status(500).send({ message: 'Erro no servidor ao salvar os dados' });
     } finally {
         await client.close();
     }
