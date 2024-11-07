@@ -1,65 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
-    <link rel="stylesheet" href="B-corp.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="dashboard.css">
     <title>FitLab</title>
 </head>
 
 <body>
 
-    <nav>
-        <div class="nav-logo">
-            <a href="/">
-                <img src="https://i.ibb.co/FY5bCP7/logo.png">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="https://i.ibb.co/FY5bCP7/logo.png" alt="logo" style="width: 100px;">
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/time">Sobre nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/planos">Planos e aulas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/loja">Loja de suplementos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/b-corp">B-corp</a>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <footer class="container" id="footer">
-            <span class="blur"></span>
-            <span class="blur"></span>
-            <div class="column">
-                <div class="logo">
-                    <img src="https://i.ibb.co/FY5bCP7/logo.png">
-                </div>
+    <!-- PLACEHOLDER -->
+
+
+    <div class="settingsa">
+        <div class="container my-5">
+            <div class="row align-items-center">
+                <a href="/conta" class="d-flex align-items-center text-decoration-none">
+                    <img src="https://i.ibb.co/jLBMHx3/settings.png" alt="Configurações" class="s me-3">
+                    <div>
+                        <h2 class="s1 mb-1">Configure seu Perfil!</h2>
+                        <p class="s2">Para a IA dar resultados mais precisos!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="container py-4">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="https://i.ibb.co/FY5bCP7/logo.png" alt="logo" style="max-width: 100px;">
             </div>
             <div class="column">
                 <h4>A FitLab</h4>
-                <a href="#cursos">Todos os cursos</a>
-                <a href="site.html">Como funciona</a>
+                <a href="/planos">Todos os planos </a>
+                <a href="/comofunciona">Como funciona</a>
             </div>
             <div class="column">
                 <h4>INSTITUCIONAL</h4>
                 <a href="#sbr">Sobre Nós</a>
-                <a href="po.html">Política de privacidade</a>
-                <a href="termos.html">Termos de uso</a>
+                <a href="/po">Política de privacidade</a>
+                <a href="/termos">Termos de uso</a>
             </div>
             <form>
-                <input class="certo" type="email" placeholder="Digite o seu e-mail" required>
-                <button class="butao">Enviar</button>
+                <input class="form-control" type="email" placeholder="Digite o seu e-mail" required>
+                <button class="btn btn-primary mt-2">Enviar</button>
             </form>
-        </footer>
-    
-        <div class="copyright">
-            FitLab &copy; 2024 Lucas S. Bomtempo, Thiago Alexandre e Henrique Luiz.
-        </div>
-    
-        <script src="script.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+    </footer>
 
-    </body>
-    
+    <div class="text-center py-2">
+        FitLab &copy; 2024 Lucas S. Bomtempo, Breno Levy, Thiago Alexandre e Henrique Luiz.
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

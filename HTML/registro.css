@@ -23,7 +23,7 @@ body{
     background-color:   #18181B;
 }
 
-nav{
+.navbar{
     max-width: 1200px;
     margin: auto;
     padding: 2rem 1rem;
@@ -44,6 +44,13 @@ nav{
     gap: 3rem;
 }
 
+.paginationn {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
 .link a{
     position: relative;
     padding-bottom: 0.75rem;
@@ -98,12 +105,15 @@ header {
     align-items: center;
 }
 
-h1 {
+h1, h3 {
     margin-bottom: 1rem;
     color: white;
 }
 .registro{
     color: #a11000;
+}
+#passwordHelpBlock, #confirmPasswordHelpBlock {
+    color: white;
 }
 
 section .header{
@@ -215,6 +225,7 @@ section .header{
     border-bottom: 2px dashed #fff;
 }
 
+
 .pricing .card p{
     color: #fff;
     margin-bottom: 0.75rem;
@@ -236,7 +247,29 @@ section .header{
     background-color: #5b0303;
     border-color: #5b0303;
 }
+.tp{
+    color: cyan;
+}
+.carregar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8); 
+    z-index: 1000;
+}
 
+.fiitbot {
+    width: 50px;
+    height: 50px;
+}
+#dica {
+    color: white;
+}
 footer{
     position: relative;
     display: grid;

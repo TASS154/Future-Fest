@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Água</title>
+    <style>
+        /* Fundo animado escuro */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+            background: linear-gradient(135deg, #1d1f20, #282c34, #2f3640, #1d1f20);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        /* Animação de gradiente */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #d81d1d;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #D3d3d3;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #d81d1d;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #5b0303;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .voltar-home {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora de Água</h1>
+        <label for="peso">Digite seu peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ex: 70" />
+        <button onclick="calcularAgua()">Calcular</button>
+        <div id="resultado"></div>
+    </div>
+    <a href="/">
+        <button href="/" class="voltar-home">Voltar</button>
+    </a>
+    <script>
+        function calcularAgua() {
+            const peso = document.getElementById('peso').value;
+            const resultadoDiv = document.getElementById('resultado');
+
+            if (peso > 0) {
+                const aguaRecomendada = peso * 35; // Resultado em ml
+                resultadoDiv.innerHTML = `A quantidade recomendada de água por dia é: ${(aguaRecomendada / 1000).toFixed(2)} litros.`;
+            } else if (peso >= 600) {
+                resultadoDiv.innerHTML = 'Por favor, insira um peso válido.';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -9,8 +9,9 @@
 }
 
 
-img{
+.img-thumbnail{
     width: 100%;
+    border-radius: 50%;
     display: flex;
 }
 
@@ -21,8 +22,16 @@ a{
 body{
     font-family: 'Poppins', sans-serif;
     background-color:   #18181B;
+    color: white;
 }
 
+.ne{
+    color: cyan;
+}
+
+.form-check-label, .form-label, p {
+    color: white; 
+}
 nav{
     max-width: 1200px;
     margin: auto;
@@ -78,12 +87,159 @@ nav{
 .btn:hover{
     background-color: #5b0303;
 }
+.profile-img {
+    display: flex;
+    margin-left: 30px;
+    justify-content: center;
+}
+.Seu-Perfil {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-left: 30px;
+}
+
+.tc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selected {
+    border: 3px solid white; /* Borda azul para destacar */
+    border-radius: 5px;
+    box-shadow: 0 0 8px white;
+}
+
+.edit {
+    width: 16px; 
+    height: 16px; 
+    vertical-align: middle; 
+    margin-left: 10px; 
+    cursor: pointer; 
+}
+
+
+.form-container {
+    max-width: 400px; 
+    width: 100%;
+}
+
+.form-label {
+    color: white;
+}
+
+
+.col-form-label {
+    white-space: nowrap; 
+    margin-right: 5px; 
+    color: white; 
+}
+
+.form-control-plaintext {
+    color: white;
+    display: inline-block;
+}
+
+
+.text-left {
+    text-align: left;
+}
+
+
+.form-control-plaintext {
+    color: white; 
+    display: inline-block; 
+}
+
+
+.col-sm-10 {
+    display: flex;
+    align-items: center;
+    text-align: left; 
+}
+
+
+.input-sm {
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+#formFile, #nomeUsuario {
+    max-width: 100%; 
+}
+
+
 
 .container{
     max-width: 1200px;
     margin: auto;
     padding: 5rem 2rem;
 }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.m {
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+.modal-body img {
+    cursor: pointer;
+    border: 2px solid transparent; 
+}
+
+.modal-body img:hover {
+    border-color: white; /* Altera a borda para branco ao passar o mouse */
+}
+
+
+.collapse {
+    width: 100%;
+    max-width: 600px; /* Define uma largura máxima */
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.Generos p {
+    text-align: center;
+    color: white; /* Se precisar do texto branco */
+}
+
+.d-flex .form-check {
+    margin-right: 15px; /* Espaço entre os itens */
+}
+
+
+.collapse.show {
+    background-color: transparent !important;
+}
+
+.card-tittle h3, .card-tittle h4, .card {
+    color: white;
+    background-color: transparent !important; 
+    border: none; 
+}
+
+
+.form-control, .form-select {
+    max-width: 300px;
+    margin: 0 auto; 
+}
+
+.form-label {
+    color: white; 
+}
+
 
 .blur{
     position: absolute;
@@ -128,6 +284,29 @@ h1 {
     text-align: center;
     width: 100%;
   }
+
+  .m{
+    text-decoration: underline;
+    text-align: center;
+  }
+
+  .opcoes a, .opcoes p {
+    color: white;
+}
+.toast {
+    background-color: #000; 
+    color: #fff; 
+}
+
+.toast-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-close {
+    filter: invert(1); 
+}
+
+
 
 section .header{
     margin-bottom: 1rem;
@@ -372,4 +551,3 @@ form {
     color: white;
   }
   
-

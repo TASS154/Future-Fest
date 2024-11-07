@@ -88,7 +88,7 @@ nav{
 .container{
     max-width: 1200px;
     margin: auto;
-    padding: 5rem 2rem;
+    padding: 2rem 2rem;
 }
 
 .blur{
@@ -107,7 +107,6 @@ header{
 }
 
 header .content h4{
-    margin-bottom: 1rem;
     color: #ccc;
     font-size: 1rem;
     font-weight: 600;
@@ -115,7 +114,6 @@ header .content h4{
 
 header .content h1{
     color: #fff;
-    margin-bottom: 1rem;
     font-size: 3rem;
     font-weight: 700;
     line-height: 4rem;
@@ -446,4 +444,7 @@ form {
     object-fit: cover; 
 }
 
-
+.calculadora {
+ margin-top: -40px;
+    margin-left: 585px;
+}

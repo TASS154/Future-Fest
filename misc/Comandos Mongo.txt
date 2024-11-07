@@ -13,10 +13,39 @@ db.alunos.insertOne({
 	"Senha": "1234"
 })
 
-db.loja.insertOne({
-	"Nome": "Creatina",
-	"img": "(url)"
-	"Preço": "199,99",
-	"uso" : "xxx e xx"
-	"ingredientes": ["xx", "xxx", "xxxx"]
-})
+use academia
+
+db.loja.insertMany([
+    {
+        "Nome": "Whey Protein",
+        "img": "https://i.ibb.co/J25LVGC/Group-9.png", // Substitua pela URL da imagem
+        "Preço": "199,99",
+        "uso": ["aumento de massa muscular", "recuperação muscular", "suporte ao sistema imunológico"],
+        "ingredientes": ["proteína concentrada do soro do leite", "aromatizantes", "emulsificantes", "edulcorantes"],
+        "url": "/whey"
+    },
+    {
+        "Nome": "Vitamina C + Zinco",
+        "img": "https://i.ibb.co/XbJnB2t/Group-10-removebg-1.png", // Substitua pela URL da imagem
+        "Preço": "49,99",
+        "uso": ["fortalecimento do sistema imunológico", "aumento da absorção de ferro", "antioxidante"],
+        "ingredientes": ["ácido ascórbico (vitamina C)", "citrato de zinco", "aromatizantes", "edulcorantes"],
+        "url": "/vitamina"
+    },
+    {
+        "Nome": "Ômega 3",
+        "img": "https://i.ibb.co/YtMcKBL/Group-12.png", // Substitua pela URL da imagem
+        "Preço": "89,99",
+        "uso": ["saúde cardiovascular", "redução de inflamações", "saúde cerebral"],
+        "ingredientes": ["óleo de peixe", "glicerina", "antioxidantes"],
+        "url": "/omega"
+    },
+    {
+        "Nome": "Pré-Treino",
+        "img": "https://i.ibb.co/jHS1QPQ/Group-13.png", // Substitua pela URL da imagem
+        "Preço": "89,99",
+        "uso": ["aumento de energia", "melhora no desempenho", "foco durante o treino"],
+        "ingredientes": ["beta-alanina", "arginina", "cafeína", "creatina", "vitaminas B"],
+        "url": "/pretreino"
+    }
+]);

@@ -32,24 +32,41 @@
   </nav>
   <header>
     <h1>Entrar</h1>
-    <form method="POST" action="/login">
+    <form id="loginForm" method="POST" action="/login">
       <div class="mb-3">
         <label for="email" class="form-label">Insira o Endereço de E-mail aqui</label>
         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
       </div>
       <div class="mb-3">
         <label for="inputPassword5" class="form-label">Insira sua senha aqui</label>
-        <input type="password" id="inputPassword5" class="form-control" name="senha" aria-describedby="passwordHelpBlock" required>
+        <input type="password" id="inputPassword5" class="form-control" name="senha"
+          aria-describedby="passwordHelpBlock" required>
         <div id="passwordHelpBlock" class="form-text">
-          Sua senha deve ter 8-20 caracteres, contendo letras e números, não pode conter espaços, caracteres especiais, e emojis.
+          Sua senha deve ter 8-20 caracteres, contendo letras e números, não pode conter espaços, caracteres especiais,
+          e emojis.
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Entrar</button>
-      <p>Esqueceu a senha? Clique <a href="/esquece" class="esquece">aqui</a></p>
+      <p>Esqueceu a senha? Clique <a href="/esqueceu" class="esquece">aqui</a></p>
       <hr>
       <p>Não tem uma conta ainda? clique aqui para se <a class="registro" href="/registro">Registrar</a> </p>
     </form>
+    <!-- Spinner de Carregamento -->
+    <div class="carregar d-none" id="spinner">
+      <div class="text-center">
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden"></span>
+        </div>
+        <h2 class="text-light mt-2">Carregando...</h2>
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" class="fiitbot">
+        <h3 id="dica"></h3>
+      </div>
+    </div>
   </header>
+
+
+
+
 
   <footer class="container" id="footer">
     <span class="blur"></span>
@@ -61,14 +78,14 @@
     </div>
     <div class="column">
       <h4>A FitLab</h4>
-      <a href="#cursos">Todos os cursos </a>
-      <a href="site.html">Como funciona</a>
+      <a href="/planos">Todos os planos </a>
+      <a href="/comofunciona">Como funciona</a>
     </div>
     <div class="column">
       <h4>INSTITUCIONAL</h4>
       <a href="#sbr">Sobre Nós</a>
-      <a href="po.html">Política de privacidade</a>
-      <a href="termos.html">Termos de uso</a>
+      <a href="/po">Política de privacidade</a>
+      <a href="/termos">Termos de uso</a>
     </div>
     <form>
       <input class="certo" type="email" placeholder="Digite o seu e-mail" required>
@@ -77,10 +94,10 @@
   </footer>
 
   <div class="copyright">
-    FitLab &copy; 2023 Lucas S. Bomtempo, Thiago Alexandre e Henrique Luiz.
+    FitLab &copy; 2024 Lucas S. Bomtempo, Breno Levy, Thiago Alexandre e Henrique Luiz.
   </div>
 </body>
-<script src="script.js"></script>
+<script src="login.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
