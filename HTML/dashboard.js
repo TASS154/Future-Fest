@@ -4,9 +4,13 @@ $(document).ready(function () {
     let radius = circle.attr('r');
     let circumference = 2 * Math.PI * radius;
 
-    circle.css('stroke-dasharray', circumference);
-    circle.css('stroke-dashoffset', circumference);
+    // Define as propriedades do círculo de progresso
+    circle.css({
+        'stroke-dasharray': circumference,
+        'stroke-dashoffset': circumference
+    });
 
+    // Função para atualizar o progresso
     function setProgress(percent) {
         let offset = circumference - (percent / 100) * circumference;
         circle.css('stroke-dashoffset', offset);
@@ -22,50 +26,62 @@ $(document).ready(function () {
         }
     });
 
-    // Função para enviar e exibir mensagens do usuário e IA
-    function handleMessage(sendButtonId, inputId, chatBoxId) {
-        document.getElementById(sendButtonId).addEventListener('click', function () {
-            const userInput = document.getElementById(inputId).value;
+    // Evento do botão de envio de mensagem
+    $('#send-btn').click(function () {
+        const userInput = $('#user-input').val();
 
-            if (userInput.trim()) {
-                // Exibe a mensagem do usuário
-                appendMessage(userInput, 'user', chatBoxId);
+        if (userInput.trim()) {
+            console.log('Mensagem do usuário:', userInput); // Verifica o valor de entrada
 
-                // Limpa o campo de entrada
-                document.getElementById(inputId).value = '';
+            appendMessage(userInput, 'user');
+            $('#user-input').val(''); // Limpa o campo de entrada
+            setTimeout(() => {
+                const aiResponse = "Resposta da IA: " + userInput;
+                console.log('Resposta da IA:', aiResponse); // Verifica a resposta da IA
+                appendMessage(aiResponse, 'ai');
+            }, 1000);
+        }
+    });
+});
 
-                // Simula a resposta da IA após um curto delay
-                setTimeout(() => {
-                    const aiResponse = "Resposta da IA: " + userInput;  // Simulando a IA respondendo
-                    appendMessage(aiResponse, 'ai', chatBoxId);
-                }, 1000);
-            }
-        });
+// Função para adicionar mensagem no chat
+function appendMessage(message, sender) {
+    const chatBox = $('#chat-box');
+    const messageDiv = $('<div>').addClass('message');
+
+    // Verifica se a mensagem é do usuário ou da IA
+    if (sender === 'user') {
+        messageDiv.addClass('user-message');
+    } else {
+        messageDiv.addClass('ai-message');
     }
 
-    // Função para adicionar mensagens ao chat
-    function appendMessage(message, sender, chatBoxId) {
-        const chatBox = document.getElementById(chatBoxId);
+    messageDiv.text(message);
+    chatBox.append(messageDiv); // Adiciona a mensagem ao chat
+    chatBox.scrollTop(chatBox[0].scrollHeight); // Rolagem para a última mensagem
 
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message');
+    console.log('Mensagem adicionada:', message); // Verifica se a mensagem foi realmente adicionada
+}
 
-        if (sender === 'user') {
-            messageDiv.classList.add('user-message');
-        } else {
-            messageDiv.classList.add('ai-message');
+$(document).ready(function () {
+    $('#sendMessageBtnMA').click(function () {
+        const userInput = $('#chatMessageInputMA').val().trim();
+
+        if (userInput) {
+            // Adicionar mensagem do usuário
+            $('#chatMessagesMA').append(`<div class="message user-message"><p>${userInput}</p></div>`);
+
+            // Simulação de resposta da IA (substitua com lógica real)
+            setTimeout(function () {
+                $('#chatMessagesMA').append(`<div class="message ai-message"><p>Como posso ajudar mais?</p></div>`);
+                $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight); // Rolar para a última mensagem
+            }, 1000); // Espera 1 segundo para simular a resposta da IA
+
+            // Limpar campo de entrada
+            $('#chatMessageInputMA').val('');
         }
 
-        messageDiv.textContent = message;
-        chatBox.appendChild(messageDiv);
-
-        // Rola para o fim do chat
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    // Inicializando os bots nos diferentes offcanvases
-    handleMessage('sendMessageBtnMA', 'chatMessageInputMA', 'chatMessagesMA');
-    handleMessage('sendMessageBtnIS', 'chatMessageInputIS', 'chatMessagesIS');
-    handleMessage('sendMessageBtnLista', 'chatMessageInputLista', 'chatMessagesLista');
-
+        // Rolar o chat para baixo após enviar
+        $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
+    });
 });

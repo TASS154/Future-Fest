@@ -244,7 +244,118 @@ section .header{
     text-align: center;
     color: #ccc;
 }
+/* Estilo do offcanvas */
+.offcanvas-body {
+    padding-top: 10px;
+    position: relative; /* Necessário para a posição absoluta do input */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px; /* Deixe um espaço para o input e botão */
+    justify-content: flex-start; /* Ajuste para alinhar o conteúdo mais para cima */
+}
 
+/* Ajustes para o chat */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px; /* Mover as mensagens para cima */
+    max-height: 400px; /* Limitar a altura do chat */
+    overflow-y: auto;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #007bff; /* Azul */
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+.ai-message {
+    background-color: #f1f1f1; /* Cinza */
+    color: black;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+
+.message-input {
+    display: flex;
+    gap: 10px;
+}
+
+.message-input textarea {
+    flex: 1;
+    resize: none;
+}
+
+.message-input button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message-input button:hover {
+    background-color: #0056b3;
+}
+/* Centralização das mensagens */
+.message {
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+/* Estilo do input e botão de envio */
+.input-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background-color: #333; /* Cor de fundo do input e botão, se necessário */
+}
+#user-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+#send-btn {
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#send-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo da imagem e título */
+.fitbot-img {
+    width: 40px;
+    height: 40px;
+}
+
+.offcanvas-title {
+    margin-left: 10px;
+}
 
 .conteudo {
     display: flex;
@@ -540,6 +651,8 @@ hr{
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding-bottom: 60px; /* Ajuste para garantir que a área de chat não seja sobreposta */
+
 }
  
 .messages {
@@ -830,3 +943,8 @@ form {
 .profile-image:hover {
     transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
+
+
+
+
+

@@ -36,7 +36,7 @@ app.use(session({
 function criarCard(suplemento) {
     return `
     <link rel="stylesheet" href="loja.css">
-    <a href='/pagamento'>
+    <a href='${suplemento.url}'>
 <div class="card mb-3">
     <div class="card-body">
     <img src=${suplemento.img}>
@@ -50,9 +50,293 @@ function criarCard(suplemento) {
 `
 }
 
+app.get('/home', (req, res) => {
+    res.sendFile(__dirname + "/HTML/home.html")
+})
 // Roteamento para as páginas HTML
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/HTML/home.html'); // Página inicial
+app.get('/', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/home'); // Redireciona para login se não estiver logado
+    }
+
+    const client = new MongoClient(url); // Conecta ao MongoDB
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        // Obtém o usuário logado pelo ID da sessão
+        const usuario = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+
+        if (!usuario) {
+            return res.status(404).send('Usuário não encontrado');
+        }
+
+        // HTML dinâmico gerado com base no usuário logado
+        const conteudoDinamico = `
+        <link rel="stylesheet" href="dashboard.css">
+        <a href='/conta'>
+        <div class="conteudo"> <!-- Adicione esta div como contêiner -->
+        <div class="entrada">
+            <a href='/conta'>
+                <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
+            </a>
+            <h2>Bem-vindo, ${usuario.nome}!</h2>
+            <p>Email: ${usuario.email}</p>
+            <a href="/logout" class="btn btn-danger">Sair</a>
+        </div>
+        <div class="settingsa">
+            <div class="container my-5">
+                <div class="row align-items-center">
+                    <a href="/conta" class="d-flex align-items-center text-decoration-none">
+                        <img src="https://i.ibb.co/jLBMHx3/settings.png" alt="Configurações" class="s me-3">
+                        <div>
+                            <h2 class="s1 mb-1">Configure seu Perfil!</h2>
+                            <p class="s2">Para a IA dar resultados mais precisos!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+        <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 col-sm-6">
+                <div class="progress red">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">90%</div>
+                </div>
+                <h1>Academia (Treinamento de Força)</h1>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="progress orange">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">50%</div>
+                </div>
+                <h1>Pilates</h1>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="progress green">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">75%</div>
+                </div>
+                <h1>Condicionamento Físico</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center mb-5">
+    <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="Img-FitBot1 mb-3">
+    <h1>Falar com o FitBot</h1>
+    <hr>
+    <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasMA" aria-controls="offcanvasMA">
+        <img src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Marcar Aula
+    </button>
+    <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasIS" aria-controls="offcanvasIS"><img src="https://i.ibb.co/zRXNPxc/fitbotl.png"
+            class="i-fitbot" alt="fitbot-icone"> Indicar
+        Suplementos</button>
+    <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasLista" aria-controls="offcanvasLista"><img
+            src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Listar
+        exercícios para fazer em casa</button>
+</div>
+<hr>
+<div class="container">
+    <div class="assinaturas">
+        <h1 class="assinatura-l">Sua assinatura</h1>
+        <h1 class="assinatura-r">Aprimorar assinatura</h1>
+    </div>
+    <hr>
+    <div class="row gy-4 align-items-start">
+        <div class="col-md-4 d-flex justify-content-between align-items-start">
+            <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
+                <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
+                    alt="FitLab And B-Corp">
+                <div class="content">
+                    <h4>R$: 0,00/m - Fitlab B-corp</h4>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
+                </div>
+            </div>
+            <div class="vl"></div>
+        </div>
+        <div class="card me-2 mb-3 silver-card" style="width: 18rem;">
+            <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
+            <div class="content">
+                <h4>R$: 99,89/m - Fitlab Silver</h4>
+                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SilverModal">
+                MATRICULE-SE
+            </button>
+        </div>
+        <div class="card me-2 mb-3 gold-card" style="width: 18rem;">
+            <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
+            <div class="content">
+                <h4>R$: 150,00/m - Fitlab Gold</h4>
+                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
+                <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
+                <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GoldModal">
+                MATRICULE-SE
+            </button>
+        </div>
+    </div>
+    <div class="card me-2 mb-3 diamond-card" style="width: 18rem;">
+        <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
+        <div class="content">
+            <h4>R$: 200,00/m - Fitlab Diamond</h4>
+            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+            <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
+            <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
+            <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
+            <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
+        </div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DiamondModal">
+            MATRICULE-SE
+        </button>
+    </div>
+
+</div>
+
+
+</div>
+</div>
+
+</div>
+<!-- Offcanvas Marcar Aula -->
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMA">
+    <div class="offcanvas-header d-flex align-items-center">
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+        <h5 class="offcanvas-title mb-0">FitBot</h5>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <hr class="linha-do-perfil">
+    <div class="offcanvas-body">
+    <!-- Chat container com balõezinhos de mensagens -->
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box">
+            <!-- As mensagens serão exibidas aqui -->
+        </div>
+    </div>
+    <div class="input-container position-absolute bottom-0 start-0 end-0 p-3">
+        <div class="d-flex">
+            <input id="user-input" type="text" placeholder="Digite sua mensagem..." class="form-control me-2" />
+            <button id="send-btn" class="btn btn-primary">Enviar</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Offcanvas Indicar Suplementos -->
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasIS" aria-labelledby="offcanvasIS">
+    <div class="offcanvas-header d-flex align-items-center">
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+        <h5 class="offcanvas-title mb-0">FitBot</h5>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <hr class="linha-do-perfil">
+    <div class="offcanvas-body">
+        <!-- Chat container com balõezinhos de mensagens -->
+        <div class="chat-container">
+            <div id="chat-box" class="chat-box">
+                <!-- As mensagens serão exibidas aqui -->
+            </div>
+            <div class="input-container">
+                <input id="user-input" type="text" placeholder="Digite sua mensagem..." />
+                <button id="send-btn">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Offcanvas Listar -->
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLista" aria-labelledby="offcanvasLista">
+    <div class="offcanvas-header d-flex align-items-center">
+        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+        <h5 class="offcanvas-title mb-0">FitBot</h5>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <hr class="linha-do-perfil">
+    <div class="offcanvas-body">
+        <div class="chat-container">
+            <div class="messages" id="chatMessagesLista">
+                <!-- Mensagens irão aparecer aqui -->
+            </div>
+            <div class="message-input d-flex mt-3">
+                <textarea class="form-control" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnLista">Enviar</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+`;
+
+        // Lê o arquivo HTML base
+        const caminhoHtmlBase = path.join(__dirname, 'HTML', 'dashboard.html');
+        fs.readFile(caminhoHtmlBase, 'utf-8', (err, data) => {
+            if (err) {
+                console.error('Erro ao ler arquivo HTML base', err);
+                return res.status(500).send('Erro ao carregar o dashboard');
+            }
+
+            // Substitui o placeholder pelo conteúdo dinâmico
+            const paginaModificada = data.replace('<!-- PLACEHOLDER -->', conteudoDinamico);
+
+            // Envia a página modificada como resposta
+            res.send(paginaModificada);
+        });
+
+    } catch (err) {
+        console.error('Erro ao acessar dashboard', err);
+        res.status(500).send('Erro ao acessar o dashboard, por favor, tente novamente mais tarde.');
+    } finally {
+        client.close();
+    }
+});
+
+app.get('/vitamina', (req, res) => {
+    res.sendFile(__dirname + '/HTML/vitamina.html'); // Página inicial
+});
+
+app.get('/whey', (req, res) => {
+    res.sendFile(__dirname + '/HTML/whey.html'); // Página inicial
+});
+
+app.get('/omega', (req, res) => {
+    res.sendFile(__dirname + '/HTML/omega.html'); // Página inicial
+});
+
+app.get('/pretreino', (req, res) => {
+    res.sendFile(__dirname + '/HTML/pre_treino.html'); // Página inicial
 });
 
 app.get('/calculadora', (req, res) => {
@@ -660,8 +944,8 @@ app.get('/conta', async (req, res) => {
             // });
         </script>
          
+        
         `;
-
         // Lê o arquivo HTML base
         const caminhoHtmlBase = path.join(__dirname, 'HTML', 'conta.html');
         fs.readFile(caminhoHtmlBase, 'utf-8', (err, data) => {
@@ -1050,18 +1334,121 @@ app.post('/FitLab', async (req, res) => {
     }
 })
 
-// calculadora de agua:
-function calcularAgua() {
-    const peso = document.getElementById('peso').value;
-    const resultadoDiv = document.getElementById('resultado');
+app.post('/whey', async (req, res) => {
+    const payInfo = req.body
+    const client = new MongoClient(url)
 
-    if (peso > 0) {
-        const aguaRecomendada = peso * 35; // Resultadi vai ser em litros 
-        resultadoDiv.innerHTML = `A quantidade recomendada de água por dia é: ${(aguaRecomendada / 1000).toFixed(2)} litros.`;
-    } else {
-        resultadoDiv.innerHTML = 'Por favor, insira um peso válido.';
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        const user = await collection.findOne({ nome: payInfo.nome })
+
+        console.log(user)
+
+        if (!user) {
+            res.send(`<h1>Usuário não encontrado</h1> <br> <a href="/whey"> tente novamente! </a> `)
+        }
+
+        console.log(plan)
+
+        res.redirect('/obrigado')
+
+    } catch (err) {
+        console.error("erro ao comprar o produto, tente novamente mais tarde", err)
+    } finally {
+        await client.close()
     }
-}
+})
+
+app.post('/omega', async (req, res) => {
+    const payInfo = req.body
+    const client = new MongoClient(url)
+
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        const user = await collection.findOne({ nome: payInfo.nome })
+
+        console.log(user)
+
+        if (!user) {
+            res.send(`<h1>Usuário não encontrado</h1> <br> <a href="/omega"> tente novamente! </a> `)
+        }
+
+        console.log(plan)
+
+        res.redirect('/obrigado')
+
+    } catch (err) {
+        console.error("erro ao comprar o produto, tente novamente mais tarde", err)
+    } finally {
+        await client.close()
+    }
+})
+
+app.post('/vitamina', async (req, res) => {
+    const payInfo = req.body
+    const client = new MongoClient(url)
+
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        const user = await collection.findOne({ nome: payInfo.nome })
+
+        console.log(user)
+
+        if (!user) {
+            res.send(`<h1>Usuário não encontrado</h1> <br> <a href="/vitamina"> tente novamente! </a> `)
+        }
+
+        console.log(plan)
+
+        res.redirect('/obrigado')
+
+    } catch (err) {
+        console.error("erro ao comprar o produto, tente novamente mais tarde", err)
+    } finally {
+        await client.close()
+    }
+})
+
+app.post('/pretreino', async (req, res) => {
+    const payInfo = req.body
+    const client = new MongoClient(url)
+
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+
+        const user = await collection.findOne({ nome: payInfo.nome })
+
+        console.log(user)
+
+        if (!user) {
+            res.send(`<h1>Usuário não encontrado</h1> <br> <a href="/pretreino"> tente novamente! </a> `)
+        }
+
+        console.log(plan)
+
+        res.redirect('/obrigado')
+
+    } catch (err) {
+        console.error("erro ao comprar o produto, tente novamente mais tarde", err)
+    } finally {
+        await client.close()
+    }
+})
 
 // Inicia o servidor na porta especificada
 app.listen(port, () => {
