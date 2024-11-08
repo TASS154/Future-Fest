@@ -240,7 +240,9 @@ app.get('/', async (req, res) => {
     <div class="offcanvas-body d-flex flex-column">
         <!-- Chat container com balõezinhos de mensagens -->
         <div class="chat-container">
-            <div id="chat-box" class="chat-box flex-grow-1">
+        <div class="message ai-message">
+        <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
+        </div>
                 <!-- As mensagens serão exibidas aqui -->
             </div>
         </div>

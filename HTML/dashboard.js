@@ -44,7 +44,6 @@ $(document).ready(function () {
     });
 });
 
-// Função para adicionar mensagem no chat
 function appendIaMessage(message) {
     const chatBox = document.getElementById('chat-box');
     const messageBubble = document.createElement('div');
@@ -71,16 +70,13 @@ $(document).ready(function () {
         const userInput = $('#chatMessageInputMA').val().trim();
 
         if (userInput) {
-            // Adicionar mensagem do usuário
             $('#chatMessagesMA').append(`<div class="message user-message"><p>${userInput}</p></div>`);
 
-            // Simulação de resposta da IA (substitua com lógica real)
             setTimeout(function () {
                 $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">Como posso ajudar mais?</p></div>`);
                 $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight); // Rolar para a última mensagem
-            }, 1000); // Espera 1 segundo para simular a resposta da IA
+            }, 1000);
 
-            // Limpar campo de entrada
             $('#chatMessageInputMA').val('');
         }
 
@@ -90,6 +86,10 @@ $(document).ready(function () {
 });
 
 document.getElementById('offcanvasMA').addEventListener('shown.bs.offcanvas', function () {
+    // Adiciona a mensagem do FitBot ao chat
+    $('#chatMessagesMA').append(`<div class="message ai-message"><p class="cpa">Olá sou o FitBot!<br>Como posso ajudar?</p></div>`);
+    $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight); // Rolar para a última mensagem
+
     // Definindo o valor do textarea quando o offcanvas for aberto
     document.getElementById('chatMessageInputMA').value = "Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?";
 });
