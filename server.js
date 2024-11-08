@@ -265,21 +265,23 @@ app.get('/', async (req, res) => {
         <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <hr class="linha-do-perfil">
-    <div class="offcanvas-body">
+    <div class="offcanvas-body d-flex flex-column">
         <!-- Chat container com balõezinhos de mensagens -->
         <div class="chat-container">
-            <div id="chat-box" class="chat-box">
+        <div class="message ai-message">
+        <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
+        </div>
                 <!-- As mensagens serão exibidas aqui -->
             </div>
-            <div class="input-container">
-                <input id="user-input" type="text" placeholder="Digite sua mensagem..." />
-                <button id="send-btn">Enviar</button>
+        </div>
+        <div class="input-container mt-auto">
+            <div class="d-flex">
+                <textarea id="chatMessageInputIS" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
+                <button id="sendMessageBtnIS" class="btn btn-primary">Enviar</button>
             </div>
         </div>
     </div>
 </div>
-
-
 <!-- Offcanvas Listar -->
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLista" aria-labelledby="offcanvasLista">
     <div class="offcanvas-header d-flex align-items-center">

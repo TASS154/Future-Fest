@@ -285,12 +285,13 @@ section .header{
     overflow-y: auto;
 }
 
-#chatMessagesMA {
+#chatMessagesMA, #chatMessagesIS {
     display: flex;
     flex-direction: column;
     height: 1000px;
     gap: 10px;
 }
+
 
 .message {
     padding: 10px;
@@ -656,77 +657,81 @@ textarea {
 hr{
     background-color: gray;
 }
+
 #offcanvasMA{
     display: flex;
     justify-content:center;
 }
-.fitbot-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
- 
-  .linha-do-perfil {
-    border: 1px solid #ccc;
-    margin-top: 10px;
-  }
- 
-  .chat-container {
-    padding-bottom: 60px; /* Ajuste para garantir que a área de chat não seja sobreposta */
+#offcanvasIS {
+    display: flex;
+    justify-content: center;
 }
-.chat-box {
-    flex-grow: 1;
-    overflow-y: auto;
-    color: black;
-
-}
-
-.messages {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding-bottom: 10px;
-}
- 
-.message {
-    max-width: 70%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 10px;
-}
- 
-.message.received {
-    background-color: #e0e0e0;
-    align-self: flex-start;
-    border-top-left-radius: 0;
-}
-.message.ai-message {
-    background-color: #f0f0f0; /* Cor de fundo clara para IA */
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-    max-width: 80%;
-}
-
-.message-input {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-}
-
- 
-.message.sent {
-    background-color: #007bff;
-    color: white;
-    align-self: flex-end;
-    border-top-right-radius: 0;
-}
- 
-.message-input {
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-}
-
+    .fitbot-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    
+    .linha-do-perfil {
+        border: 1px solid #ccc;
+        margin-top: 10px;
+    }
+    
+    .chat-container {
+        padding-bottom: 60px; /* Ajuste para garantir que a área de chat não seja sobreposta */
+    }
+    
+    .chat-box {
+        flex-grow: 1;
+        overflow-y: auto;
+        color: black;
+    }
+    
+    .messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-bottom: 10px;
+    }
+    
+    .message {
+        max-width: 70%;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 10px;
+    }
+    
+    .message.received {
+        background-color: #e0e0e0;
+        align-self: flex-start;
+        border-top-left-radius: 0;
+    }
+    
+    .message.ai-message {
+        background-color: #f0f0f0; /* Cor de fundo clara para IA */
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        max-width: 80%;
+    }
+    
+    .message-input {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+    
+    .message.sent {
+        background-color: #007bff;
+        color: white;
+        align-self: flex-end;
+        border-top-right-radius: 0;
+    }
+    
+    .message-input {
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
  
  
 .pricing {
