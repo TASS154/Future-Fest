@@ -165,7 +165,7 @@ document.getElementById('offcanvasIS').addEventListener('shown.bs.offcanvas', fu
 
 $(document).ready(function () {
     // Ao tentar fechar o offcanvas, exibimos o modal de confirmação
-    $('#offcanvasMA').on('hide.bs.offcanvas', function (e) {
+    offcanvasMA.addEventListener('hidden.bs.offcanvas', event => {
         e.preventDefault();  // Impede o fechamento imediato do offcanvas
         $('#confirmationModal').modal('show');  // Exibe o modal de confirmação
     });
