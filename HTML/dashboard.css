@@ -10,6 +10,33 @@
 }
  
  
+.botaoplanos {
+    margin-left: 750px;
+    margin-top: -250px;
+    padding: 12px 24px;
+    max-width: 200px; 
+    background-color: #5b0303; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    right: 10px;
+}
+
+.botaoplanos:hover {
+    background-color: #d81d1d; 
+    transform: translateY(-4px); 
+}
+
+.botaoplanos:active {
+    transform: translateY(2px);
+}
+
+
 img{
     width: 100%;
     display: flex;
@@ -17,6 +44,7 @@ img{
  
 a{
     text-decoration: none;
+    color: white;
 }
  
 body{
@@ -24,7 +52,7 @@ body{
     background-color:   #18181B;
 }
  
-h1, h2, h3, h4, p, a {
+h1, h2, h3, h4, p{
     color: white;
 }
 #ia-m {
@@ -55,8 +83,6 @@ nav {
     gap: 4rem;
     white-space: nowrap;
 }
- 
- 
  
 .link a{
     position: relative;
@@ -285,7 +311,7 @@ section .header{
     overflow-y: auto;
 }
 
-#chatMessagesMA, #chatMessagesIS {
+#chatMessagesMA, #chatMessagesIS, #chatMessagesLista {
     display: flex;
     flex-direction: column;
     height: 1000px;
@@ -666,6 +692,10 @@ hr{
     display: flex;
     justify-content: center;
 }
+#offcanvasLista{
+    display: flex;
+    justify-content: center;
+}
     .fitbot-img {
         width: 50px;
         height: 50px;
@@ -810,32 +840,35 @@ hr{
     border-left: 2px solid grey;
     height: 500px;
   }
+  .da{
+    height: 30px;
+    width: 30px;
+  }
 
 
-
-footer{
+  footer{
     position: relative;
     display: grid;
     grid-template-columns: 400px repeat(3, 1fr);
     gap: 2rem;
 }
- 
+
 footer .column .logo{
     max-width: 100px;
     margin-bottom: 2rem;
 }
- 
+
 footer .column p{
     color: #ccc;
     margin-bottom: 2rem;
 }
- 
+
 footer .column .socials{
     display: flex;
     align-items: center;
     gap: 1rem;
 }
- 
+
 footer .column .socials a{
     color: #ccc;
     border: 1px solid #ccc;
@@ -844,31 +877,31 @@ footer .column .socials a{
     border-radius: 100%;
     transition: all 0.3s ease;
 }
- 
+
 footer .column .socials a:hover{
     color: #fff;
     background-color: #5b0303;
     border-color: #5b0303;
 }
- 
+
 footer .column h4{
     color: #fff;
     margin-bottom: 2rem;
     font-size: 1.2rem;
     font-weight: 500;
 }
- 
+
 footer .column > a{
     display: block;
     color: #ccc;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
- 
+
 footer .column > a:hover{
     color: #5b0303;
 }
- 
+
 .copyright{
     max-width: 1200px;
     margin: auto;
@@ -877,7 +910,7 @@ footer .column > a:hover{
     font-size: 0.8rem;
     text-align: center;
 }
- 
+
 @media (width < 900px){
     .nav-links{
         display: none;
@@ -898,25 +931,25 @@ footer .column > a:hover{
         grid-template-columns: 1fr 200px;
     }
 }
- 
+
 @media (width < 600px){
     header .image::before{
         display: none;
     }
- 
+
     .features{
         grid-template-columns: repeat(1, 1fr);
     }
- 
+
     .pricing{
         grid-template-columns: repeat(1, 1fr);
     }
- 
+
     footer{
         grid-template-columns: 1fr 150px;
     }
 }
- 
+
 /* Estilização básica para o formulário */
 form {
     display: flex;

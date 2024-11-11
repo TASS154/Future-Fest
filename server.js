@@ -234,60 +234,51 @@ app.get('/', async (req, res) => {
     <div class="offcanvas-header d-flex align-items-center">
         <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
         <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
+        <img src="https://i.ibb.co/jhmLBBG/close.png" alt="Close" id="CloseMA" class="ms-auto" data-bs-dismiss="offcanvas" aria-label="Close" style="cursor: pointer; width: 24px; height: 24px;">    </div>
     <hr class="linha-do-perfil">
     <div class="offcanvas-body d-flex flex-column">
-        <!-- Chat container com balõezinhos de mensagens -->
         <div class="chat-container">
-        <div class="message ai-message">
-        <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
-        </div>
-                <!-- As mensagens serão exibidas aqui -->
+            <div class="message ai-message">
+                <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
             </div>
         </div>
-        <div class="input-container mt-auto">
-            <div class="d-flex">
-                <textarea id="chatMessageInputMA" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
-                <button id="sendMessageBtnMA" class="btn btn-primary">Enviar</button>
-            </div>
+    </div>
+    <div class="input-container mt-auto">
+        <div class="d-flex">
+            <textarea id="chatMessageInputMA" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
+            <button id="sendMessageBtnMA" class="btn btn-primary">Enviar</button>
         </div>
     </div>
 </div>
-
-
 
 <!-- Offcanvas Indicar Suplementos -->
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasIS" aria-labelledby="offcanvasIS">
     <div class="offcanvas-header d-flex align-items-center">
         <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
         <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
+        <img src="https://i.ibb.co/jhmLBBG/close.png" alt="Close" id="CloseMA" class="ms-auto" data-bs-dismiss="offcanvas" aria-label="Close" style="cursor: pointer; width: 24px; height: 24px;">    </div>
     <hr class="linha-do-perfil">
     <div class="offcanvas-body d-flex flex-column">
-        <!-- Chat container com balõezinhos de mensagens -->
         <div class="chat-container">
-        <div class="message ai-message">
-        <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
-        </div>
-                <!-- As mensagens serão exibidas aqui -->
+            <div class="message ai-message">
+                <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
             </div>
         </div>
-        <div class="input-container mt-auto">
-            <div class="d-flex">
-                <textarea id="chatMessageInputIS" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
-                <button id="sendMessageBtnIS" class="btn btn-primary">Enviar</button>
-            </div>
+    </div>
+    <div class="input-container mt-auto">
+        <div class="d-flex">
+            <textarea id="chatMessageInputIS" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
+            <button id="sendMessageBtnIS" class="btn btn-primary">Enviar</button>
         </div>
     </div>
 </div>
+
 <!-- Offcanvas Listar -->
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLista" aria-labelledby="offcanvasLista">
     <div class="offcanvas-header d-flex align-items-center">
         <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
         <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <img src="https://i.ibb.co/jhmLBBG/close.png" alt="Close" id="CloseLista" class="ms-auto" data-bs-dismiss="offcanvas" aria-label="Close" style="cursor: pointer; width: 24px; height: 24px;">
     </div>
     <hr class="linha-do-perfil">
     <div class="offcanvas-body">
@@ -298,7 +289,7 @@ app.get('/', async (req, res) => {
             <div class="message-input d-flex mt-3">
                 <textarea class="form-control" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..."></textarea>
                 <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnLista">Enviar</button>
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -581,76 +572,42 @@ app.get('/dashboard', async (req, res) => {
             </div>
             <div class="vl"></div>
         </div>
-        <div class="card me-2 mb-3 silver-card" style="width: 18rem;">
-            <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
-            <div class="content">
-                <h4>R$: 99,89/m - Fitlab Silver</h4>
-                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
-            </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SilverModal">
-                MATRICULE-SE
-            </button>
-        </div>
-        <div class="card me-2 mb-3 gold-card" style="width: 18rem;">
-            <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
-            <div class="content">
-                <h4>R$: 150,00/m - Fitlab Gold</h4>
-                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
-                <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-                <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
-            </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GoldModal">
-                MATRICULE-SE
-            </button>
-        </div>
-    </div>
-    <div class="card me-2 mb-3 diamond-card" style="width: 18rem;">
-        <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
-        <div class="content">
-            <h4>R$: 200,00/m - Fitlab Diamond</h4>
-            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-            <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
-            <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-            <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
-            <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
-        </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DiamondModal">
-            MATRICULE-SE
-        </button>
-    </div>
-
-</div>
-
-
-</div>
+       <div class="botaoplanos">
+        <a href="/planos">
+        <button href="/planos" class="ver_planos bg-transparent">Ver planos<img src="https://i.ibb.co/6YcYRqX/Double-Arrow.png" class="da"></button>
+    </a>
 </div>
 
 </div>
+</div>  
+
+</div>
+
 <!-- Offcanvas Marcar Aula -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMA">
-    <div class="offcanvas-header d-flex align-items-center">
-        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
-        <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMALabel">
+  <div class="offcanvas-header d-flex align-items-center">
+    <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+    <h5 class="offcanvas-title mb-0" id="offcanvasMALabel">FitBot</h5>
+    <button type="button" class="btn-close" aria-label="Close"></button>
+  </div>
+  <hr class="linha-do-perfil">
+  <div class="offcanvas-body">
+    <div class="chat-container">
+      <div class="messages" id="chatMessagesMA">
+        <!-- Mensagens irão aparecer aqui -->
+      </div>
+      <form method="POST" action="/marcar-aula">
+      <div class="message-input d-flex mt-3">
+
+        <textarea class="form-control" id="chatMessageInputMA" name="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
+        <button type="submit" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
+
+      </div>
+      </form>
     </div>
-    <hr class="linha-do-perfil">
-    <div class="offcanvas-body">
-        <div class="chat-container">
-            <div class="messages" id="chatMessagesMA">
-                <!-- Mensagens irão aparecer aqui -->
-            </div>
-            <div class="message-input d-flex mt-3">
-                <textarea class="form-control" id="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
-                <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
+
 
 <!-- Offcanvas Indicar Suplementos -->
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasIS" aria-labelledby="offcanvasIS">
@@ -731,7 +688,6 @@ app.get('/conta', async (req, res) => {
         const db = client.db(dbName);
         const collection = db.collection(collectionUser);
 
-        // Obtém o usuário logado pelo ID da sessão
         const usuario = await collection.findOne({ _id: new ObjectId(req.session.userId) });
 
         if (!usuario) {
@@ -1184,7 +1140,7 @@ app.post('/conta/save', async (req, res) => {
         return res.status(401).send({ message: 'Usuário não está logado' });
     }
 
-    const { genero, alergiaA, condicaoS, atividadeFisica, objetivo, prefAlimentar, histLesao, supAtual } = req.body;
+    const { genero, alergias, condicaoDeSaude, atividadeFisica, objetivo, preferenciaAlimentar, históricoDeLesão, supAtual } = req.body;
 
     const client = new MongoClient(url);
     try {
@@ -1202,9 +1158,9 @@ app.post('/conta/save', async (req, res) => {
                     condicaoDeSaude,
                     atividadeFisica,
                     objetivo,
-                    prefAlimentar,
-                    histLesao,
-                    supAtual
+                    preferenciaAlimentar,
+                    históricoDeLesão,
+                    suplementostuais
                 }
             }
         );
@@ -1296,9 +1252,51 @@ app.post('/listar-exercicios', async (req, res) => {
 
 // Rota para marcar a aula
 app.post('/marcar-aula', async (req, res) => {
-    const Input = req.body.InputMA;
+    const client = new MongoClient(url);
+
 
     try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+        const user = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+        if (!user) {
+            return res.status(404).send('Usuário não encontrado');
+        }
+
+        // Agora que 'user' está definido, monta o Input
+        const Input = req.body.chatMessageInputMA + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
+        console.log(req.body.chatMessageInputMA)
+
+        // Chama a função runChat com a entrada
+        const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
+        //res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
+    } catch (error) {
+        console.error('erro ao iniciar chat', error);
+        res.status(500).send('Erro ao iniciar chat');
+    } finally {
+        await client.close();
+        console.log('chat fechado');
+    }
+});
+
+app.post('/indicar-suplementos', async (req, res) => {
+    const client = new MongoClient(url);
+
+
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionUser);
+        const user = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+        if (!user) {
+            return res.status(404).send('Usuário não encontrado');
+        }
+
+        // Agora que 'user' está definido, monta o Input
+        const Input = req.body.InputListar + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
+        console.log(inpu)
+
         // Chama a função runChat com a entrada
         const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
         res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
@@ -1306,18 +1304,7 @@ app.post('/marcar-aula', async (req, res) => {
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
     } finally {
-    }
-});
-
-app.post('/indicar-suplementos', async (req, res) => {
-    const Input = req.body.InputIS
-    try {
-        await IA.runChat(Input); // Chama a função como assíncrona
-        res.status(200).send('Chat iniciado'); // Responda ao cliente
-    } catch (error) {
-        console.error('erro ao iniciar chat', error);
-        res.status(500).send('Erro ao iniciar chat');
-    } finally {
+        await client.close();
         console.log('chat fechado');
     }
 });

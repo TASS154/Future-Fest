@@ -7,7 +7,12 @@
     border: none;
     box-sizing: border-box;
 }
-
+.content{
+    margin-top: -150px;
+}
+.image{
+    margin-top: -150px;
+}
 
 img{
     width: 100%;

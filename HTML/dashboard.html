@@ -32,42 +32,26 @@
     <!-- PLACEHOLDER -->
 
 
-    <div class="settingsa">
-        <div class="container my-5">
-            <div class="row align-items-center">
-                <a href="/conta" class="d-flex align-items-center text-decoration-none">
-                    <img src="https://i.ibb.co/jLBMHx3/settings.png" alt="Configurações" class="s me-3">
-                    <div>
-                        <h2 class="s1 mb-1">Configure seu Perfil!</h2>
-                        <p class="s2">Para a IA dar resultados mais precisos!</p>
-                    </div>
-                </a>
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmCloseModal" tabindex="-1" aria-labelledby="confirmCloseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-bg-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmCloseModalLabel">Você tem certeza?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Você irá perder toda sua conversa com o FitBot, tem certeza disso?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="confirmCloseButton">Fechar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continuar</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal de Confirmação -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark">
-                <div class="modal-header">
-                    <h5 class="modal-title text-white" id="confirmationModalLabel">Você tem certeza?</h5>
-                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-white">
-                    Você irá perder toda sua conversa com o FitBot, tem certeza disso?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="offcanvasMA"
-                        aria-label="Close">fechar</button>
-                    <button type=" button" class="btn btn-primary" id="continueBtn"
-                        data-bs-dismiss="modal">Continuar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
