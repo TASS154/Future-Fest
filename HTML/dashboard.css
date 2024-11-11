@@ -10,6 +10,31 @@
 }
  
  
+.botaoplanos {
+    margin-left: 750px;
+    margin-top: -250px;
+    padding: 12px 24px; 
+    background-color: #5b0303; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.botaoplanos:hover {
+    background-color: #d81d1d; 
+    transform: translateY(-4px); 
+}
+
+.botaoplanos:active {
+    transform: translateY(2px);
+}
+
+
 img{
     width: 100%;
     display: flex;
@@ -17,6 +42,7 @@ img{
  
 a{
     text-decoration: none;
+    color: white;
 }
  
 body{
@@ -24,8 +50,11 @@ body{
     background-color:   #18181B;
 }
  
-h1, h2, h3, h4, p, a {
+h1, h2, h3, h4, p{
     color: white;
+}
+#ia-m {
+    color: black;
 }
  
 nav {
@@ -52,8 +81,6 @@ nav {
     gap: 4rem;
     white-space: nowrap;
 }
- 
- 
  
 .link a{
     position: relative;
@@ -111,12 +138,29 @@ header{
     align-items: center;
     gap: 2rem;
 }
-.offcanvas-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  margin-bottom: 10px; /* Ajuste fino para não ficar muito afastado */
+
+.ai-message {
+    background-color: #f0f0f0; /* Cor de fundo cinza claro */
+    color: black; /* Texto escuro */
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 60%;
+    margin: 10px 0;
+    align-self: flex-start; /* Alinha à esquerda */
+    word-wrap: break-word;
 }
+.IA-m {
+    color: black;
+}
+.cpa {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+
+
 
 .chat-container {
     display: flex;
@@ -244,7 +288,123 @@ section .header{
     text-align: center;
     color: #ccc;
 }
+/* Estilo do offcanvas */
+.offcanvas-body {
+    padding-top: 10px;
+    position: relative; /* Necessário para a posição absoluta do input */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    display: flex;
+    flex-direction: column;
+    height: 50%; /* Para garantir que o offcanvas ocupe toda a altura */
+}
+/* Ajustes para o chat */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px; /* Mover as mensagens para cima */
+    max-height: 1000px; /* Limitar a altura do chat */
+    overflow-y: auto;
+}
 
+#chatMessagesMA, #chatMessagesIS {
+    display: flex;
+    flex-direction: column;
+    height: 1000px;
+    gap: 10px;
+}
+
+
+.message {
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+.user-message {
+    background-color: #007bff; /* Cor de fundo azul */
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 60%;
+    margin: 10px 0;
+    align-self: flex-end; /* Alinha à direita */
+    word-wrap: break-word;
+}
+.cpa {
+    color: black;
+}
+.message-input {
+    display: flex;
+    gap: 10px;
+}
+textarea {
+    color: black; 
+}
+
+.message-input textarea {
+    flex: 1;
+    resize: none;
+}
+
+.message-input button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message-input button:hover {
+    background-color: #0056b3;
+}
+/* Centralização das mensagens */
+.message {
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+/* Estilo do input e botão de envio */
+.input-container {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #333; /* Cor de fundo do input e botão, se necessário */
+}
+#user-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+#send-btn {
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#send-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo da imagem e título */
+.fitbot-img {
+    width: 40px;
+    height: 40px;
+}
+
+.offcanvas-title {
+    margin-left: 10px;
+}
 
 .conteudo {
     display: flex;
@@ -521,58 +681,81 @@ section .header{
 hr{
     background-color: gray;
 }
+
 #offcanvasMA{
     display: flex;
     justify-content:center;
 }
-.fitbot-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
- 
-  .linha-do-perfil {
-    border: 1px solid #ccc;
-    margin-top: 10px;
-  }
- 
-  .chat-container {
+#offcanvasIS {
     display: flex;
-    flex-direction: column;
-    height: 100%;
+    justify-content: center;
 }
- 
-.messages {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding-bottom: 10px;
-}
- 
-.message {
-    max-width: 70%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 10px;
-}
- 
-.message.received {
-    background-color: #e0e0e0;
-    align-self: flex-start;
-    border-top-left-radius: 0;
-}
- 
-.message.sent {
-    background-color: #007bff;
-    color: white;
-    align-self: flex-end;
-    border-top-right-radius: 0;
-}
- 
-.message-input {
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-}
- 
+    .fitbot-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    
+    .linha-do-perfil {
+        border: 1px solid #ccc;
+        margin-top: 10px;
+    }
+    
+    .chat-container {
+        padding-bottom: 60px; /* Ajuste para garantir que a área de chat não seja sobreposta */
+    }
+    
+    .chat-box {
+        flex-grow: 1;
+        overflow-y: auto;
+        color: black;
+    }
+    
+    .messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-bottom: 10px;
+    }
+    
+    .message {
+        max-width: 70%;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 10px;
+    }
+    
+    .message.received {
+        background-color: #e0e0e0;
+        align-self: flex-start;
+        border-top-left-radius: 0;
+    }
+    
+    .message.ai-message {
+        background-color: #f0f0f0; /* Cor de fundo clara para IA */
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        max-width: 80%;
+    }
+    
+    .message-input {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+    
+    .message.sent {
+        background-color: #007bff;
+        color: white;
+        align-self: flex-end;
+        border-top-right-radius: 0;
+    }
+    
+    .message-input {
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
  
  
 .pricing {
@@ -830,3 +1013,8 @@ form {
 .profile-image:hover {
     transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
+
+
+
+
+
