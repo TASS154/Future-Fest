@@ -66,23 +66,53 @@ function appendIaMessage(message) {
 }
 
 $(document).ready(function () {
-    $('#sendMessageBtnMA').click(function () {
+    $('#sendMessageBtnMA').click(function (event) {
         const userInput = $('#chatMessageInputMA').val().trim();
-        console.log(userInput)
-
-        if (userInput) {
-            $('#chatMessagesMA').append(`<div class="message user-message"><p>${userInput}</p></div>`);
-
-            setTimeout(function () {
-                $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">Como posso ajudar mais?</p></div>`);
-                $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight); // Rolar para a última mensagem
-            }, 1000);
-
-            $('#chatMessageInputMA').val('');
+        console.log(userInput);
+        function getCookie(name) {
+            const cookieArr = document.cookie.split(';');
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookie = cookieArr[i].trim();
+                if (cookie.indexOf(name + '=') === 0) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return null;
+        }
+        
+        // Recuperar o valor do cookie 'aiResponse'
+        const aiResponse = getCookie('aiResponse');
+        
+        if (aiResponse) {
+            console.log("Resposta da IA: ", aiResponse);
+        } else {
+            console.log("Cookie 'aiResponse' não encontrado.");
         }
 
-        // Rolar o chat para baixo após enviar
-        $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
+
+        // Verifique se há input
+        if (userInput) {
+            // Adicionar a mensagem do usuário no chat
+            $('#chatMessagesMA').append(`<div class="message user-message"><p>${userInput}</p></div>`);
+
+            // Resposta da IA após 1 segundo
+            setTimeout(function () {
+                // Adicionar a resposta da IA
+                $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">${aiResponse}</p></div>`);
+                
+                // Rolar para a última mensagem
+                $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
+
+
+            }, 1000); // Atraso de 1 segundo para simular o processamento da IA
+
+            setTimeout(function() {
+                // Limpar o campo de entrada após a resposta da IA
+                $('#chatMessageInputMA').val('');
+            }, 10)
+            // Rolar o chat para baixo após enviar a mensagem do usuário
+            $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
+        }
     });
 });
 

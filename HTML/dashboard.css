@@ -59,14 +59,17 @@ h1, h2, h3, h4, p{
     color: black;
 }
  
-nav {
+nav{
     max-width: 1200px;
+    border: 10px;
     margin: auto;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
+    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    gap: 2rem;
+    background-color: black;
 }
  
 .nav-logo {
@@ -119,7 +122,10 @@ nav {
 .btn:hover{
     background-color: #5b0303;
 }
- 
+ .Welcome, .Email, #Sair{
+    display: flex;
+    align-items: center;
+ }
 .container{
     max-width: 1200px;
     margin: auto;
@@ -163,7 +169,9 @@ header{
 
 
 
-
+.conversaMA{
+    background-color: black;
+}
 .chat-container {
     display: flex;
     flex-direction: column;
@@ -376,7 +384,7 @@ textarea {
     right: 0;
     width: 100%;
     padding: 15px;
-    background-color: #333; /* Cor de fundo do input e botão, se necessário */
+    background-color: black; /* Cor de fundo do input e botão, se necessário */
 }
 #user-input {
     flex: 1;
@@ -1009,7 +1017,7 @@ form {
  
 .profile-image {
     position: absolute;
-    top: 20px; /* Ajuste conforme necessário */
+    top: 0px; /* Ajuste conforme necessário */
     right: 20px; /* Ajuste conforme necessário */
     width: 75px;
     height: 75px;

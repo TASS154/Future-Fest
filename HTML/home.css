@@ -14,10 +14,15 @@
     margin-top: -150px;
 }
 
+
 img{
     width: 100%;
     display: flex;
 }
+
+
+
+    
 
 a{
     text-decoration: none;
@@ -30,18 +35,24 @@ body{
 .planos, .lds, .bco, .cai{
     width: 40px; 
     height: 40px; 
-    margin-left: 2px;
+    margin-left: 80px;
 
+}
+.tt {
+text-align: center;
 }
 
 nav{
     max-width: 1200px;
+    border: 10px;
     margin: auto;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
+    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    background-color: black;
 }
 
 .nav-logo{
@@ -448,7 +459,18 @@ form {
     height: 400px; 
     object-fit: cover; 
 }
+.Carrousel-Tittle {
+    font-family: "DM Serif Text", serif;
+   color: #620606;
+   background-color: rgba(255, 255, 255, 0.5);
 
+}
+
+.Carrousel-Captions {
+    background-color: rgba(128, 128, 128, 0.5);
+    font-family: "DM Serif Text", serif;
+    font-style: italic;
+}
 .calculadora {
  margin-top: -40px;
     margin-left: 585px;

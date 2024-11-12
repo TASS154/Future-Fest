@@ -34,12 +34,15 @@ body{
 }
 nav{
     max-width: 1200px;
+    border: 10px;
     margin: auto;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
+    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    background-color: black;
 }
 
 .nav-logo{
@@ -111,7 +114,24 @@ nav{
     margin-top: 2rem;
     margin-left: 30px;
 }
-
+.form-label {
+   margin-left: 70px;
+}
+#Tidp{
+    margin-left: 45px;
+}
+#nomeDisplay{
+    margin-left: 120px;
+}
+#ede {
+    margin-left: 60px;
+}
+.emailDisplay{
+    margin-left: 60px;
+}
+#AC{
+    margin-left: 70px;
+}
 .tc {
     display: flex;
     justify-content: center;
