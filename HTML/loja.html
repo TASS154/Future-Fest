@@ -11,42 +11,47 @@
 </head>
 
 <body>
-    <nav>
-        <div class="container">
-            <nav>
-                <div class="nav-logo">
-                    <a href="/">
-                        <img src="https://i.ibb.co/FY5bCP7/logo.png">
-                    </a>
-                </div>
+    <nav class="fixed-top">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="https://i.ibb.co/fCR4Wkj/logo-Store.png" alt="Logo">
+            </a>
+        </div>
 
-                <ul class="nav-links">
-                    <li class="link"><a href="time.html">Sobre nós</a></li>
-                    <li id="link1" class="link"><a href="/planos">Planos e aulas</a></li>
-                    <li id="link2" class="link"><a href="/loja">Loja de suplementos</a></li>
-                    <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
-                </ul>
-                <a href="/login">
-                    <button class="btn">Entrar</button>
-                </a>
-            </nav>
-            <img src="https://i.ibb.co/fCR4Wkj/logo-Store.png" class="Logo-Store" alt="Logo Da Loja">
+        <ul class="nav-links">
+            <li class="link"><a href="/time">Sobre nós</a></li>
+            <li id="link1" class="link"><a href="/planos">Planos e aulas</a></li>
+            <li id="link2" class="link"><a href="/loja">Loja de suplementos</a></li>
+            <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
+        </ul>
 
-            <header>
-                <!--<div class="search-bar">
+        <!-- Exibe a imagem de perfil se o usuário estiver logado -->
+        <a href='/conta'>
+            <img id="profileImageNav" src="" alt="Foto de perfil" class="profile-image" style="display:none;">
+        </a>
+
+        <!-- Exibe o botão "Entrar" se o usuário não estiver logado -->
+        <a href="/login" id="entrarButton" class="btn btn-primary" style="display:none;">Entrar</a>
+    </nav>
+
+    <img src="https://i.ibb.co/fCR4Wkj/logo-Store.png" class="Logo-Store" alt="Logo Da Loja">
+
+    <header>
+        <!--<div class="search-bar">
                     <input type="text" placeholder="Buscar suplementos..." class="search-input">
                     <button class="search-btn"><img src="https://i.ibb.co/y8mRkgL/pesquisar.png"
                     alt="Buscar">Buscar</button>
                 </div>-->
-                </datalist>
-                <div class="Produtos">
-                    {{cardsHtml}}
-                </div>
-            </header>
+        </datalist>
+        <div class="Produtos">
+            {{cardsHtml}}
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+    </header>
+    </div>
+    <script src="loja.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

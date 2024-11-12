@@ -5,7 +5,7 @@ const { MongoClient, ObjectId } = require('mongodb'); // Cliente MongoDB para op
 const app = express(); // Cria uma instância do aplicativo Express
 const path = require('path'); // Módulo para manipulação de caminhos de arquivos
 const bcrypt = require('bcrypt'); // Módulo para criptografia de senhas
-const port = 3100; // Porta em que o servidor irá escutar
+const port = 3000; // Porta em que o servidor irá escutar
 const methodOverride = require('method-override'); // Middleware para permitir métodos HTTP que não são suportados pelo HTML
 const fs = require('fs'); // Módulo para operações de sistema de arquivos
 const IA = require('./DANE-SE/IA.js')
@@ -52,6 +52,7 @@ function criarCard(suplemento) {
 
 app.get('/home', (req, res) => {
     res.sendFile(__dirname + "/HTML/home.html")
+    
 })
 // Roteamento para as páginas HTML
 app.get('/', async (req, res) => {
@@ -75,15 +76,30 @@ app.get('/', async (req, res) => {
         // HTML dinâmico gerado com base no usuário logado
         const conteudoDinamico = `
         <link rel="stylesheet" href="dashboard.css">
+        <nav class="fixed-top">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="https://i.ibb.co/FY5bCP7/logo.png">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="time.html">Sobre nós</a></li>
+            <li id="link1" class="link"><a href="/planos">Planos e aulas</a></li>
+            <li id="link2" class="link"><a href="/loja">Loja de suplementos</a></li>
+            <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
+        </ul>
+        <a href='/conta'>
+        <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
+    </a>
+
+    </nav>
         <a href='/conta'>
         <div class="conteudo"> <!-- Adicione esta div como contêiner -->
         <div class="entrada">
-            <a href='/conta'>
-                <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
-            </a>
-            <h2>Bem-vindo, ${usuario.nome}!</h2>
-            <p>Email: ${usuario.email}</p>
-            <a href="/logout" class="btn btn-danger">Sair</a>
+                    <h2 class="Welcome">Bem-vindo, ${usuario.nome}!</h2>
+            <p class="Email">Email: ${usuario.email}</p>
+            <a href="/logout" id="Sair" class="btn btn-danger">Sair</a>
         </div>
         <div class="settingsa">
             <div class="container my-5">
@@ -179,82 +195,41 @@ app.get('/', async (req, res) => {
             </div>
             <div class="vl"></div>
         </div>
-        <div class="card me-2 mb-3 silver-card" style="width: 18rem;">
-            <img src="https://i.ibb.co/2qsVjwY/fitlabsilver1.png" class="card-img-top" alt="FitLab Silver">
-            <div class="content">
-                <h4>R$: 99,89/m - Fitlab Silver</h4>
-                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                <p><i class="ri-checkbox-circle-line"></i> Direito a 2 aulas da sua escolha semanal</p>
-            </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SilverModal">
-                MATRICULE-SE
-            </button>
-        </div>
-        <div class="card me-2 mb-3 gold-card" style="width: 18rem;">
-            <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
-            <div class="content">
-                <h4>R$: 150,00/m - Fitlab Gold</h4>
-                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                <p><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</p>
-                <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-                <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
-            </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GoldModal">
-                MATRICULE-SE
-            </button>
-        </div>
-    </div>
-    <div class="card me-2 mb-3 diamond-card" style="width: 18rem;">
-        <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
-        <div class="content">
-            <h4>R$: 200,00/m - Fitlab Diamond</h4>
-            <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-            <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-            <p><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</p>
-            <p><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</p>
-            <p><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</p>
-            <p><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</p>
-        </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DiamondModal">
-            MATRICULE-SE
-        </button>
-    </div>
-
-</div>
-
-
-</div>
+       <div class="botaoplanos">
+        <a href="/planos">
+        <button href="/planos" class="ver_planos bg-transparent">Ver planos<img src="https://i.ibb.co/6YcYRqX/Double-Arrow.png" class="da"></button>
+    </a>
 </div>
 
 </div>
+</div>  
+
+</div>
+
 <!-- Offcanvas Marcar Aula -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMA">
-    <div class="offcanvas-header d-flex align-items-center">
-        <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
-        <h5 class="offcanvas-title mb-0">FitBot</h5>
-        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <hr class="linha-do-perfil">
-    <div class="offcanvas-body d-flex flex-column">
-        <!-- Chat container com balõezinhos de mensagens -->
-        <div class="chat-container">
-        <div class="message ai-message">
-        <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
-        </div>
-                <!-- As mensagens serão exibidas aqui -->
-            </div>
-        </div>
-        <div class="input-container mt-auto">
-            <div class="d-flex">
-                <textarea id="chatMessageInputMA" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
-                <button id="sendMessageBtnMA" class="btn btn-primary">Enviar</button>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMALabel">
+  <div class="offcanvas-header d-flex align-items-center">
+    <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+    <h5 class="offcanvas-title mb-0" id="offcanvasMALabel">FitBot</h5>
+    <button type="button" class="btn-close" aria-label="Close"></button>
+  </div>
+  <hr class="linha-do-perfil">
+  <div class="offcanvas-body">
+    <div class="chat-container">
+      <div class="messages" id="chatMessagesMA">
+        <!-- Mensagens irão aparecer aqui -->
+      </div>
+      <form method="POST" action="/marcar-aula">
+      <div class="message-input d-flex mt-3">
 
+        <textarea class="form-control" id="chatMessageInputMA" name="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
+        <button type="submit" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
+
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 <!-- Offcanvas Indicar Suplementos -->
@@ -265,23 +240,19 @@ app.get('/', async (req, res) => {
         <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <hr class="linha-do-perfil">
-    <div class="offcanvas-body d-flex flex-column">
-        <!-- Chat container com balõezinhos de mensagens -->
+    <div class="offcanvas-body">
         <div class="chat-container">
-        <div class="message ai-message">
-        <p id="ia-m">Olá sou o FitBot!<br>Como posso ajudar?</p>
-        </div>
-                <!-- As mensagens serão exibidas aqui -->
+            <div class="messages" id="chatMessagesIS">
+                <!-- Mensagens irão aparecer aqui -->
             </div>
-        </div>
-        <div class="input-container mt-auto">
-            <div class="d-flex">
-                <textarea id="chatMessageInputIS" placeholder="Digite sua mensagem aqui..." class="form-control me-2">Eu gostaria de marcar uma aula, poderia me mandar os horários disponíveis?</textarea>
-                <button id="sendMessageBtnIS" class="btn btn-primary">Enviar</button>
+            <div class="message-input d-flex mt-3">
+                <textarea class="form-control" id="chatMessageInputIS" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnIS">Enviar</button>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Offcanvas Listar -->
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLista" aria-labelledby="offcanvasLista">
     <div class="offcanvas-header d-flex align-items-center">
@@ -298,11 +269,10 @@ app.get('/', async (req, res) => {
             <div class="message-input d-flex mt-3">
                 <textarea class="form-control" id="chatMessageInputLista" rows="4" placeholder="Digite sua mensagem..."></textarea>
                 <button type="button" class="btn btn-primary ms-2" id="sendMessageBtnLista">Enviar</button>
-                </div>
+            </div>
         </div>
     </div>
 </div>
-
 
 `;
 
@@ -477,15 +447,30 @@ app.get('/dashboard', async (req, res) => {
         // HTML dinâmico gerado com base no usuário logado
         const conteudoDinamico = `
         <link rel="stylesheet" href="dashboard.css">
+        <nav class="fixed-top">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="https://i.ibb.co/FY5bCP7/logo.png">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="time.html">Sobre nós</a></li>
+            <li id="link1" class="link"><a href="/planos">Planos e aulas</a></li>
+            <li id="link2" class="link"><a href="/loja">Loja de suplementos</a></li>
+            <li id="link3" class="link"><a href="/B-corp">B-corp</a></li>
+        </ul>
+        <a href='/conta'>
+        <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
+    </a>
+
+    </nav>
         <a href='/conta'>
         <div class="conteudo"> <!-- Adicione esta div como contêiner -->
         <div class="entrada">
-            <a href='/conta'>
-                <img src="${usuario.foto}" alt="Foto de perfil" class="profile-image">
-            </a>
-            <h2>Bem-vindo, ${usuario.nome}!</h2>
-            <p>Email: ${usuario.email}</p>
-            <a href="/logout" class="btn btn-danger">Sair</a>
+                    <h2 class="Welcome">Bem-vindo, ${usuario.nome}!</h2>
+            <p class="Email">Email: ${usuario.email}</p>
+            <a href="/logout" id="Sair" class="btn btn-danger">Sair</a>
         </div>
         <div class="settingsa">
             <div class="container my-5">
@@ -583,7 +568,7 @@ app.get('/dashboard', async (req, res) => {
         </div>
        <div class="botaoplanos">
         <a href="/planos">
-        <button href="/planos" class="ver_planos">Ver planos</button>
+        <button href="/planos" class="ver_planos bg-transparent">Ver planos<img src="https://i.ibb.co/6YcYRqX/Double-Arrow.png" class="da"></button>
     </a>
 </div>
 
@@ -697,7 +682,6 @@ app.get('/conta', async (req, res) => {
         const db = client.db(dbName);
         const collection = db.collection(collectionUser);
 
-        // Obtém o usuário logado pelo ID da sessão
         const usuario = await collection.findOne({ _id: new ObjectId(req.session.userId) });
 
         if (!usuario) {
@@ -711,7 +695,7 @@ app.get('/conta', async (req, res) => {
             <img src="${usuario.foto}" alt="Imagem de Perfil" class="img-thumbnail" id="profileImage" style="width: 200px; height: 200px;">
         </div>
         <div class="tc">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileImageModal">
+        <button type="button" id="Tidp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileImageModal">
         Trocar imagem de perfil
     </button>
       </div>
@@ -760,16 +744,16 @@ app.get('/conta', async (req, res) => {
                         <button type="submit" id="confirmButton" class="btn btn-primary mt-3" style="display: none;" aria-label="Salvar Nome" >Salvar</button>
                     </div>
                     <div class="mb-3 row align-items-center">
-                        <label for="staticEmail" class="col-auto col-form-label">Endereço de E-mail:</label>
+                        <label for="staticEmail" id="ede" class="col-auto col-form-label">Endereço de E-mail:</label>
                         <div class="col-auto">
-                            <span>${usuario.email}</span>
+                            <span class="emailDisplay">${usuario.email}</span>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <form method="POST" action='/conta/delete'>
-        <button type="submit" class="btn btn-danger btn-apagar mt-3"> <!-- Aumentar margem superior -->
+        <button type="submit" class="btn btn-danger btn-apagar mt-3" id="AC"> <!-- Aumentar margem superior -->
             <img src="https://i.ibb.co/Ss6dxLd/trashh.png" alt="Ícone de apagar Conta" class="i-apagar me-2" aria-hidden="true">
             <span class="btn-apagar-text">Apagar Conta</span>
         </button>
@@ -1245,12 +1229,12 @@ app.post('/listar-exercicios', async (req, res) => {
         }
 
         // Agora que 'user' está definido, monta o Input
-        const Input = req.body.InputListar + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
-        console.log(inpu)
+        const Input = req.body.chatMessageInputLista + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
+        console.log(Input)
 
         // Chama a função runChat com a entrada
         const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
-        res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
+        //res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
     } catch (error) {
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
@@ -1276,11 +1260,16 @@ app.post('/marcar-aula', async (req, res) => {
 
         // Agora que 'user' está definido, monta o Input
         const Input = req.body.chatMessageInputMA + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
-        console.log(req.body.chatMessageInputMA)
 
         // Chama a função runChat com a entrada
         const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
-        //res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
+        console.log(aiResponse)
+        JSON.stringify(aiResponse)
+        res.cookie('aiResponse', aiResponse, {
+            httpOnly: true,   // Impede o acesso ao cookie via JavaScript no cliente
+            secure: process.env.NODE_ENV === 'production',  // Garante que o cookie seja enviado apenas via HTTPS em produção
+            maxAge: 3600000   // Define o tempo de expiração (1 hora)
+        });
     } catch (error) {
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
@@ -1304,12 +1293,12 @@ app.post('/indicar-suplementos', async (req, res) => {
         }
 
         // Agora que 'user' está definido, monta o Input
-        const Input = req.body.InputListar + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
-        console.log(inpu)
+        const Input = req.body.chatMessageInputIS + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
+        console.log(Input)
 
         // Chama a função runChat com a entrada
         const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
-        res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
+        //res.status(200).send({ message: 'Chat iniciado', response: aiResponse }); // Envia a resposta da IA
     } catch (error) {
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');

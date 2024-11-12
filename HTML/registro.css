@@ -33,6 +33,19 @@ body{
     gap: 2rem;
 }
 
+.navbar{
+    max-width: 1200px;
+    border: 10px;
+    margin: auto;
+    padding: 1rem 1rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    background-color: black;
+}
+
 .nav-logo{
     max-width: 100px;
 }

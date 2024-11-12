@@ -27,8 +27,8 @@ $(document).ready(function () {
     });
 
     // Evento do botão de envio de mensagem
-   $('#send-btn').click(function () {
-       const userInput = $('#user-input').val();
+    $('#send-btn').click(function () {
+        const userInput = $('#user-input').val();
 
         if (userInput.trim()) {
             console.log('Mensagem do usuário:', userInput); // Verifica o valor de entrada
@@ -41,7 +41,7 @@ $(document).ready(function () {
                 appendMessage(aiResponse, 'ai');
             }, 1000);
         }
-   });
+    });
 });
 
 function appendIaMessage(message) {
@@ -66,24 +66,53 @@ function appendIaMessage(message) {
 }
 
 $(document).ready(function () {
-    $('#sendMessageBtnMA').click(function () {
-        Event.preventDefault()
+    $('#sendMessageBtnMA').click(function (event) {
         const userInput = $('#chatMessageInputMA').val().trim();
-        console.log(userInput)
-
-        if (userInput) {
-            $('#chatMessagesMA').append(`<div class="message user-message"><p>${userInput}</p></div>`);
-
-            setTimeout(function () {
-                $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">Como posso ajudar mais?</p></div>`);
-                $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight); // Rolar para a última mensagem
-            }, 1000);
-
-            $('#chatMessageInputMA').val('');
+        console.log(userInput);
+        function getCookie(name) {
+            const cookieArr = document.cookie.split(';');
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookie = cookieArr[i].trim();
+                if (cookie.indexOf(name + '=') === 0) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return null;
+        }
+        
+        // Recuperar o valor do cookie 'aiResponse'
+        const aiResponse = getCookie('aiResponse');
+        
+        if (aiResponse) {
+            console.log("Resposta da IA: ", aiResponse);
+        } else {
+            console.log("Cookie 'aiResponse' não encontrado.");
         }
 
-        // Rolar o chat para baixo após enviar
-        $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
+
+        // Verifique se há input
+        if (userInput) {
+            // Adicionar a mensagem do usuário no chat
+            $('#chatMessagesMA').append(`<div class="message user-message"><p>${userInput}</p></div>`);
+
+            // Resposta da IA após 1 segundo
+            setTimeout(function () {
+                // Adicionar a resposta da IA
+                $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">${aiResponse}</p></div>`);
+                
+                // Rolar para a última mensagem
+                $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
+
+
+            }, 1000); // Atraso de 1 segundo para simular o processamento da IA
+
+            setTimeout(function() {
+                // Limpar o campo de entrada após a resposta da IA
+                $('#chatMessageInputMA').val('');
+            }, 10)
+            // Rolar o chat para baixo após enviar a mensagem do usuário
+            $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
+        }
     });
 });
 
@@ -157,41 +186,10 @@ $(document).ready(function () {
 });
 
 document.getElementById('offcanvasIS').addEventListener('shown.bs.offcanvas', function () {
-    // Adiciona a mensagem do FitBot ao chat
     $('#chatMessagesIS').append(`<div class="message ai-message"><p class="cpa">Olá sou o FitBot!<br>Como posso ajudar?</p></div>`);
     $('#chatMessagesIS').scrollTop($('#chatMessagesIS')[0].scrollHeight); // Rolar para a última mensagem
 
-    // Definindo o valor do textarea quando o offcanvas for aberto
     document.getElementById('chatMessageInputIS').value = "Eu queria algumas indicações de Suplementos para eu usar, você poderia me mandar?";
-});
-
-$(document).ready(function () {
-    $('#sendMessageBtnIS').click(function () {
-        const userInput = $('#chatMessageInputIS').val().trim();
-
-        if (userInput) {
-            $('#chatMessagesIS').append(`<div class="message user-message"><p>${userInput}</p></div>`);
-
-            setTimeout(function () {
-                $('#chatMessagesIS').append(`<div class="message ai-message"><p id="ia-m">Como posso ajudar mais?</p></div>`);
-                $('#chatMessagesIS').scrollTop($('#chatMessagesIS')[0].scrollHeight); // Rolar para a última mensagem
-            }, 1000);
-
-            $('#chatMessageInputIS').val('');
-        }
-
-        // Rolar o chat para baixo após enviar
-        $('#chatMessagesIS').scrollTop($('#chatMessagesIS')[0].scrollHeight);
-    });
-});
-
-document.getElementById('offcanvasIS').addEventListener('shown.bs.offcanvas', function () {
-    // Adiciona a mensagem do FitBot ao chat
-    $('#chatMessagesLista').append(`<div class="message ai-message"><p class="cpa">Olá sou o FitBot!<br>Como posso ajudar?</p></div>`);
-    $('#chatMessagesLista').scrollTop($('#chatMessagesLista')[0].scrollHeight); // Rolar para a última mensagem
-
-    // Definindo o valor do textarea quando o offcanvas for aberto
-    document.getElementById('chatMessageInputLista').value = "Eu queria algumas indicações de Suplementos para eu usar, você poderia me mandar?";
 });
 //APAGAR MENSAGENS de MA
 $(document).ready(function () {
@@ -264,4 +262,71 @@ $(document).ready(function () {
             });
         }, 300);
     });
+});
+
+//INICIO DA LISTA
+$('#send-btn').click(function () {
+    const userInput = $('#user-input').val();
+
+    if (userInput.trim()) {
+        console.log('Mensagem do usuário:', userInput); // Verifica o valor de entrada
+
+        appendMessage(userInput, 'user');
+        $('#user-input').val(''); // Limpa o campo de entrada
+        setTimeout(() => {
+            const aiResponse = "Resposta da IA: " + userInput;
+            console.log('Resposta da IA:', aiResponse); // Verifica a resposta da IA
+            appendMessage(aiResponse, 'ai');
+        }, 1000);
+    }
+});
+
+function appendIaMessage(message) {
+    const chatBox = document.getElementById('chat-box');
+    const messageBubble = document.createElement('div');
+    messageBubble.classList.add('ia-response'); // Classe para a cor preta
+    messageBubble.textContent = message;
+    chatBox.appendChild(messageBubble);
+
+    // Verifica se a mensagem é do usuário ou da IA
+    if (sender === 'user') {
+        messageDiv.addClass('user-message');
+    } else {
+        messageDiv.addClass('ai-message');
+    }
+
+    messageDiv.text(message);
+    chatBox.append(messageDiv); // Adiciona a mensagem ao chat
+    chatBox.scrollTop(chatBox[0].scrollHeight); // Rolagem para a última mensagem
+
+    console.log('Mensagem adicionada:', message); // Verifica se a mensagem foi realmente adicionada
+}
+
+$(document).ready(function () {
+    $('#sendMessageBtnLista').click(function () {
+        const userInput = $('#chatMessageInputLista').val().trim();
+        console.log(userInput)
+
+        if (userInput) {
+            $('#chatMessagesLista').append(`<div class="message user-message"><p>${userInput}</p></div>`);
+
+            setTimeout(function () {
+                $('#chatMessagesLista').append(`<div class="message ai-message"><p id="ia-m">Como posso ajudar mais?</p></div>`);
+                $('#chatMessagesLista').scrollTop($('#chatMessagesLista')[0].scrollHeight); // Rolar para a última mensagem
+            }, 1000);
+
+            $('#chatMessageInputLista').val('');
+        }
+
+        // Rolar o chat para baixo após enviar
+        $('#chatMessagesLista').scrollTop($('#chatMessagesLista')[0].scrollHeight);
+    });
+});
+
+document.getElementById('offcanvasLista').addEventListener('shown.bs.offcanvas', function () {
+    // Adiciona a mensagem do FitBot ao chat
+    $('#chatMessagesLista').append(`<div class="message ai-message"><p class="cpa">Olá sou o FitBot!<br>Como posso ajudar?</p></div>`);
+    $('#chatMessagesLista').scrollTop($('#chatMessagesLista')[0].scrollHeight); // Rolar para a última mensagem
+
+    document.getElementById('chatMessageInputLista').value = "Eu quero uma lista de exercicios para eu fazer em casa";
 });

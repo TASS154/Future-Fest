@@ -31,16 +31,19 @@ body{
 
 nav{
     max-width: 1200px;
+    border: 10px;
     margin: auto;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
+    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    background-color: black;
 }
 
 .nav-logo{
-    max-width: 100px;
+    max-width: 200px;
 }
 
 .nav-links{
@@ -71,6 +74,17 @@ nav{
     width: 70%;
 }
 
+.profile-image {
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff; /* Borda opcional para destaque */
+    transition: all 0.3s ease;
+}
 .btn{
     padding: 1rem 2rem;
     font-size: 1rem;
