@@ -53,6 +53,17 @@ nav{
     gap: 3rem;
 }
 
+.profile-image {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff; /* Borda opcional para destaque */
+    transition: all 0.3s ease;
+}
 .link a{
     position: relative;
     padding-bottom: 0.75rem;
