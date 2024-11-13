@@ -25,7 +25,7 @@ body{
 }
 /* Fazendo as imagens ficarem redondas */
 .img-rounded {
-    border-radius: 45%; /* Aplica o formato circular */
+    border-radius: 10%; /* Aplica o formato circular */
     object-fit: cover;  /* Garante que a imagem não fique distorcida ao cortar */
     width: 200%;
     height: auto;

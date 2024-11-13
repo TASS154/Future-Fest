@@ -79,10 +79,10 @@ $(document).ready(function () {
             }
             return null;
         }
-        
+
         // Recuperar o valor do cookie 'aiResponse'
         const aiResponse = getCookie('aiResponse');
-        
+
         if (aiResponse) {
             console.log("Resposta da IA: ", aiResponse);
         } else {
@@ -99,14 +99,14 @@ $(document).ready(function () {
             setTimeout(function () {
                 // Adicionar a resposta da IA
                 $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">${aiResponse}</p></div>`);
-                
+
                 // Rolar para a última mensagem
                 $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
 
 
             }, 1000); // Atraso de 1 segundo para simular o processamento da IA
 
-            setTimeout(function() {
+            setTimeout(function () {
                 // Limpar o campo de entrada após a resposta da IA
                 $('#chatMessageInputMA').val('');
             }, 10)
@@ -329,4 +329,20 @@ document.getElementById('offcanvasLista').addEventListener('shown.bs.offcanvas',
     $('#chatMessagesLista').scrollTop($('#chatMessagesLista')[0].scrollHeight); // Rolar para a última mensagem
 
     document.getElementById('chatMessageInputLista').value = "Eu quero uma lista de exercicios para eu fazer em casa";
+});
+
+$(document).ready(function () {
+    $('#showPlanosBtn').click(function () {
+        $('.planos').show(); // Torna a div 'planos' visível
+    });
+});
+$(document).ready(function () {
+    $('#showPlanosBtn').click(function () {
+        $('.planos').toggle(); // Alterna a visibilidade da div 'planos'
+    });
+});
+$(document).ready(function () {
+    $('#showPlanosBtn').click(function () {
+        $('.planos').css('display', 'block'); // Altera o display para 'block' e torna visível
+    });
 });

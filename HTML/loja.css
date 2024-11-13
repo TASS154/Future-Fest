@@ -43,7 +43,7 @@ nav{
 }
 
 .nav-logo{
-    max-width: 200px;
+    max-width: 150px;
 }
 
 .nav-links{
@@ -528,4 +528,25 @@ form {
     object-fit: cover; /* Mantém a proporção da imagem, cortando o que exceder */
 }
 
+
+
+
+
+.btn-comprar {
+    background-color: darkred;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    
+    margin-top: 15px;
+    width: 100%;
+}
+
+.btn-comprar:hover {
+    background-color: red;
+}
 

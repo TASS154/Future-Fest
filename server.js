@@ -12,7 +12,6 @@ const IA = require('./DANE-SE/IA.js')
 const bodyParser = require('body-parser');
 
 
-console.log(IA)
 
 // Middleware para lidar com requisições JSON e URL-encoded
 app.use(express.json());
@@ -37,22 +36,27 @@ function criarCard(suplemento) {
     return `
     <link rel="stylesheet" href="loja.css">
     <a href='${suplemento.url}'>
-<div class="card mb-3">
-    <div class="card-body">
-    <img src=${suplemento.img}>
-    <h5 class="card-title">${suplemento.Nome}</h5>
-    <h3 class="card-text">${suplemento.Preço}R$</h3>
-    <p class="card-text"><strong>Usos:</strong> ${suplemento.uso}</p> <br>
-    <p class="card-text"><strong>Ingreditentes:</strong> ${suplemento.ingredientes}</p> 
-</div>
-</div>
-</a>
-`
+        <div class="card mb-3">
+            <div class="card-body">
+                <img src=${suplemento.img}>
+                <h5 class="card-title">${suplemento.Nome}</h5>
+                <h3 class="card-text">${suplemento.Preço}R$</h3>
+                <p class="card-text"><strong>Usos:</strong> ${suplemento.uso}</p> <br>
+                <p class="card-text"><strong>Ingredientes:</strong> ${suplemento.ingredientes}</p> 
+                
+                
+                    <button class="btn-comprar">Comprar</button>
+            </div>
+        </div>
+    </a>
+    `
 }
+
+
 
 app.get('/home', (req, res) => {
     res.sendFile(__dirname + "/HTML/home.html")
-    
+
 })
 // Roteamento para as páginas HTML
 app.get('/', async (req, res) => {
@@ -116,8 +120,8 @@ app.get('/', async (req, res) => {
         </div>
     </div>
     
-
-        <div class="container">
+        <div class="Progressos">
+        <div class="progress-container" style="width: 50%; margin: 0 auto;">
         <div class="row text-center">
             <div class="col-md-4 col-sm-6">
                 <div class="progress red">
@@ -156,8 +160,10 @@ app.get('/', async (req, res) => {
                 <h1>Condicionamento Físico</h1>
             </div>
         </div>
+        </div>
     </div>
     <div class="container text-center mb-5">
+    <div class="fitbot" id="FitBot">
     <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="Img-FitBot1 mb-3">
     <h1>Falar com o FitBot</h1>
     <hr>
@@ -174,6 +180,7 @@ app.get('/', async (req, res) => {
             src="https://i.ibb.co/zRXNPxc/fitbotl.png" class="i-fitbot" alt="fitbot-icone"> Listar
         exercícios para fazer em casa</button>
 </div>
+</div>
 <hr>
 <div class="container">
     <div class="assinaturas">
@@ -181,22 +188,11 @@ app.get('/', async (req, res) => {
         <h1 class="assinatura-r">Aprimorar assinatura</h1>
     </div>
     <hr>
-    <div class="row gy-4 align-items-start">
-        <div class="col-md-4 d-flex justify-content-between align-items-start">
-            <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
-                <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
-                    alt="FitLab And B-Corp">
-                <div class="content">
-                    <h4>R$: 0,00/m - Fitlab B-corp</h4>
-                    <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
-                </div>
-            </div>
-            <div class="vl"></div>
-        </div>
+
+
        <div class="botaoplanos">
-        <a href="/planos">
+
+       <a href="/planos">
         <button href="/planos" class="ver_planos bg-transparent">Ver planos<img src="https://i.ibb.co/6YcYRqX/Double-Arrow.png" class="da"></button>
     </a>
 </div>
@@ -645,6 +641,9 @@ app.get('/dashboard', async (req, res) => {
     </div>
 </div>
 
+<script>
+
+</script>
 `;
 
         // Lê o arquivo HTML base
@@ -1457,8 +1456,6 @@ app.post('/whey', async (req, res) => {
         if (!user) {
             res.send(`<h1>Usuário não encontrado</h1> <br> <a href="/whey"> tente novamente! </a> `)
         }
-
-        console.log(plan)
 
         res.redirect('/obrigado')
 

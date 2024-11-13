@@ -147,6 +147,22 @@ header{
     gap: 2rem;
 }
 
+.chat-bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    background: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+}
 .ai-message {
     background-color: #f0f0f0; /* Cor de fundo cinza claro */
     color: black; /* Texto escuro */
@@ -502,7 +518,25 @@ textarea {
     transform: scale(1.05);
 }
 
+.progressos .col-md-4, .progressos .col-sm-6 {
+    margin-left: 10px; /* Remove as margens para aproximar os itens */
+    margin-right: 10px;
+}
 
+.progress {
+    margin: 10 auto;
+}
+
+.progress-container {
+    width: 10%; /* Define a largura da div */
+    margin: 10 auto; /* Centraliza a div */
+}
+.progressos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px; /* Ajuste para 5px ou 10px para controlar o espaço */
+}
 .progress{
     width: 150px;
     height: 150px;
@@ -511,6 +545,7 @@ textarea {
     margin: 0 auto;
     box-shadow: none;
     position: relative;
+    margin: 10 5px; /* Reduz o espaço entre cada progresso */
 }
 .progress:after{
     content: "";
