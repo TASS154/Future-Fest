@@ -20,5 +20,8 @@ O site foi cuidadosamente projetado para oferecer uma navegação intuitiva, com
   Para instalar as dependências necessárias do projeto, use o comando abaixo:
 
 ```bash
-npm install express express-session mongodb bcrypt method-override
+npm install express express-session mongodb bcrypt method-override @google/generative-ai
 ```
+<h2 align="center">Capturas e Videos📸</h2>
+<h4>Interface Interativa</h4>
+<img src="https://i.imgur.com/rmenwdi.gif">
