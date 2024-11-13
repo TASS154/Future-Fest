@@ -25,5 +25,5 @@ npm install express express-session mongodb bcrypt method-override @google/gener
 <h2 align="center">Capturas e Videos📸</h2>
 <h4>✍Interface Interativa</h4>
 <img src="https://i.imgur.com/rmenwdi.gif">
-<h4>💪Diversos Planos</h4>
+<h4>💪Diversos Planos para empenhar seu treino</h4>
 <img src="https://i.imgur.com/3vjEok9.gif">
