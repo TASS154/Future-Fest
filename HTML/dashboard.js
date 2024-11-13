@@ -64,24 +64,18 @@ function appendIaMessage(message) {
 
     console.log('Mensagem adicionada:', message); // Verifica se a mensagem foi realmente adicionada
 }
-
 $(document).ready(function () {
     $('#sendMessageBtnMA').click(function (event) {
         const userInput = $('#chatMessageInputMA').val().trim();
+        const socket = io();
         console.log(userInput);
-        function getCookie(name) {
-            const cookieArr = document.cookie.split(';');
-            for (let i = 0; i < cookieArr.length; i++) {
-                let cookie = cookieArr[i].trim();
-                if (cookie.indexOf(name + '=') === 0) {
-                    return cookie.substring(name.length + 1);
-                }
-            }
-            return null;
-        }
         
+        socket.on('message', (data) => {
+            console.log(data); // 'Mensagem do servidor!'
+          });
+
         // Recuperar o valor do cookie 'aiResponse'
-        const aiResponse = getCookie('aiResponse');
+        const aiResponse = data
         
         if (aiResponse) {
             console.log("Resposta da IA: ", aiResponse);
@@ -142,7 +136,6 @@ $('#send-btn').click(function () {
         }, 1000);
     }
 });
-
 
 function appendIaMessage(message) {
     const chatBox = document.getElementById('chat-box');

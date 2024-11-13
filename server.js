@@ -1,16 +1,23 @@
-// Importa as dependências necessárias
 const express = require('express'); // Framework para criação de servidores web
 const session = require('express-session');
 const { MongoClient, ObjectId } = require('mongodb'); // Cliente MongoDB para operações no banco de dados
 const app = express(); // Cria uma instância do aplicativo Express
 const path = require('path'); // Módulo para manipulação de caminhos de arquivos
 const bcrypt = require('bcrypt'); // Módulo para criptografia de senhas
-const port = 3000; // Porta em que o servidor irá escutar
+const port = 3100; // Porta em que o servidor irá escutar
 const methodOverride = require('method-override'); // Middleware para permitir métodos HTTP que não são suportados pelo HTML
 const fs = require('fs'); // Módulo para operações de sistema de arquivos
-const IA = require('./DANE-SE/IA.js')
-const bodyParser = require('body-parser');
+const IA = require('./DANE-SE/IA.js') // Seu arquivo IA.js
+const http = require('http'); // Para criar o servidor HTTP
+const {Server} = require('socket.io'); // Biblioteca do Socket.IO para comunicação em tempo real
+const { createServer } = require('node:http');
+const { join } = require('node:path');
 
+// Criação do servidor HTTP
+const server = createServer(app);
+
+// Inicialização do Socket.IO com o servidor HTTP
+const io = new Server(server);
 
 console.log(IA)
 
@@ -51,7 +58,11 @@ function criarCard(suplemento) {
 }
 
 app.get('/home', (req, res) => {
-    res.sendFile(__dirname + "/HTML/home.html")
+    res.sendFile(join(__dirname + "/HTML/home.html"))
+    io.on('connection', (socket) => {
+        console.log('usuario conectado')
+    })
+    
     
 })
 // Roteamento para as páginas HTML
@@ -298,6 +309,10 @@ app.get('/', async (req, res) => {
         client.close();
     }
 });
+
+io.on('connection', (socket) => {
+    console.log('usuario conectado')
+})
 
 app.get('/vitamina', (req, res) => {
     res.sendFile(__dirname + '/HTML/vitamina.html'); // Página inicial
@@ -644,6 +659,8 @@ app.get('/dashboard', async (req, res) => {
         </div>
     </div>
 </div>
+
+
 
 `;
 
@@ -1265,11 +1282,7 @@ app.post('/marcar-aula', async (req, res) => {
         const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
         console.log(aiResponse)
         JSON.stringify(aiResponse)
-        res.cookie('aiResponse', aiResponse, {
-            httpOnly: true,   // Impede o acesso ao cookie via JavaScript no cliente
-            secure: process.env.NODE_ENV === 'production',  // Garante que o cookie seja enviado apenas via HTTPS em produção
-            maxAge: 3600000   // Define o tempo de expiração (1 hora)
-        });
+        io.emit('aiMessage', aiResponse); // Isso envia a resposta para todos os clientes conectados via WebSocket
     } catch (error) {
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
