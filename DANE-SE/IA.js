@@ -1,6 +1,5 @@
 const readline = require('readline');
 const { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } = require('@google/generative-ai');
-const userInput = "olá, pode me responder uma curiosidade curta aleatória?"
 // Configuração de geração para o modelo
 const GENERATION_CONFIG = {
     temperature: 0.9,
@@ -52,10 +51,12 @@ async function runChat(userInput) {
             
             if (result.error) {
                 console.error('Erro AI:', result.error.message);
+                return null
             } else {
                 // Obtendo apenas o texto da resposta da IA
                 const response = result.response.text();
                 console.log('AI:', response);
+                return response
             }
 
             // Fechar a interface de leitura após a interação
@@ -63,9 +64,9 @@ async function runChat(userInput) {
         }
         catch (error) {
             console.error('Erro encontrado:', error.message);
+            return null
         }
 
     };
-runChat(userInput)
 module.exports = {runChat};
 

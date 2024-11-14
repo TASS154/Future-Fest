@@ -39,7 +39,7 @@ function criarCard(suplemento) {
     <a href='${suplemento.url}'>
         <div class="card mb-3">
             <div class="card-body">
-                <img src=${suplemento.img}>
+                <img src=${suplemento.img} class="img-produto">
                 <h5 class="card-title">${suplemento.Nome}</h5>
                 <h3 class="card-text">${suplemento.Preço}R$</h3>
                 <p class="card-text"><strong>Usos:</strong> ${suplemento.uso}</p> <br>
@@ -121,51 +121,56 @@ app.get('/', async (req, res) => {
         </div>
     </div>
     
-        <div class="Progressos">
-        <div class="progress-container" style="width: 50%; margin: 0 auto;">
-        <div class="row text-center">
-            <div class="col-md-4 col-sm-6">
-                <div class="progress red">
-                    <span class="progress-left">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <span class="progress-right">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <div class="progress-value">90%</div>
-                </div>
-                <h1>Academia (Treinamento de Força)</h1>
+
+    <div class="Progressos">
+    <div class="container">
+    <div class="row text-center">
+        <div class="col-md-4 col-sm-6">
+            <div class="progress red">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">90%</div>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="progress orange">
-                    <span class="progress-left">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <span class="progress-right">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <div class="progress-value">50%</div>
-                </div>
-                <h1>Pilates</h1>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="progress green">
-                    <span class="progress-left">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <span class="progress-right">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <div class="progress-value">75%</div>
-                </div>
-                <h1>Condicionamento Físico</h1>
-            </div>
+            <h1>Academia (Treinamento de Força)</h1>
         </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="progress orange">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">50%</div>
+            </div>
+            <h1>Pilates</h1>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="progress green">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">75%</div>
+            </div>
+            <h1>Condicionamento Físico</h1>
         </div>
     </div>
+    </div>
+</div>
+<div class="scroll-arrow">
+    <img src="https://i.ibb.co/ZH3LKGW/Double-Arrow-Down.png" alt="Double Arrow Down">
+</div>
+   <div class="FitBot">
     <div class="container text-center mb-5">
-    <div class="fitbot" id="FitBot">
     <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="Img-FitBot1 mb-3">
+    <im
     <h1>Falar com o FitBot</h1>
     <hr>
     <button type="button" class="btn btn-primary btn-lg my-2" data-bs-toggle="offcanvas"
@@ -189,11 +194,26 @@ app.get('/', async (req, res) => {
         <h1 class="assinatura-r">Aprimorar assinatura</h1>
     </div>
     <hr>
-
-
+    <div class="row gy-4 align-items-start">
+        <div class="col-md-4 d-flex justify-content-between align-items-start">
+            <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
+                <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
+                    alt="FitLab And B-Corp">
+                <div class="content">
+                    <h4>R$: 0,00/m - Fitlab B-corp</h4>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
+                </div>
+            </div>
+            <div class="vl"></div>
+        </div>
+        <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
+        alt="FitLab And B-Corp">
+        <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
+        alt="FitLab And B-Corp">x
        <div class="botaoplanos">
-
-       <a href="/planos">
+        <a href="/planos">
         <button href="/planos" class="ver_planos bg-transparent">Ver planos<img src="https://i.ibb.co/6YcYRqX/Double-Arrow.png" class="da"></button>
     </a>
 </div>
@@ -204,29 +224,29 @@ app.get('/', async (req, res) => {
 </div>
 
 <!-- Offcanvas Marcar Aula -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMALabel">
-  <div class="offcanvas-header d-flex align-items-center">
-    <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
-    <h5 class="offcanvas-title mb-0" id="offcanvasMALabel">FitBot</h5>
-    <button type="button" class="btn-close" aria-label="Close"></button>
-  </div>
-  <hr class="linha-do-perfil">
-  <div class="offcanvas-body">
-    <div class="chat-container">
-      <div class="messages" id="chatMessagesMA">
-        <!-- Mensagens irão aparecer aqui -->
-      </div>
-      <form method="POST" action="/marcar-aula">
-      <div class="message-input d-flex mt-3">
-
-        <textarea class="form-control" id="chatMessageInputMA" name="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
-        <button type="submit" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
-
-      </div>
-      </form>
+   <div class="container">
+        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMALabel">
+            <div class="offcanvas-header d-flex align-items-center">
+                <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+                <h5 class="offcanvas-title mb-0" id="offcanvasMALabel">FitBot</h5>
+                <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+            <hr class="linha-do-perfil">
+            <div class="offcanvas-body">
+                <div class="chat-container">
+                    <div class="messages" id="chatMessagesMA">
+                        <!-- Mensagens irão aparecer aqui -->
+                    </div>
+                    <form id="messageFormMA" method="POST" action="/marcar-aula">
+                        <div class="message-input d-flex mt-3">
+                            <textarea class="form-control" id="chatMessageInputMA" name="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                            <button type="submit" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
 <!-- Offcanvas Indicar Suplementos -->
@@ -270,6 +290,38 @@ app.get('/', async (req, res) => {
         </div>
     </div>
 </div>
+
+    <script>
+        document.getElementById('messageFormMA').onsubmit = async function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const formData = new FormData(this); // Captura os dados do formulário
+
+            try {
+                const response = await fetch(this.action, {
+                    method: this.method,
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro na resposta da rede');
+                }
+
+                const data = await response.json(); // Converte a resposta para JSON
+
+                // Adiciona a resposta da IA ao chat
+                const messagesContainer = document.getElementById('chatMessagesMA');
+                messagesContainer.innerHTML += '<div class="message">Você: ' + formData.get('chatMessageInputMA') + '</div>';
+                messagesContainer.innerHTML += '<div class="message">FitBot: ' + data.aiResponse + '</div>';
+
+                // Limpa o campo de entrada
+                document.getElementById('chatMessageInputMA').value = '';
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao enviar a mensagem.');
+            }
+        };
+    </script>
 
 `;
 
@@ -484,47 +536,49 @@ app.get('/dashboard', async (req, res) => {
         </div>
     </div>
     
-
-        <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4 col-sm-6">
-                <div class="progress red">
-                    <span class="progress-left">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <span class="progress-right">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <div class="progress-value">90%</div>
-                </div>
-                <h1>Academia (Treinamento de Força)</h1>
+    <div class="Progressos">
+    <div class="container">
+    <div class="row text-center">
+        <div class="col-md-4 col-sm-6">
+            <div class="progress red">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">90%</div>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="progress orange">
-                    <span class="progress-left">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <span class="progress-right">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <div class="progress-value">50%</div>
-                </div>
-                <h1>Pilates</h1>
+            <h1>Academia (Treinamento de Força)</h1>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="progress orange">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">50%</div>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="progress green">
-                    <span class="progress-left">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <span class="progress-right">
-                        <span class="progress-bar"></span>
-                    </span>
-                    <div class="progress-value">75%</div>
-                </div>
-                <h1>Condicionamento Físico</h1>
+            <h1>Pilates</h1>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="progress green">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">75%</div>
             </div>
+            <h1>Condicionamento Físico</h1>
         </div>
     </div>
+    </div>
+</div>
+
     <div class="container text-center mb-5">
     <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="Img-FitBot1 mb-3">
     <h1>Falar com o FitBot</h1>
@@ -546,23 +600,68 @@ app.get('/dashboard', async (req, res) => {
 <div class="container">
     <div class="assinaturas">
         <h1 class="assinatura-l">Sua assinatura</h1>
-        <h1 class="assinatura-r">Aprimorar assinatura</h1>
+        <h1 class="assinatura-r">Recomendações</h1>
     </div>
     <hr>
+    
     <div class="row gy-4 align-items-start">
-        <div class="col-md-4 d-flex justify-content-between align-items-start">
-            <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
-                <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top"
-                    alt="FitLab And B-Corp">
-                <div class="content">
-                    <h4>R$: 0,00/m - Fitlab B-corp</h4>
-                    <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
-                    <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
+    <!-- Plano B-Corp (permanece no mesmo lugar) -->
+    <div class="col-md-4 d-flex justify-content-between align-items-start">
+        <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
+            <img src="https://i.ibb.co/dDBZJyj/fitlabandbcorp1.png" class="card-img-top" alt="FitLab And B-Corp">
+            <div class="content">
+                <h4>R$: 0,00/m - Fitlab B-corp</h4>
+                <p><i class="ri-checkbox-circle-line"></i> Área de musculação</p>
+                <p><i class="ri-checkbox-circle-line"></i> Área de cardio</p>
+                <p><i class="ri-checkbox-circle-line"></i> Direito a 1 aula da sua escolha semanal</p>
+            </div>
+        </div>
+        <div class="vl"></div>
+    </div>
+
+    <!-- Plano Gold e Diamond na direita -->
+    <div class="col-md-8 d-flex justify-content-end">
+        <div class="row gy-4 align-items-start">
+            
+            <!-- Plano Gold -->
+            <div class="col-md-6 d-flex justify-content-between align-items-start">
+                <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
+                    <img src="https://i.ibb.co/LvFVbbZ/fit-Lab-Gold.png" class="card-img-top" alt="FitLab Gold">
+                    <div class="content">
+                        <h4>R$: 150,00/m - Fitlab Gold</h4>
+                        <ul>
+                            <li><i class="ri-checkbox-circle-line"></i> Área de musculação</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Área de cardio</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Direito a 3 aulas da sua escolha semanal</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="vl"></div>
+
+            <!-- Plano Diamond -->
+            <div class="col-md-6 d-flex justify-content-between align-items-start">
+                <div class="card me-2 mb-3 bcorp-card" style="width: 18rem;">
+                    <img src="https://i.ibb.co/y574F4z/fitlabdiamond-1.png" class="card-img-top" alt="FitLab Diamond">
+                    <div class="content">
+                    <h4>R$: 200,00/m - Fitlab Diamond</h4>
+                        <ul>
+                            <li><i class="ri-checkbox-circle-line"></i> Área de musculação</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Área de cardio</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Direito a 4 aulas da sua escolha semanal</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Acesso a cadeira de massagem durante 1h por dia</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Acesso a sala de sauna</li>
+                            <li><i class="ri-checkbox-circle-line"></i> Acesso a consultas com nutricionista</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
+</div>
+
        <div class="botaoplanos">
         <a href="/planos">
         <button href="/planos" class="ver_planos bg-transparent">Ver planos<img src="https://i.ibb.co/6YcYRqX/Double-Arrow.png" class="da"></button>
@@ -642,37 +741,37 @@ app.get('/dashboard', async (req, res) => {
     </div>
 </div>
 
-    <script>
-        document.getElementById('messageFormMA').onsubmit = async function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
+<script>
+document.getElementById('messageFormMA').onsubmit = async function(event) {
+    event.preventDefault(); // Impede o envio padrão do formulário
 
-            const formData = new FormData(this); // Captura os dados do formulário
+    const formData = new FormData(this); // Captura os dados do formulário
 
-            try {
-                const response = await fetch(this.action, {
-                    method: this.method,
-                    body: formData,
-                });
+    try {
+        const response = await fetch(this.action, {
+            method: this.method,
+            body: formData,
+        });
 
-                if (!response.ok) {
-                    throw new Error('Erro na resposta da rede');
-                }
+        if (!response.ok) {
+            throw new Error('Erro na resposta da rede');
+        }
 
-                const data = await response.json(); // Converte a resposta para JSON
+        const data = await response.json(); // Converte a resposta para JSON
 
-                // Adiciona a resposta da IA ao chat
-                const messagesContainer = document.getElementById('chatMessagesMA');
-                messagesContainer.innerHTML += '<div class="message">Você: ' + formData.get('chatMessageInputMA') + '</div>';
-                messagesContainer.innerHTML += '<div class="message">FitBot: ' + data.aiResponse + '</div>';
+        // Adiciona a resposta da IA ao chat
+        const messagesContainer = document.getElementById('chatMessagesMA');
 
-                // Limpa o campo de entrada
-                document.getElementById('chatMessageInputMA').value = '';
-            } catch (error) {
-                console.error('Erro:', error);
-                alert('Ocorreu um erro ao enviar a mensagem.');
-            }
-        };
-    </script>
+
+        // Limpa o campo de entrada
+        document.getElementById('chatMessageInputMA').value = '';
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Ocorreu um erro ao enviar a mensagem.');
+    }
+};
+</script>
+
 `;
 
         // Lê o arquivo HTML base
@@ -719,6 +818,7 @@ app.get('/conta', async (req, res) => {
         // Gera o HTML com os dados do usuário
         const display = `
         <link rel="stylesheet" href="conta.css">
+        <div class="conta-body">
         <div class="profile-img text-center mb-4">
             <img src="${usuario.foto}" alt="Imagem de Perfil" class="img-thumbnail" id="profileImage" style="width: 200px; height: 200px;">
         </div>
@@ -786,7 +886,7 @@ app.get('/conta', async (req, res) => {
             <span class="btn-apagar-text">Apagar Conta</span>
         </button>
     </form>
-    
+    </div>
     <div class="container mt-0"> 
         <a class="m" data-bs-toggle="collapse" href="#avancado" role="button" aria-expanded="false"
             aria-controls="avancado">
@@ -858,8 +958,8 @@ app.get('/conta', async (req, res) => {
             </div>
             <div class="mb-3">
             <div>
-            <label for="suplementostuais" class="form-label">Suplementostuais:</label>
-            <input type="text" class="form-control" id="suplementostuais" placeholder="Exemplo: Creatina, vitamina D">
+            <label for="suplementosAtuais" class="form-label">SuplementosAtuais:</label>
+            <input type="text" class="form-control" id="suplementosAtuais" placeholder="Exemplo: Creatina, vitamina D">
         </div>
         <div class="saver">
             <button type="button" class="btn btn-danger" id="saveButton">Salvar</button>
@@ -879,84 +979,74 @@ app.get('/conta', async (req, res) => {
             </div>
         </div>
     
-<script>
-    document.getElementById('editNome').addEventListener('click', toggleEditNome);
-    document.getElementById('confirmButton').addEventListener('click', salvarNome);
-
-    function toggleEditNome() {
-        const nomeDisplay = document.getElementById('nomeDisplay');
-        const nomeInput = document.getElementById('nomeInput');
-        const editNomeBtn = document.getElementById('editNome');
-        const confirmBtn = document.getElementById('confirmButton');
-
-        nomeDisplay.style.display = 'none';
-        nomeInput.style.display = 'block';
-        nomeInput.value = nomeDisplay.textContent;
-        editNomeBtn.style.display = 'none';
-        confirmBtn.style.display = 'inline-block';
-        nomeInput.focus();
-    }
-
-    function salvarNome(event) {
-        const nomeInput = document.getElementById('nomeInput');
-        const nomeDisplay = document.getElementById('nomeDisplay');
-        const editNomeBtn = document.getElementById('editNome');
-        const confirmBtn = document.getElementById('confirmButton');
-
-        nomeDisplay.textContent = nomeInput.value;
-        nomeDisplay.style.display = 'inline-block';
-        nomeInput.style.display = 'none';
-        confirmBtn.style.display = 'none';
-        editNomeBtn.style.display = 'inline-block';
-    }
-            // Email (caso necessário)
-            // document.getElementById('editEmail').addEventListener('click', function () {
-            //     document.getElementById('nomeDisplay1').style.display = 'none';
-            //     document.getElementById('nomeInput1').style.display = 'block';
-            //     document.getElementById('nomeInput1').value = document.getElementById('nomeDisplay').textContent;
-            //     document.getElementById('editEmail').style.display = 'none';
-            //     document.getElementById('confirmButton1').style.display = 'inline-block';
-            // });
-        
-            // document.getElementById('confirmButton1').addEventListener('click', function () {
-            //     const novoNome = document.getElementById('nomeInput1').value;
-            //     document.getElementById('nomeDisplay1').textContent = novoNome;
-            //     document.getElementById('nomeDisplay1').style.display = 'inline-block';
-            //     document.getElementById('nomeInput1').style.display = 'none';
-            //     document.getElementById('confirmButton1').style.display = 'none';
-            //     document.getElementById('editEmail').style.display = 'inline-block';
-            // });
-
-            document.addEventListener('DOMContentLoaded', function () {
-                const avancadoLink = document.querySelector('.m');
-                const avancadoContent = document.getElementById('avancado');
-            
-                avancadoLink.textContent = 'Mostrar opções avançadas';
-            
-                avancadoLink.addEventListener('click', function () {
-                    const isExpanded = avancadoContent.classList.contains('show');
-            
-                    if (isExpanded) {
-                        avancadoLink.textContent = 'Mostrar opções avançadas';
-                    } else {
-                        avancadoLink.textContent = 'Fechar opções avançadas';
-                    }
-                });
-            
-                avancadoContent.addEventListener('shown.bs.collapse', function () {
-                    avancadoLink.textContent = 'Fechar opções avançadas';
-                });
-            
-                avancadoContent.addEventListener('hidden.bs.collapse', function () {
+        <script>
+        // Lógica de edição de nome
+        document.getElementById('editNome').addEventListener('click', toggleEditNome);
+        document.getElementById('confirmButton').addEventListener('click', salvarNome);
+    
+        function toggleEditNome() {
+            const nomeDisplay = document.getElementById('nomeDisplay');
+            const nomeInput = document.getElementById('nomeInput');
+            const editNomeBtn = document.getElementById('editNome');
+            const confirmBtn = document.getElementById('confirmButton');
+    
+            // Ocultar nome exibido e mostrar campo de input
+            nomeDisplay.style.display = 'none';
+            nomeInput.style.display = 'block';
+            nomeInput.value = nomeDisplay.textContent;
+            editNomeBtn.style.display = 'none';
+            confirmBtn.style.display = 'inline-block';
+            nomeInput.focus();
+        }
+    
+        function salvarNome(event) {
+            const nomeInput = document.getElementById('nomeInput');
+            const nomeDisplay = document.getElementById('nomeDisplay');
+            const editNomeBtn = document.getElementById('editNome');
+            const confirmBtn = document.getElementById('confirmButton');
+    
+            // Salvar o novo nome e alternar os botões de exibição
+            nomeDisplay.textContent = nomeInput.value;
+            nomeDisplay.style.display = 'inline-block';
+            nomeInput.style.display = 'none';
+            confirmBtn.style.display = 'none';
+            editNomeBtn.style.display = 'inline-block';
+        }
+    
+        // Lógica para mostrar e ocultar opções avançadas
+        document.addEventListener('DOMContentLoaded', function () {
+            const avancadoLink = document.querySelector('.m');
+            const avancadoContent = document.getElementById('avancado');
+    
+            avancadoLink.textContent = 'Mostrar opções avançadas';
+    
+            avancadoLink.addEventListener('click', function () {
+                const isExpanded = avancadoContent.classList.contains('show');
+    
+                // Alternar texto do botão
+                if (isExpanded) {
                     avancadoLink.textContent = 'Mostrar opções avançadas';
-                });
+                } else {
+                    avancadoLink.textContent = 'Fechar opções avançadas';
+                }
             });
-            
-            
-            // Repita o mesmo padrão para os outros botões...
-            
+    
+            avancadoContent.addEventListener('shown.bs.collapse', function () {
+                avancadoLink.textContent = 'Fechar opções avançadas';
+            });
+    
+            avancadoContent.addEventListener('hidden.bs.collapse', function () {
+                avancadoLink.textContent = 'Mostrar opções avançadas';
+            });
+        });
+    
+        // Lógica para salvar dados e exibir o toast
+        document.addEventListener('DOMContentLoaded', function () {
+            const saveButton = document.getElementById('saveButton');
+    
             if (saveButton) {
                 saveButton.addEventListener('click', function () {
+                    // Coletar dados do formulário
                     const genero = document.querySelector('input[name="flexRadioDefault"]:checked').nextElementSibling.textContent.trim();
                     const alergias = document.getElementById('alergias').value;
                     const condicaoDeSaude = document.getElementById('condicaoDeSaude').value;
@@ -964,8 +1054,8 @@ app.get('/conta', async (req, res) => {
                     const objetivo = document.querySelectorAll('.form-select')[1].value;
                     const preferenciaAlimentar = document.getElementById('preferenciaAlimentar').value;
                     const históricoDeLesão = document.getElementById('históricoDeLesão').value;
-                    const suplementostuais = document.getElementById('suplementostuais').value;
-            
+                    const suplementosAtuais = document.getElementById('suplementosAtuais').value;
+    
                     const dadosUsuario = {
                         genero: genero,
                         alergias: alergias,
@@ -974,9 +1064,10 @@ app.get('/conta', async (req, res) => {
                         objetivo: objetivo,
                         preferenciaAlimentar: preferenciaAlimentar,
                         históricoDeLesão: históricoDeLesão,
-                        suplementostuais: suplementostuais
+                        suplementosAtuais: suplementosAtuais
                     };
-                    
+    
+                    // Enviar os dados para o servidor
                     fetch('/conta/save', {
                         method: 'POST',
                         headers: {
@@ -984,18 +1075,21 @@ app.get('/conta', async (req, res) => {
                         },
                         body: JSON.stringify(dadosUsuario) // Enviando os dados como JSON
                     })
-
-                    console.log('Dados salvos:', dadosUsuario);
-            
+                    .then(response => response.json())  // Certifique-se de tratar a resposta
+                    .catch(error => console.error('Erro ao salvar dados:', error));
+    
+                    // Salvar dados no localStorage
                     localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
-                    document.getElementById('saveButton').addEventListener('click', function () {
-                        var toastElement = document.getElementById('liveToast');
-                        var toast = new bootstrap.Toast(toastElement);
-                        toast.show();
-                    });
+    
+                    // Mostrar o toast
+                    var toastElement = document.getElementById('liveToast');
+                    var toast = new bootstrap.Toast(toastElement);
+                    toast.show();
                 });
             }
-        </script>
+        });
+    </script>
+    
          
         `;
 
@@ -1162,7 +1256,7 @@ app.post('/conta/save', async (req, res) => {
         return res.status(401).send({ message: 'Usuário não está logado' });
     }
 
-    const { genero, alergias, condicaoDeSaude, atividadeFisica, objetivo, preferenciaAlimentar, históricoDeLesão, supAtual } = req.body;
+    const { genero, alergias, condicaoDeSaude, atividadeFisica, objetivo, preferenciaAlimentar, históricoDeLesão, suplementosAtuais } = req.body;
 
     const client = new MongoClient(url);
     try {
@@ -1182,10 +1276,12 @@ app.post('/conta/save', async (req, res) => {
                     objetivo,
                     preferenciaAlimentar,
                     históricoDeLesão,
-                    suplementostuais
+                    suplementosAtuais
                 }
             }
         );
+
+        console.log(updateResult)
 
         if (updateResult.modifiedCount === 0) {
             return res.status(400).send({ message: 'Erro ao salvar as informações do usuário' });
@@ -1279,17 +1375,16 @@ app.post('/marcar-aula', async (req, res) => {
     try {
         await client.connect();
         const db = client.db(dbName);
-        const collection = db.collection(collectionUser );
+        const collection = db.collection(collectionUser);
         const user = await collection.findOne({ _id: new ObjectId(req.session.userId) });
         if (!user) {
             return res.status(404).send('Usuário não encontrado');
         }
 
         const chatMessageInput = req.body.chatMessageInputMA;
-        const Input = `${chatMessageInput} faça esse pedido com base nas minhas informações a seguir: ${JSON.stringify(user)}`;
+        const Input = `${chatMessageInput} faça esse pedido com base nas minhas informações a seguir: ${JSON.stringify(user)}t, não formate o texto, apenas digite como numa conversa normal, evitando tentar colocar textos em negrito, itálico ou qualuqer outro efeito, não me diga qualquer infomração que possa ser prejudicial caso vaze, como cpf, email, numero de telefone etc.os unicos permitidos são o nome, idade, alergias, condição fisica, plano, Apenas, mas só se, e apenas se, for pedido, diretamente, pelo usu`;
 
         const aiResponse = await IA.runChat(Input);
-        console.log('AI Response:', aiResponse); // Verifique o que está retornando aqui
 
         if (aiResponse === null) {
             return res.status(500).send('Erro ao obter resposta da IA');
@@ -1298,7 +1393,7 @@ app.post('/marcar-aula', async (req, res) => {
         res.json({ aiResponse });
     } catch (error) {
         console.error('Erro ao iniciar chat', error);
-       
+
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
     } finally {

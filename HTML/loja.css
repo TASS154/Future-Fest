@@ -176,7 +176,7 @@ nav{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
     gap: 20px; 
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 2rem;
     margin: 50px;
 }

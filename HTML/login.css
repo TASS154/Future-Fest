@@ -53,6 +53,7 @@ nav{
     color: #fff;
 }
 
+
 .link a::after{
     content: "";
     position: absolute;
@@ -78,9 +79,34 @@ nav{
     transition: all 0.3s ease;
 }
 
+
 .btn:hover{
     background-color: #5b0303;
 }
+
+.certo{
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  
+.butao{
+    padding: 10px 20px;
+    background-color: #5b0303;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .butao:hover {
+    background-color: #5b0303;
+  }
 
 .container{
     max-width: 1200px;

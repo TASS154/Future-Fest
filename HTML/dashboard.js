@@ -26,6 +26,23 @@ $(document).ready(function () {
         }
     });
 
+    //arrow
+    // Seleciona a seta e a div de destino
+    const scrollArrow = document.querySelector('.scroll-arrow');
+    const fitBotDiv = document.querySelector('.FitBot');
+
+    // Função para verificar a posição da seta em relação à div
+    function checkPosition() {
+        const rect = fitBotDiv.getBoundingClientRect();
+        if (rect.top <= window.innerHeight) {
+            scrollArrow.classList.add('hidden'); // esconde a seta
+        } else {
+            scrollArrow.classList.remove('hidden'); // exibe a seta
+        }
+    }
+
+    window.addEventListener('scroll', checkPosition);
+
     // Evento do botão de envio de mensagem
     $('#send-btn').click(function () {
         const userInput = $('#user-input').val();
@@ -69,34 +86,34 @@ $(document).ready(function () {
     $('#sendMessageBtnMA').click(function (event) {
         const userInput = $('#chatMessageInputMA').val().trim();
         console.log(userInput);
- 
+
         // Verifique se há input
         if (userInput) {
             // Adicionar a mensagem do usuário no chat
             $('#chatMessagesMA').append(`<div class="message user-message"><p>${userInput}</p></div>`);
- 
+
             // Enviar a mensagem do usuário para o servidor
             $.ajax({
                 type: 'POST',
                 url: '/marcar-aula',
                 data: { chatMessageInputMA: userInput },
-                success: function(response) {
+                success: function (response) {
                     // Adicionar a resposta da IA após 1 segundo
                     setTimeout(function () {
                         $('#chatMessagesMA').append(`<div class="message ai-message"><p id="ia-m">${response.aiResponse}</p></div>`);
- 
+
                         // Rolar para a última mensagem
                         $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
                     }, 1000); // Atraso de 1 segundo para simular o processamento da IA
- 
+
                     // Limpar o campo de entrada após a resposta da IA
                     $('#chatMessageInputMA').val('');
                 },
-                error: function() {
+                error: function () {
                     console.log("Erro ao enviar a mensagem.");
                 }
             });
- 
+
             // Rolar o chat para baixo após enviar a mensagem do usuário
             $('#chatMessagesMA').scrollTop($('#chatMessagesMA')[0].scrollHeight);
         }

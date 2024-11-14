@@ -47,5 +47,13 @@ db.loja.insertMany([
         "uso": ["aumento de energia", "melhora no desempenho", "foco durante o treino"],
         "ingredientes": ["beta-alanina", "arginina", "cafeína", "creatina", "vitaminas B"],
         "url": "/pretreino"
+    },
+        {
+        "Nome": "Vitamina D",
+        "img": "https://i.ibb.co/jHS1QPQ/Group-13.png", // Substitua pela URL da imagem
+        "Preço": "89,99",
+        "uso": ["aumento de energia", "melhora no desempenho", "foco durante o treino"],
+        "ingredientes": ["beta-alanina", "arginina", "cafeína", "creatina", "vitaminas B"],
+        "url": "/pretreino"
     }
 ]);
