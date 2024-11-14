@@ -15,6 +15,7 @@ const bodyParser = require('body-parser');
 
 // Middleware para lidar com requisições JSON e URL-encoded
 app.use(express.json());
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method')); // Permite sobrepor métodos HTTP
 app.use(express.static(path.join(__dirname, '/HTML'))); // Serve arquivos estáticos da pasta HTML
@@ -574,29 +575,29 @@ app.get('/dashboard', async (req, res) => {
 </div>
 
 <!-- Offcanvas Marcar Aula -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMALabel">
-  <div class="offcanvas-header d-flex align-items-center">
-    <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
-    <h5 class="offcanvas-title mb-0" id="offcanvasMALabel">FitBot</h5>
-    <button type="button" class="btn-close" aria-label="Close"></button>
-  </div>
-  <hr class="linha-do-perfil">
-  <div class="offcanvas-body">
-    <div class="chat-container">
-      <div class="messages" id="chatMessagesMA">
-        <!-- Mensagens irão aparecer aqui -->
-      </div>
-      <form method="POST" action="/marcar-aula">
-      <div class="message-input d-flex mt-3">
-
-        <textarea class="form-control" id="chatMessageInputMA" name="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
-        <button type="submit" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
-
-      </div>
-      </form>
+   <div class="container">
+        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMA" aria-labelledby="offcanvasMALabel">
+            <div class="offcanvas-header d-flex align-items-center">
+                <img src="https://i.ibb.co/BcstXfr/FitBot.png" alt="FitBot" class="fitbot-img me-2">
+                <h5 class="offcanvas-title mb-0" id="offcanvasMALabel">FitBot</h5>
+                <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+            <hr class="linha-do-perfil">
+            <div class="offcanvas-body">
+                <div class="chat-container">
+                    <div class="messages" id="chatMessagesMA">
+                        <!-- Mensagens irão aparecer aqui -->
+                    </div>
+                    <form id="messageFormMA" method="POST" action="/marcar-aula">
+                        <div class="message-input d-flex mt-3">
+                            <textarea class="form-control" id="chatMessageInputMA" name="chatMessageInputMA" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                            <button type="submit" class="btn btn-primary ms-2" id="sendMessageBtnMA">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
 <!-- Offcanvas Indicar Suplementos -->
@@ -641,9 +642,37 @@ app.get('/dashboard', async (req, res) => {
     </div>
 </div>
 
-<script>
+    <script>
+        document.getElementById('messageFormMA').onsubmit = async function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
 
-</script>
+            const formData = new FormData(this); // Captura os dados do formulário
+
+            try {
+                const response = await fetch(this.action, {
+                    method: this.method,
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro na resposta da rede');
+                }
+
+                const data = await response.json(); // Converte a resposta para JSON
+
+                // Adiciona a resposta da IA ao chat
+                const messagesContainer = document.getElementById('chatMessagesMA');
+                messagesContainer.innerHTML += '<div class="message">Você: ' + formData.get('chatMessageInputMA') + '</div>';
+                messagesContainer.innerHTML += '<div class="message">FitBot: ' + data.aiResponse + '</div>';
+
+                // Limpa o campo de entrada
+                document.getElementById('chatMessageInputMA').value = '';
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao enviar a mensagem.');
+            }
+        };
+    </script>
 `;
 
         // Lê o arquivo HTML base
@@ -1247,29 +1276,29 @@ app.post('/listar-exercicios', async (req, res) => {
 app.post('/marcar-aula', async (req, res) => {
     const client = new MongoClient(url);
 
-
     try {
         await client.connect();
         const db = client.db(dbName);
-        const collection = db.collection(collectionUser);
+        const collection = db.collection(collectionUser );
         const user = await collection.findOne({ _id: new ObjectId(req.session.userId) });
         if (!user) {
             return res.status(404).send('Usuário não encontrado');
         }
 
-        // Agora que 'user' está definido, monta o Input
-        const Input = req.body.chatMessageInputMA + " faça esse pedido com base nas minhas informações a seguir: " + JSON.stringify(user);
+        const chatMessageInput = req.body.chatMessageInputMA;
+        const Input = `${chatMessageInput} faça esse pedido com base nas minhas informações a seguir: ${JSON.stringify(user)}`;
 
-        // Chama a função runChat com a entrada
-        const aiResponse = await IA.runChat(Input); // Agora a resposta da IA é retornada
-        console.log(aiResponse)
-        JSON.stringify(aiResponse)
-        res.cookie('aiResponse', aiResponse, {
-            httpOnly: true,   // Impede o acesso ao cookie via JavaScript no cliente
-            secure: process.env.NODE_ENV === 'production',  // Garante que o cookie seja enviado apenas via HTTPS em produção
-            maxAge: 3600000   // Define o tempo de expiração (1 hora)
-        });
+        const aiResponse = await IA.runChat(Input);
+        console.log('AI Response:', aiResponse); // Verifique o que está retornando aqui
+
+        if (aiResponse === null) {
+            return res.status(500).send('Erro ao obter resposta da IA');
+        }
+
+        res.json({ aiResponse });
     } catch (error) {
+        console.error('Erro ao iniciar chat', error);
+       
         console.error('erro ao iniciar chat', error);
         res.status(500).send('Erro ao iniciar chat');
     } finally {
